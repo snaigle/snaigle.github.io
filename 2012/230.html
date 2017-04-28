@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>两个任意值整数列 ,交换元素使两个数列的和相差最小</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>两个任意值整数列 ,交换元素使两个数列的和相差最小 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <pre class="prettyprint lang-java linenums">/**
+ * 两个任意值整数列 ,交换元素使两个数列的和相差最小
+ * @author tt
+ *
+ */
+public class TwoArrayTotalLeast {
+
+    static int[] first = {1,3,4,89,32,234,42,12,34,34,123,443,55,66};
+    static int[] second = {1,3,4,89,76,87,34,12,24,64,93,393,59,89};
+    
+    static void sort(){
+        int[] max = null;
+        int[] min = null;
+        int sum1 =0;
+        int sum2 = 0;
+        for(int t : first){sum1 += t;}
+        for(int t : second){sum2 += t;}
+        if(sum1 &lt; sum2){
+            min = first;
+            max= second;
+        }else{
+            max = first;
+            min = second;
+        }
+        while(true){
+            boolean change = false;
+            sum1=0;sum2=0;
+            for(int t : max){sum1 += t;}
+            for(int t : min){sum2 += t;}
+            int sub = (sum1-sum2)/2;
+            if(sub==0) break;
+            
+            int temp = -1;
+            int tempi = -1;
+            int tempj = -1;
+            for(int i=0;i&lt;max.length;i++){
+                for(int j=0;j&lt;min.length ;j++){
+                    if(max[i] &gt; min[j] &amp;&amp; (max[i] - min[j] &lt;= sub) &amp;&amp; (max[i] - min[j]  &gt; temp)){
+                        temp = max[i] - min[j];
+                        tempi = i;
+                        tempj = j;
+                        change = true;
+                    }
+                }
+            }
+            if(change){
+                int t = max[tempi];
+                max[tempi] = min[tempj];
+                min[tempj] = t;
+            }else break;
+        }
+    }
+    public static void main(String[] args) {
+        System.out.println(sum(first));
+        System.out.println(sum(second));
+        sort();
+        System.out.println(sum(first));
+        System.out.println(sum(second));
+        
+    }
+    public static int sum(int[] temp){
+        int result = 0;
+        for(int i : temp){
+            result += i;
+        }
+        return result;
+    }
+}</pre>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/231.html" title="Z形遍历二维数组">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/229.html" title="求整型数组中, 能排列的最大的数">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-05-14 12:50:36</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E7%AE%97%E6%B3%95-ref">算法 <span>5</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

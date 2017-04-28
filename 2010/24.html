@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>velocity 判空</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>velocity 判空 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><span style="font-family: Arial, sans-serif, Helvetica, Tahoma; color: #666666; line-height: 18px;">   <div class="blog_title" style="margin-bottom: 0px; padding-left: 7px; height: 64px;">    <h3 style="font-size: 16px; line-height: 1.5em; margin-top: 0px; margin-right: 0px; margin-bottom: 0.5em; margin-left: 0px; padding-top: 10px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; color: black;"><a style="color: white; text-decoration: none;" href="http://esteem.iteye.com/blog/249466">Velocity中如何判断null</a></h3>   </div>   <div class="blog_content" style="background-color: white; margin-top: 0px; margin-right: 6px; margin-bottom: 0px; margin-left: 4px; color: #666666; padding: 5px;">    <div id="_mcontent" class="mcontent">     <p style="padding: 0px; margin: 0px;">相信这个问题是很多使用Velocity的朋友所经常碰到的，大家可能非常期望下面这样的代码能够运行：</p>     <p style="padding: 0px; margin: 0px;">&nbsp;&nbsp;&nbsp; #if($foo == null)&nbsp;<br />&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; ...<br />&nbsp;&nbsp;&nbsp; #end</p>     <p style="padding: 0px; margin: 0px;">实际上这段代码会报错。这是因为Velocity中对null的支持比较特别。总统上说，判断是否为null有下面几种方法：</p>     <p style="padding: 0px; margin: 0px;">1. #if (! $foo) 判断$foo为空，判断非空为 #if ($foo)</p>     <p style="padding: 0px; margin: 0px;">2. 使用 #ifnull() 或 #ifnotnull()</p>     <p style="padding: 0px; margin: 0px;">&nbsp;&nbsp;&nbsp; #ifnull ($foo)</p>     <p style="padding: 0px; margin: 0px;">&nbsp;&nbsp;&nbsp; 要使用这个特性必须在velocity.properties文件中加入：</p>     <pre>userdirective = org.apache.velocity.tools.generic.directive.Ifnulluserdirective = org.apache.velocity.tools.generic.directive.Ifnotnull</pre>     <p style="padding: 0px; margin: 0px;">3. 使用null工具判断</p>     <p style="padding: 0px; margin: 0px;">&nbsp;&nbsp;&nbsp; #if($null.isNull($foo))</p>     <p style="padding: 0px; margin: 0px;">&nbsp;&nbsp;&nbsp; 注意这种方式特别有用，尤其你在需要这个判断作为一个判断字句时，比如我要你判断一个集合为null或为空时只能使用这种方式了：</p>     <p style="padding: 0px; margin: 0px;">&nbsp;&nbsp;&nbsp; $if ($null.isNull($mycoll) || $mycoll.size()==0)</p>     <p style="padding: 0px; margin: 0px;">更详细的介绍请参考：</p>     <p style="padding: 0px; margin: 0px;"><a style="color: #006699; text-decoration: none;" href="http://wiki.apache.org/velocity/VelocityNullSupport">http://wiki.apache.org/velocity/VelocityNullSupport<br /></a><a style="color: #006699; text-decoration: none;" href="http://wiki.apache.org/velocity/CheckingForNull">http://wiki.apache.org/velocity/CheckingForNull</a></p>    </div>   </div> </span></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2010/25.html" title="freemarker 语法">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2010/23.html" title="在eclipse中安装velocity编辑器、Freemarker编辑器">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2010-09-19</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>python 语法介绍（入门级）</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>python 语法介绍（入门级） </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>今天又看了看 python，熟悉了一下语法</p> <p>&nbsp;</p> <p>python属于动态语言，</p> <p>一些常用的 语法结构： &nbsp;</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; if &nbsp; : else &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; for : else &nbsp; （当for遍历完后会执行else）</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; while else (当while里面为false时)</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;break,continue &nbsp; &nbsp;</p> <p>&nbsp;&nbsp; &nbsp; in 可以用来遍历数组，也可以检查数组中是否含有 如 &nbsp;if a in [a,b]</p> <p>常用方法&nbsp;</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;range（start,end,step） 从0开始 end不计</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp;print&nbsp;</p> <p>传多个参数用，隔开</p> <p>还有定义函数时，方法名下第一行可写字符串，用来做文档，方法名后 用#来写注释</p> <p>关于*abd,**abdd</p> <p>这个*可以理解为解包， 而意味着abd就是个包&nbsp;</p> <p>因此可以这样 &nbsp; def my_function(logn,name='anyone',*arg,**map)</p> <p>这样接受可变参数</p> <p>&nbsp;</p> <p>剩下的就是一些常用 的函数和库的介绍，正在看。看完后再整理</p> <p>&nbsp;</p> <p>写起来是挺方便的，尤其实在命令行下。</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/102.html" title="python 语法入门 2">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/99.html" title="为nutz添加tiles视图">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-02-26</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

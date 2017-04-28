@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>安装 php5, apache2 mysql5，搭建php环境</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>安装 php5, apache2 mysql5，搭建php环境 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>1，安装apache2</p> <p><span>sudo apt-get install apache2</span></p> <p>2，安装php5</p> <p>&nbsp;&nbsp;<span>sudo apt-get install php5 //安装PHP5</span></p> <p><span> </span></p> <p>sudo apt-get install libapache2-mod-php5 //配置APACHE+PHP （这个也可以不找 上个命令会自动装好）</p> <p>sudo /etc/init.d/apache2 restart //重启APACHE</p> <p>&nbsp;</p> <p>下面进行测试php5和apache是否安装成功</p> <p>&nbsp;打开gksudo gedit /var/www/test.php， 随便输入点什么：hello world</p> <p>在浏览器打开localhost/test.php 或 127.0.0.1/test/php 就可以看到你输出的东西了。</p> <p>&nbsp;</p> <p>&nbsp;</p> <p>3.安装MYSQL</p> <p>sudo apt-get install mysql-server</p> <p>安装完成按提示设置root密码</p> <p>4、让apache、php支持 mysql</p> <p>sudo apt-get install libapache2-mod-auth-mysql</p> <p>sudo apt-get install php5-mysql</p> <p>&nbsp;</p> <p>sudo /etc/init.d/apache2 restart&nbsp;</p> <p>&nbsp;</p> <p>-------------------------------------------------------下面是转载的----------------------------------------------------------------</p> <p><span>安装步骤<br /><br />一，安装</span><span>数据库<br /><br /></span><span><span># apt-get install mysql-server-5.0 <br /># apt-get install mysql-client-5.0</span><br /><br /><span>如果安装mysql时没有用密码，我们须要修改mysql root 密码</span><br /><br /><span># mysqladmin -u root password &quot;填你的密码&quot;</span></span><span><br /><br />2，安装Apache HTTP Server<br /><br />sudo apt-get install apache2<br /><br />3，安装 PHP5和Apache PHP5 module<br /># apt-get install php5 <br /># apt-get install libapache2-mod-php5</span><span><br /></span><span># apt-get install php5-gd</span><br /><span><span># apt-get install php5-mysql</span></span><span><br /></span><br /><span><span># apt-get install php5-common</span></span><br /><span><span># apt-get install php5-cli</span><br /><span># apt-get install php5-cgi</span></span><span><br /># apt-get install php5-ffmpeg<br /># apt-get install php5-imagick<br /></span><br /><span>4，重启Apache<br />sudo /etc/init.d/apache2 restart<br /><br />5，安装phpMyAdmin<br />sudo apt-get install phpmyadmin<br /><br /></span><span>默认安装在 /usr/share/phpmyadmin</span><br /><span>使用apt-get安装不知道装哪去啦，可以使用dpkg -L phpmyadmin 看看安装在什么地方.</span><br /><span>安装完成之后，系统内会增加这么几个目录：<br />/etc/phpmyadmin<br />/usr/share/phpmyadmin</span><br /><span>作个链接到 /var/www/ 目录下，命令为：<br />sudo ln -s /usr/share/phpmyadmin/ /var/www/<br />或者把其移到站点根目录下：<br />mv /usr/share/phpmyadmin/ /var/www/phpmyadmin/<br />然后访问http://localhost/phpmyadmin就可以看到登录页面了,直接输入安装时的MYSQL用户名及密码即可。<br /><br /></span><span>二，配置<br /><br />1.配置php5<br /></span><span><span>sudo gedit /etc/php5/apache2/php.ini</span></span><span><br /></span><span><span><br /></span><span>修改允许最大使用内存，查找</span><br /><span>memory_limit = 8M</span><br /><span>修改为</span><br /><span>memory_limit = 32M</span><br /><span>修改允许最大上传尺寸，查找</span><br /><span>upload_max_filesize = 2M</span><br /><span>修改为</span><br /><span>upload_max_filesize = 8M</span><br /><span>允许 mysql 和 gd 模块，检查文件最后是否包含下面的代码，如果没有添加上。<br />（默认是在配置文件最后有添加的，检查一下以防万一）</span><br /><span>extension=mysql.so</span><br /><span>extension=gd.so</span><br /><span>保存并关闭文件。<br /><br /></span></span><span>启用 mod_rewrite 模块<br />sudo a2enmod rewrite</span><br /><span><span><br /><br /></span></span><span>2.配置apache2<br /><br /></span><span><span>apache2默认的sites路径在</span><br /><span>/var/www/sites<br /><br /></span></span><span>[主目录位置<br />/var/www<br />更改主目录位置<br />sudo gedit /etc/apache2/sites-available/default</span>]<br /><span><span><br /></span></span><span>sudo gedit /etc/apache2/conf.d/charset<br />这个是网站编码配置，里面内容很少，打开看就知道了，我这里将最后行的 <br />#AddDefaultCharset UTF-8 前面的#去掉，使用UTF-8编码，当然也可以把 UTF-8改成别的编码.<br /><br />sudo gedit /etc/apache2/sites-available/default<br /><br />更改apache2运行路径，更改DocumentRoot 指向的路径（绝对路径），更改&lt; Directory &gt; 里的路径，和DocumentRoot保持一致<br /><br /></span><span>配置 apache2.conf<br />sudo gedit /etc/apache2/apache2.conf<br />以管理员身份打开文件/etc/apache2/httpd.conf，在文件中添加一下两行内容并保存：<br />AddType application/x-httpd-php .php<br />AddType application/x-httpd-php-source .phps<br />上面两行的目的是使Apache支持PHP文件<br />然后在终端中执行命令/etc/init.d/apache2 restart 重启Apache，以使配置升效。<br />在浏览器中输入http://localhost.如果出现it’s works 表示apache已经安装成功。<br /><br /></span><span>使用如下命令运行 Apache：<br />sudo /usr/sbin/apache2ctl start<br />要停止 Apache，使用：<br />sudo /usr/sbin/apache2ctl stop<br />最后，重启 Apache，执行如下命令：<br />sudo /usr/sbin/apache2ctl restart<br /><br /></span><span>重启 apache<br />sudo /etc/init.d/apache2 restart<br />有时这两个比重起好<br />sudo /etc/init.d/apache2 stop<br />sudo /etc/init.d/apache2 start</span><br /><span><br /></span><span><br />3.配置 mysql，让它支持其它客户端访问，如果你不需要就不用修改。<br /><br />sudo gedit /etc/mysql/my.cnf<br />查找文件<br />skip-networking<br />修改为<br />#skip-networking<br />保存并关闭文件。<br /><br />重新启动 mysql<br />sudo /etc/init.d/mysql restart<br /><br />三，测试<br /><br />为了检查你的<br />为检查你的PHP安装状态：<br />sudo gedit /var/www/testphp.php<br />在上述文件中插入下面这行代码：<br /></span>&lt;?php<br />phpinfo();<br />?&gt; <br /><span>在Web浏览器中查看此页面，通过 http://yourserveripaddress/testphp.php 或 http://localhost/testphp.php 地址。<br /></span><span><br />++++++++++++++++++++++++++++++++++++++++++++++++++++<br /></span><span><br /></span><span><span>ubuntu<br /><br /></span><span>sudo apt-get install apache2<br /><br /></span><span>sudo apt-get install mysql-server</span><br /><span>sudo apt-get install mysql-client</span><br /><br /><span>sudo apt-get install php5</span><br /><span>sudo apt-get install phpmyadmin</span><br /><span>sudo apt-get install php5-mysql</span><br /><span>sudo apt-get install libapache2-mod-php5</span><br /><span>sudo apt-get install php5-gd</span><br /></span><span><span>sudo apt-get install php5-common<br /><br /></span></span><span><span>sudo apt-get install php5-ffmpeg</span><br /><span>sudo apt-get install php5-imagick</span></span><br /><span><br /><span>sudo apt-get install php5-cli</span><br /><span>sudo apt-get install php5-cgi</span><br /><span>sudo apt-get install php-pear</span><br /><span>sudo apt-get install php5-xcache</span><br /><span>sudo apt-get install php5-dev</span><br /><span>sudo apt-get install php5-memcache</span></span></p> <p>&nbsp;</p> <p>&nbsp;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/114.html" title="jstl 标签">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/112.html" title="js 语法入门 1">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-03-08</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

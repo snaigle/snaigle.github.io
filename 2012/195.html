@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>每日命令  ln,chmod</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>每日命令  ln,chmod </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>　指令名称 : ln
+　　
+　　使用方式 : ln [options] source dist，其中 option 的格式为 :
+　　
+　　说明 : Linux/Unix 档案系统中，有所谓的连结(link)，我们可以将其视为档案的别名，而连结又可分为两种 : 硬连结(hard link)与软连结(symbolic link)，硬连结的意思是一个档案可以有多个名称，而软连结的方式则是产生一个特殊的档案，该档案的内容是指向另一个档案的位置。硬连结是存在同一个档案系统中，而软连结却可以跨越不同的档案系统。
+　　ln source dist 是产生一个连结(dist)到 source，至于使用硬连结或软链结则由参数决定。
+　　
+　　不论是硬连结或软链结都不会将原本的档案复制一份，只会占用非常少量的磁碟空间。
+　　
+　　参数 :
+　　
+　　-f : 链结时先将与 dist 同档名的档案删除
+        -d : 允许系统管理者硬链结自己的目录
+        -i : 在删除与 dist 同档名的档案时先进行询问
+        -n : 在进行软连结时，将 dist 视为一般的档案
+        -s : 进行软链结(symbolic link)
+        -v : 在连结之前显示其档名
+        -b : 将在链结时会被覆写或删除的档案进行备份
+        -S SUFFIX : 将备份的档案都加上 SUFFIX 的字尾
+        -V METHOD : 指定备份的方式
+        --help : 显示辅助说明--version : 显示版本
+　　范例 :
+　　将档案 yy 产生一个 symbolic link : zz
+　　 ln -s yy zz<br />
+　　将档案 yy 产生一个 hard link : zz
+　　 ln yy xx
+　　
+指令名称 : chmod
+　　
+　　使用权限 : 所有使用者
+　　
+　　使用方式 : chmod [-cfvR] [--help] [--version] mode file&hellip;
+　　
+　　说明 : Linux/Unix 的档案调用权限分为三级 : 档案拥有者、群组、其他。利用 chmod 可以藉以控制档案如何被他人所调用。
+　　
+　　参数 :
+　　
+　　mode : 权限设定字串，格式如下 : [ugoa&hellip;][[+-=][rwxX]&hellip;][,&hellip;]，其中
+　　u 表示该档案的拥有者，g 表示与该档案的拥有者属于同一个群体(group)者，o 表示其他以外的人，a 表示这三者皆是。
+　　+ 表示增加权限、- 表示取消权限、= 表示唯一设定权限。
+　　r 表示可读取，w 表示可写入，x 表示可执行，X 表示只有当该档案是个子目录或者该档案已经被设定过为可执行。
+　　-c : 若该档案权限确实已经更改，才显示其更改动作
+　　-f : 若该档案权限无法被更改也不要显示错误讯息
+　　-v : 显示权限变更的详细资料
+　　-R : 对目前目录下的所有档案与子目录进行相同的权限变更(即以递回的方式逐个变更)
+　　--help : 显示辅助说明
+　　--version : 显示版本
+　　
+　　范例 :将档案 file1.txt 设为所有人皆可读取 :
+　　 chmod ugo+r file1.txt
+　　
+　　将档案 file1.txt 设为所有人皆可读取 :
+　　 chmod a+r file1.txt
+　　
+　　将档案 file1.txt 与 file2.txt 设为该档案拥有者，与其所属同一个群体者可写入，但其他以外的人则不可写入 :
+　　 chmod ug+w,o-w file1.txt file2.txt
+　　
+　　将 ex1.py 设定为只有该档案拥有者可以执行 :
+　　 chmod u+x ex1.py
+　　
+　　将目前目录下的所有档案与子目录皆设为任何人可读取 :
+　　 chmod -R a+r *
+　　
+　　 此外chmod也可以用数字来表示权限如 chmod 777 file
+　　语法为：chmod abc file
+　　
+　　其中a,b,c各为一个数字，分别表示User、Group、及Other的权限。
+　　
+　　r=4，w=2，x=1
+　　若要rwx属性则4+2+1=7；
+　　若要rw-属性则4+2=6；
+　　若要r-x属性则4+1=7。
+　　
+　　范例：
+　　 chmod a=rwx file
+　　
+　　和
+　　 chmod 777 file
+　　
+　　效果相同
+　　 chmod ug=rwx,o=x file
+　　
+　　和
+　　 chmod 771 file
+　　
+　　效果相同
+　　
+　　若用chmod 4755 filename可使此程序具有root的权限</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/196.html" title="开始学习jetty的源码，也适当参考tomcat的源码">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/194.html" title="每日一命令   rm,cp">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-03-19 22:45:57</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4-ref">每日linux命令 <span>7</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

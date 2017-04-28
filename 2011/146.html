@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SVN，HG，GIT命令对照</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>SVN，HG，GIT命令对照 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>SVN，HG，GIT命令对照</p>
+
+<p>SVN，HG，GIT命令对照 SVN，HG，GIT是三种常见的版本控制系统，本文简单列出一些相似的操作命令。当然，三种系统各有特点，严格的对应关系是没有的。 1，第一次下载，包括源码和版本库： svn checkout <a href="http://path/to/repo">http://path/to/repo</a> repo_name hg clone <a href="http://path/to/repo">http://path/to/repo</a> repo_name git glone <a href="http://path/to/repo">http://path/to/repo</a> repo_name或者</p>
+
+<p>SVN，HG，GIT命令对照 SVN，HG，GIT是三种常见的版本控制系统，本文简单列出一些相似的操作命令。当然，三种系统各有特点，严格的对应关系是没有的。</p>
+
+<p>1，第一次下载，包括源码和版本库：</p>
+
+<p>svn checkout <a href="http://path/to/repo">http://path/to/repo</a> repo_name</p>
+
+<p>hg clone <a href="http://path/to/repo ">http://path/to/repo </a> repo_name</p>
+
+<p>git clone <a href="http://path/to/repo">http://path/to/repo</a> repo_name或者git clone git://path/to/repo repo_name</p>
+
+<p>2，下载服务器上最新的更新：</p>
+
+<p>svn update</p>
+
+<p>hg pull &amp;&amp; hg update -C</p>
+
+<p>git pull</p>
+
+<p>3，检出某个修订版本</p>
+
+<p>svn checkout -r &lt;rev&gt;</p>
+
+<p>hg update -C -r &lt;rev&gt;</p>
+
+<p>git reset –hard -r &lt;rev&gt;</p>
+
+<p>4，新增被跟踪文件</p>
+
+<p>svn add /path/to/file</p>
+
+<p>hg add /path/to/file</p>
+
+<p>git add /path/to/file</p>
+
+<p>4，移除被跟踪文件</p>
+
+<p>svn rm /path/to/file</p>
+
+<p>hg remove /path/to/file</p>
+
+<p>git rm /path/to/file</p>
+
+<p>5，生成补丁</p>
+
+<p>svn diff  &gt;patch_file</p>
+
+<p>hg diff &gt;patch_file</p>
+
+<p>git diff &gt;patch_file</p>
+
+<p>6，提交更改</p>
+
+<p>svn commit</p>
+
+<p>hg commit</p>
+
+<p>git commit</p>
+
+<p>6，查看当前状态</p>
+
+<p>svn info</p>
+
+<p>hg status</p>
+
+<p>git status</p>
+
+<p>7，查看修订记录</p>
+
+<p>svn log</p>
+
+<p>hg log</p>
+
+<p>git log</p>
+
+<p>8，启动服务器</p>
+
+<p>svnserve -d</p>
+
+<p>hg serve -p 8002 &amp;</p>
+
+<p>git daemon –base-path=/path/to/repo –export-all &amp;</p>
+
+<p>通过<a href="http://tech.16c.cn/svnsy/20100112/17492.html">SVN，HG，GIT命令对照 - 联城技术网</a>.</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/147.html" title="10个免费的图表生成代码 - 非技术 - ITeye资讯">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/145.html" title="关于社会人文的一些感想">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-06-10 15:39:37</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

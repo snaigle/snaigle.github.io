@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>activemq 使用介绍</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>activemq 使用介绍 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p> 1，activemq 分为 queue和topic 两种 </p> 
+<p> 2，下面先介绍queue ，使用spring 集成 </p> 
+<p> build.gradle </p> 
+<p> </p>
+<pre>compile &quot;org.springframework:spring-jms:3.2.1.RELEASE&quot;
+    compile &quot;org.apache.activemq:activemq-core:5.7.0&quot;
+    compile &quot;ch.qos.logback:logback-core:1.0.9&quot;
+    compile &quot;ch.qos.logback:logback-classic:1.0.9&quot;
+    compile &quot;ch.qos.logback:logback-access:1.0.9&quot;
+    testCompile group: 'junit', name: 'junit', version: '4.10'</pre>  
+<p> applicationContext.xml </p> 
+<p> </p>
+<pre> &lt;description&gt;Spring公共配置&lt;/description&gt;
+
+    &lt;!-- 使用annotation 自动注册bean,并检查@Required,@Autowired的属性已被注入 --&gt;
+    &lt;context:component-scan base-package=&quot;net.tt64&quot;/&gt;
+    &lt;!-- ActiveMQ 连接工厂 --&gt;
+    &lt;bean id=&quot;advancedConnectionFactory&quot; class=&quot;org.apache.activemq.ActiveMQConnectionFactory&quot;&gt;
+        &lt;property name=&quot;brokerURL&quot; value=&quot;vm://cheyoushuo&quot; /&gt;
+        &lt;property name=&quot;useAsyncSend&quot; value=&quot;true&quot; /&gt;
+    &lt;/bean&gt;
+    
+    &lt;!-- Spring Caching 连接工厂 --&gt;
+    &lt;bean id=&quot;advancedCachingConnectionFactory&quot; class=&quot;org.springframework.jms.connection.CachingConnectionFactory&quot;&gt;
+        &lt;property name=&quot;targetConnectionFactory&quot; ref=&quot;advancedConnectionFactory&quot; /&gt;
+        &lt;property name=&quot;sessionCacheSize&quot; value=&quot;10&quot; /&gt;
+    &lt;/bean&gt;
+    
+    &lt;!-- Queue定义 --&gt;
+    &lt;bean id=&quot;notifyQueue&quot; class=&quot;org.apache.activemq.command.ActiveMQQueue&quot;&gt;
+        &lt;constructor-arg value=&quot;test.jms&quot; /&gt;
+    &lt;/bean&gt;
+
+    &lt;!-- Spring JMS Template --&gt;
+    &lt;bean id=&quot;jmsTemplate&quot; class=&quot;org.springframework.jms.core.JmsTemplate&quot;&gt;
+        &lt;property name=&quot;connectionFactory&quot; ref=&quot;advancedCachingConnectionFactory&quot; /&gt;
+        &lt;!-- 使 deliveryMode, priority, timeToLive设置生效--&gt;
+        &lt;property name=&quot;explicitQosEnabled&quot; value=&quot;true&quot; /&gt;
+        &lt;!-- 设置NON_PERSISTENT模式, 默认为PERSISTENT --&gt;
+        &lt;property name=&quot;deliveryPersistent&quot; value=&quot;true&quot; /&gt;
+        &lt;!-- 设置优先级, 默认为4 --&gt;
+        &lt;property name=&quot;priority&quot; value=&quot;9&quot; /&gt;
+    &lt;/bean&gt;
+    
+    &lt;!-- 异步接收Queue消息Container --&gt;
+    &lt;bean id=&quot;advancedQueueContainer&quot; depends-on=&quot;jmsService&quot; class=&quot;org.springframework.jms.listener.DefaultMessageListenerContainer&quot;&gt;
+        &lt;property name=&quot;connectionFactory&quot; ref=&quot;advancedConnectionFactory&quot; /&gt;
+        &lt;property name=&quot;destination&quot; ref=&quot;notifyQueue&quot; /&gt;
+        &lt;property name=&quot;messageListener&quot; ref=&quot;jmsService&quot; /&gt;
+        &lt;!-- 初始5个Consumer, 可动态扩展到10 --&gt;
+        &lt;property name=&quot;concurrentConsumers&quot; value=&quot;1&quot; /&gt;
+        &lt;property name=&quot;maxConcurrentConsumers&quot; value=&quot;1&quot; /&gt;
+        &lt;!-- 设置消息确认模式为Client --&gt;
+        &lt;property name=&quot;sessionAcknowledgeModeName&quot; value=&quot;CLIENT_ACKNOWLEDGE&quot; /&gt;
+    &lt;/bean&gt;</pre>  
+<p> jms sender&nbsp; </p> 
+<p> </p>
+<pre>@Autowired
+    private JmsTemplate jmsTemplate;
+    @Autowired
+    private Destination dest;
+
+    public void send(final Serializable obj) {
+        jmsTemplate.send(dest, new MessageCreator() {
+            @Override
+            public Message createMessage(Session session) throws JMSException {
+                ObjectMessage msg = session.createObjectMessage(obj);
+                return msg;
+            }
+        });
+    }</pre> jms receiver  
+<p> </p>
+<pre> @Override
+    public void onMessage(Message message) {
+        if (message instanceof ObjectMessage) {
+            ObjectMessage om = (ObjectMessage) message;
+            try {
+                System.out.println(om.getObject().toString() + &quot; recieved&quot;);
+                Thread.currentThread().sleep(1000);
+                System.out.println(om.getObject().toString() + &quot;  process over&quot;);
+            } catch (InterruptedException ex) {
+            } catch (JMSException ex) {
+            }
+        }
+    }</pre> Main  
+<p> </p>
+<pre> public static void main(String[] args) {
+        ApplicationContext ctx = new ClassPathXmlApplicationContext(&quot;applicationContext.xml&quot;);
+        JmsSender sender = ctx.getBean(JmsSender.class);
+        for (int i = 0; i &lt; 100; i++) {
+            System.out.println(&quot;message &quot; + i + &quot;send&quot;);
+            sender.send(&quot;message&quot; + i);
+        }
+    }</pre>  
+<p> 这里将 concurrentConsumers 调为 1, 这就是单任务队列 </p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2013/370.html" title="jms 概念">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2013/368.html" title="spring insight 使用介绍">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2013-03-21 12:35:14</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+      <li>
+  <a href="/categories/#oschina-ref">oschina <span>6</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E9%83%A8%E7%BD%B2-ref">服务器优化部署 <span>11</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

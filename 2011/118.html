@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>httpsession 详细内容整理</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>httpsession 详细内容整理 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>最近在做登录和权限控制模块，用到了session，发现session的好多方法都不熟悉，而且以前也听说过JsessionId 之类session窃取的事，对这些一直都是一知半解。今天索性google了很多资料，先上sun的官网去看session的文档了解一些方法，又找了别人关于session的看法。</p>
+
+<p>总结如下：</p>
+
+<p>1，session是什么？  what</p>
+
+<p>session经常译为会话，以打电话为例，从开始拨号到挂断电话就是你会话的生存周期。</p>
+
+<p>2，session 做什么用的  why？</p>
+
+<p>首先举个例子：</p>
+
+<p>咖啡店举行 消费满5杯咖啡赠送一杯的活动，可每个人一次消费5杯的时候非常少。这时候有3种办法：</p>
+
+<p>1，店员看到每个顾客时都能记住其消费了多少杯，从而给其优惠，这是协议本身具有状态</p>
+
+<p>2，给每个顾客一个卡片，上面记录顾客的每次消费，这是客户端保存状态</p>
+
+<p>3，给每个顾客一个卡片，卡片上只有一个编号，顾客每次的消费记录在店里，这就是 服务端有状态</p>
+
+<p>而http本身是无状态的，所以我们只能使用2，3中方法，来保存一些信息。</p>
+
+<p>实际采用的是第3种方法，服务器段保存一次会话所有的信息，并生成一个唯一的id，这个id没有规律而且不会重复，将这个id传回到客户段，保存到cookie中。每次访问服务器时，客户端都会偷偷将这个id传到服务器，服务器根据id查到这次会话保存的内容。就能实现会话中共享一些数据。</p>
+
+<p>3，session怎样创建和销毁 ？ how</p>
+
+<p>session是保存在内存中的，所以会有一些性能上的影响。因此本着这个原则，session是只有在使用到的时候才会被创建，如果始终没有用到session，这个session是永远不会被创建的。</p>
+
+<p>比如： 访问servlet ，只要你代码中没有 request.getSession()或request.getSession(true);这两行是等价的，那session是不会创建。又 当你访问静态页面时，根本不会生成servlet，所以也不会创建session。</p>
+
+<p>下面解释一些疑惑： session是第一次请求时创建的？</p>
+
+<p>大家都知道 jsp是被编译成servlet才执行的，问题就在jsp编译的过程。</p>
+
+<p>jsp中有个&lt;%@ page session=&ldquo;true/false&rdquo;%&gt; 这个开关表示是否创建session，当你不写这行时，它会默认给你加上这句。所以会造成上面的疑惑。当然还有一些标签中可能有getSession()操作，会产生一些不必要的session。</p>
+
+<p>session只能在服务端销毁，有三种途径： 1，到达session的最大请求间隔时间时，2，session。invalidate()</p>
+
+<p>3,服务器进程当掉。</p>
+
+<p>这里也有一些疑惑： 浏览器关闭时，session就会注销。</p>
+
+<p>首先浏览器关闭时，浏览器并没有给服务器发送任何消息，所以服务器不会知道浏览器何时关闭了。</p>
+
+<p>上面我们知道取得session 是因为浏览器cookie中有sessionid，而普通cookie通常会是会话cookie，也就是说浏览器关闭时，这个cookie会被注销，所以当你再访问服务器时就没有sessionid了，所以造成session关闭了的假象，如果昵称通过特殊方法将sessionid传递给服务器，你会发现session还在。</p>
+
+<p>如果想让cookie保存时间长一些，就需要手动指定cookie的过期时间</p>
+
+<p>&nbsp;</p>
+
+<p>4，实际项目中的难点：</p>
+
+<p>1，浏览器禁用cookie</p>
+
+<p>这就没办法保存sessionid了，可以采用url重写，转发，加隐藏字段等方法来将sessionid传给服务器。</p>
+
+<p>如：  baidu.com:jsessionid=adfasdfasdfasdfasdfafdadf?asdfasdf</p>
+
+<p>baidu.com?jsessionid=asdfasdfasdfadsfad&amp;&amp;adfdf</p>
+
+<p>这根据服务器的不同实现，第一种可以将普通参数区分开。</p>
+
+<p>&nbsp;</p>
+
+<p>2，多人共用session的问题</p>
+
+<p>例： a 访问 baidu.com ,但他没有帐号，于是他将连接 baidu.com/login.jsp?jsessionid=adsfasdfad（这个a的sessionid） 发给B, B登录后，a就相当于用b的帐号登录了。你们可以在在本地试试。</p>
+
+<p>解决方法： 当发现通过sessionid从url指定时， 创建一个新的session，将旧session的信息复制到 新sessoin中，然后将新session注销。就能防止上面那种情况了。</p>
+
+<p>3，一个帐号多地方登录</p>
+
+<p>比如： 你用abc帐号登录了baidu.com,有打开了一个浏览器，又用abc帐号登录了一次。当不设计敏感操作时，这无所谓，而当你做一些敏感操作时就必须禁止这样情况，防止同时操作，造成重复操作，或者数据损坏。</p>
+
+<p>解决方法： 监听session，将username和sessionid对应起来，当username再次登录时，注销掉以前的session，保存现在的session，这也是一种比较不错的方案。</p>
+
+<p>&nbsp;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/119.html" title="胡思乱想中">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/117.html" title="simpletiles0.1 --tiles 2.2.2 去除slf4j 依赖，添加common-logging依赖，并将重新封包">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-03-13</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

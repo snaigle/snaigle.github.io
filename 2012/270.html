@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>redis 命令大全</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>redis 命令大全 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    redis版本 2.2.5，有条件请直接看英文版，都有例子的。&nbsp;
+</p>
+<p>
+    一、Strings类的， redis中存储的全是字符串
+</p>
+<p>
+    1，append key value , 在key之后添加value
+</p>
+<p>
+    例： append key1 hello ; append key1 world ; &nbsp;get key1 显示 helloworld
+</p>
+<p>
+    2，decr key &nbsp; ,对key的整数值减一，不存在的key默认为0
+</p>
+<p>
+    例 decr key2 ; 将显示 -1
+</p>
+<p>
+    3，decrby &nbsp;key decrement, &nbsp;对可以的整数值减去指定值 &nbsp;
+</p>
+<p>
+    &nbsp;例： decrby key3 5 ; 显示 -5
+</p>
+<p>
+    4,get key 取得key的值
+</p>
+<p>
+    &nbsp; &nbsp;如：get key4 ，显示&lt;nil&gt; , decr key4 ,get key4 显示 -1
+</p>
+<p>
+    5, getbit key offset &nbsp;&nbsp;返回String值指定位置的位 ，只有0和1
+</p>
+<p>
+    &nbsp; &nbsp;如： getbit key4 7 显示1 ，getbit key4 0 ，显示0
+</p>
+<p>
+    6，getrange key start end 截取key值的 子字符串
+</p>
+<p>
+    &nbsp; &nbsp;如 ： getrange key1 0 3 ,显示 hell
+</p>
+<p>
+    7， getset key value ，返回key的旧值，然后将value赋给key
+</p>
+<p>
+    8， incr key ， key的整型值加一
+</p>
+<p>
+    9， incrby key increment， key的整型值加上指定值
+</p>
+<p>
+    10， mget key [key ...] 取得多个key的值
+</p>
+<p>
+    11，&nbsp;mset key value [key value] &nbsp;设置多个key value值对
+</p>
+<p>
+    12， msetnx key value [key value] 只有当所有的key都不存在时 才设置多个key value值对
+</p>
+<p>
+    13，set key value &nbsp;设置key value值对
+</p>
+<p>
+    14， setbit key offset value , 设置key值指定位置的bit， value只能为0和1
+</p>
+<p>
+    15，setex key seconds value , 设置key value 在指定时间后过期
+</p>
+<p>
+    16，setnx key value ，当key不存在时设置key value
+</p>
+<p>
+    17,setrange key offset value ，在key值指定偏移处使用value进行覆盖
+</p>
+<p>
+    18，strlen key ， key值的长度
+</p>
+<p>
+    <br />
+</p>
+<p>
+    二、 连接类和服务器类
+</p>
+<p>
+    1，auth 验证密码
+</p>
+<p>
+    2，echo message， 控制台输出信息，在使用多命令时有用
+</p>
+<p>
+    3，ping ，验证服务器是否连通
+</p>
+<p>
+    4，quit ， 结束当前连接
+</p>
+<p>
+    5，select index ，改变当前的数据库 0-15，共16个
+</p>
+<p>
+    6，bgsave， 异步的保存数据到硬盘&nbsp;
+</p>
+<p>
+    7，dbsize ， 返回当前数据库的key的总数
+</p>
+<p>
+    8，flashall ， 移除所有库中的所有key
+</p>
+<p>
+    9，flashdb， 移除当前库中的所有key
+</p>
+<p>
+    10，info ， 该服务器的信息和统计数据
+</p>
+<p>
+    11，lastsave , 最近一次成功保存在硬盘的时间戳
+</p>
+<p>
+    12，监听服务器接受每个请求的实际时间
+</p>
+<p>
+    13， save ，同步的将数据保存到硬盘
+</p>
+<p>
+    14，shutdown &nbsp;，这个命令相当于先执行 save，然后关闭服务器
+</p>
+<p>
+    15，slaveof host port ，**配置集群用的， 配置该服务器为 指定服务器的slaver，还有其他情况。
+</p>
+<p>
+    16，sync ，集群瞎用， 同步集群中的数据
+</p>
+<p>
+    17，time 返回当前服务器的时间
+</p>
+<p>
+    三、key操作类型
+</p>
+<p>
+    &nbsp;1，del key [key ...] ,删除key
+</p>
+<p>
+    &nbsp;2，exists key ，该key是否存在
+</p>
+<p>
+    &nbsp;3，expire key seconds , 设置key多长时间后过期
+</p>
+<p>
+    &nbsp;4，expireat key timestamp ,设置key指定时间过期
+</p>
+<p>
+    &nbsp;5，keys pattern ， 列出所有符合表达式的key
+</p>
+<p>
+    &nbsp;6，move key db ,移动一个key到指定数据库
+</p>
+<p>
+    &nbsp;7，object &nbsp;refcount|encoding|idletime &nbsp;key ,查询key的一些属性
+</p>
+<p>
+    &nbsp;8，persist ，移除key的过期时间，固化key
+</p>
+<p>
+    --------未完
+</p>
+<p>
+    <br />
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/271.html" title="昨晚做了一个梦">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/269.html" title="一些回忆">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-06-21 09:46:09</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E9%BB%98%E8%AE%A4-ref">默认 <span>41</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

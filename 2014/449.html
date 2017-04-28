@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>第一次通关的解密游戏，大概花了一个工作日</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>第一次通关的解密游戏，大概花了一个工作日 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>#1
+<br /> 按提示可知是brain.fuck 语言，找个编译器跑一下就好了
+<br /> welcome
+<br /> #2
+<br /> 这里面共有两个值，首先按数列得出1944, 下面终极答案直接google，是42，计算得到
+<br /> 81648
+<br /> #3
+<br /> 这个其实是Dvorak键盘布局，这里我们要做的是把下面打乱的用正常的布局转换回来就好了
+<br /> 结果是这个 main() { printf(&amp;unix[&quot;\021%six\012\0&quot;],(unix)[&quot;have&quot;]+&quot;fun&quot;-0x60);}&nbsp;
+<br /> 这个c中很常见的一个问题，简单方法是直接执行下，就可以了。想看原理的，google
+<br /> 执行结果是unix
+<br /> #4
+<br /> 首先二维码解析出来是 [abcdefghijklmnopqrstuvwxyz] &lt;=&gt; [pvwdgazxubqfsnrhocitlkeymj]
+<br /> 很明显是做了字母映射导致的语句错误，反转回来即可&nbsp;
+<br /> Where there is a shell, there is a way. I expect you use the shell command to solve this problem, now, please try using the rot13 of &quot;shell&quot; to enter next level.
+<br /> 看意思是要对shell进行rot13, 直接google,其实就是对字母进行13个错位
+<br /> echo &lsquo;shell&rsquo; | tr &lsquo;[A-Za-z]&rsquo; &lsquo;[N-ZA-Mn-za-m]&rsquo;
+<br /> furyy
+<br /> #5
+<br /> 回文，看要求，只有满足[A-Z][0-9][a-z][0-9][A-Z]|[0-9][A-Z][a-z][A-Z][0-9]这两种情况的才算满足，
+<br /> 看提示在源文件中发现一堆字符，刚开始不明白题意，后来才想清楚直接进行回文模式查找，中间的字母是有效的，
+<br /> 输出：variables
+<br /> #6
+<br /> 点击图片，发现返回数字，把数字替换掉2014，发现又返回了一个新数字，直接写程序跑，直到不是数字
+<br /> Cool! the next level is &quot;tree&quot;
+<br /> #7
+<br /> 这个耽误的时间很长，没有想清楚思路，一个中序和后序输出，求原始tree，直接写程序吧，说了好长时间，才决定写，
+<br /> 因为感觉很复杂，有两个规则，1，中序是tree的排序，2，后序可以确定root
+<br /> 求出tree后，找到最长的zWp8LGn01wxJ7
+<br /> 然后用下面的命令解码
+<br /> echo U2FsdGVkX1+gxunKbemS2193vhGGQ1Y8pc5gPegMAcg=|openssl enc -aes-128-cbc -a -d
+<br /> 输入密钥，就有答案了nqueens
+<br /> #8
+<br /> 9皇后问题，写个程序跑，满足sha1( $passwd + $code + &quot;\n&quot; ) = e48d316ed573d3273931e19f9ac9f9e6039a4242即可
+<br /> 953172864
+<br /> #9&nbsp;
+<br /> 这个比较简单，其实就是26进制，直接转成10进制，计算后转回26进制
+<br /> DUYO
+<br /> #10
+<br /> 这个看半天，才发现图片上都有title提示，上google,是猪圈算法，得出下面的值 helloworld
+<br /> 搞定
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br /></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2014/450.html" title="圣人不死，大盗不止">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2014/448.html" title="我想要一辆汽车">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2014-08-04 18:49:53</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

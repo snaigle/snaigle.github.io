@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>webapp下 ClassLoader 加载机制</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>webapp下 ClassLoader 加载机制 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p style="text-indent:2em;">
+    <span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;">先介绍下基本概念：</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;">类装载器是用来把类(class)装载进JVM的。</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;">JVM规范定义了两种类型的类装载器：</span>启动内装载器(bootstrap)和用户自定义装载器(user-defined class loader)<span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;">。&nbsp;</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;"><br />
+</span> 
+</p>
+<p style="text-indent:2em;">
+    JVM在运行时会产生三个ClassLoader:Bootstrap&nbsp;ClassLoader、Extension&nbsp;ClassLoader和AppClassLoader.<span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;">Bootstrap是用C++编写的，我们在Java中看不到它,是null,是JVM自带的类装载器，用来装载核心类库，如java.lang.*等。</span><br />
+AppClassLoader的Parent是ExtClassLoader，而ExtClassLoader的Parent为Bootstrap&nbsp;ClassLoader。<br />
+<span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;">&nbsp;</span> 
+</p>
+<p style="text-indent:2em;">
+    Java提供了抽象类ClassLoader，所有用户自定义类装载器都实例化自ClassLoader的子类。&nbsp;System Class Loader是一个特殊的用户自定义类装载器，由JVM的实现者提供，在编程者不特别指定装载器的情况下默认装载用户类<span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;">。系统类装载器可以通过ClassLoader.getSystemClassLoader() 方法得到。</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:Verdana, Helvetica, Arial;background-color:#FFFFFF;"><br />
+</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:'Verdana, Helvetica, Arial';">java类开始执行是从appClassLoader开始的，自定义的classloader的默认parent就是appClassLoader</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:'Verdana, Helvetica, Arial';">每个ClassLoader维护一个命名空间，一个命名空间内不准出现两个name相同的class </span>
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:'Verdana, Helvetica, Arial';">理解了这些，那么我们来了解一下WebApp下的ClassLoader层次，以tomcat为例</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:'Verdana, Helvetica, Arial';">tomcat为每个app分配了一个 WebappClassLoader ，这样来避免多个app会加载相同jar包的问题，</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:'Verdana, Helvetica, Arial';">WebappLoader的parent是&nbsp;<span>StandardClassLoader,这样多个app就能共享tomcat的类库</span></span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:'Verdana, Helvetica, Arial';">当tomcat为每个请求启动线程后，会将该线程的classloader设为 WebappLoader，如果不设置，那么新建的线程默认为 父线程的classloader。&nbsp;</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:'Verdana, Helvetica, Arial';">案例， 如何在request中使用自定义classloader生成了一个class&nbsp;</span> 
+</p>
+<p style="text-indent:2em;">
+    <span style="color:#303030;font-family:'Verdana, Helvetica, Arial';">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; classloader的默认parent 为appclassloader，因此 classloader只能引用一些jdk的class，不能引用webappClassLoader范围的class，最好就将classloader 的parent设为 this.getClass().getClassLoader()。 如果你有特殊需求就需要你来根据classloader的层次和范围来进行设置。</span> 
+</p>
+<p style="text-indent:2em;">
+    之前我对classloader只知道分为3个层次，自定义classloader的parent的问题一直没注意，昨天写代码出现了这个问题，今天才意识到是parent的问题，自己写了一个test证实了这个问题，写出来分享一下
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/279.html" title="说说这几天遇到的技术难点">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/277.html" title="菊花体生成代码">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-07-27 07:33:15</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E9%BB%98%E8%AE%A4-ref">默认 <span>41</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

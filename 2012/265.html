@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>NOR的特性</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>NOR的特性 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    <span></span>
+</p>
+<ol>
+    <li>
+        <span style="font-size:16px;line-height:24px;">COC</span><span style="font-size:16px;line-height:24px;">，约定大于配置。通过项目中约定俗成的规则来代替大部分的配置，同时还可以让大家能对项目更加熟悉，连文档都能省了。<br />
+下面是具体的项目规定： 项目中源码包的结构：<br />
+<span></span>appSrc/domains/ 领域对象存放位置，<br />
+appSrc/controllers/ 业务逻辑所在位置，常用的CRUD可以直接通过ncode生成。<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 一般的业务逻辑直接使用通用dao直接查询数据库<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 而复杂或者可复用的逻辑可以分离出来放到services中<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; controllers中的类要以Controller结尾才会进行映射处理<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 非Controller结尾的类则按照nutz的正常流程处理<br />
+appSrc/services/ 复杂或者可复用的业务逻辑或者通用功能放在这里， &nbsp;&nbsp;&nbsp;&nbsp;controller中直接使用service类注入，不适用接口。根据大多数的<span></span>中小型项目&nbsp;&nbsp;&nbsp;的&nbsp;&nbsp;&nbsp;&nbsp;统计，其使用接口来实现多个service的情况十分少见。当然若使用接口也可以，只需在service实行出使用@Inject("refer:nameService")即可注入，也可以只用配置文件进行注入<br />
+appSrc/utils/ 这里放一些常用的工具类<br />
+webapp/WEB-INF/templates/ 模版文件<br />
+webapp/Web-INF/views/ 这里放所有的视图文件，命名规则是moduleName/viewName<br />
+<br />
+</span>
+    </li>
+    <li>
+        <span style="font-size:16px;line-height:24px;">这里介绍一些controllers处的url到action到view的映射关系<br />
+url 格式： http://yourdomain/appName/moduleName/actionName<br />
+moduleName是 controllerName去掉Controller，然后首字母小写<br />
+actionName就是 methodName<br />
+你若在Contoller设置了@At, 映射就变为 @At.value/actionName<br />
+若在Action中设置了@At 映射就直接为 /@At.value, 这里要注意这时候没有controllerName做前缀<br />
+View和action的映射关系则为 WEB-INF/views/controllerName/actionName.jsp<br />
+这里还没有处理的很好，若不满意可以直接使用@Ok处理即可<br />
+</span>
+    </li>
+    <li>
+        <span><span style="line-height:24px;">这里有个新特性则是为REDIRECT 重定向 添加了可以直接返回message<br />
+例如： @Ok("&gt;&gt;:/index.jsp") Object someFunction(){return "i'm redirect";}<br />
+在index.jsp 页面你可以直接使用${message} 来得到 这个字符串。目前只支持返回字符串，再复杂的数据应该采用db或者session或者cache来处理。<br />
+</span></span>
+    </li>
+    <li>
+        <span><span style="line-height:24px;">添加了ncode模版功能，目前支持 create-project projectName , create-domain<br />
+&nbsp;create-controller ,generate-controller, generate-views ，&nbsp;help几个命令<br />
+以后会添加run-app，war等热部署项目和项目打包</span></span>
+    </li>
+    <li>
+        <span><span style="line-height:24px;">这个时目前正在做的，scoffold脚手架功能，可以使你只创建一个domain就可以享受到所有的CRUD功能，不需要再生成重复的代码<br />
+这是你就可以通过修改模版来完成大部分功能的生成，若实在特殊再添加相应的action或者view即可。<br />
+<br />
+</span></span>
+    </li>
+</ol>
+<p>
+    <span><span style="line-height:24px;">说了这么多，只有一个目的，减少代码数，提高开发者的开发效率，减少对重复性代码的复制，更多的时间去关注业务，去关注其他的方面。希望你们在开发的时候更快乐，也给我反馈更多的意见。大家能为重复代码少烦一些，多快乐一点，也算我为创建和谐社会做的贡献 :)</span></span>
+</p>
+<p>
+    <br />
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/266.html" title="protoBuf 语法介绍">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/264.html" title="介绍">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-06-17 12:19:57</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86-ref">项目管理 <span>33</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#NOR%E6%96%87%E6%A1%A3-ref">NOR文档 <span>3</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

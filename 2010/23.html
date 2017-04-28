@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>在eclipse中安装velocity编辑器、Freemarker编辑器</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>在eclipse中安装velocity编辑器、Freemarker编辑器 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><span style="font-family: Arial, sans-serif, Helvetica, Tahoma; line-height: 18px;"> </span></p> <div class="blog_title" style="margin-bottom: 15px;">  <h3 style="font-size: 16px; line-height: 1.5em; margin-top: 0px; margin-right: 0px; margin-bottom: 0.5em; margin-left: 0px; padding-top: 10px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; color: black;"><br /></h3>  <strong style="font-weight: bold;"></strong> </div> <div class="blog_content"> 记录以便今后重新搭环境时查找。&nbsp; <br />1.在myeclipse中增加velocity支持的包后，在集成velocity的velocity编辑器，会是开发更方便快捷。&nbsp; <br />Veloeclipse的网站http://code.google.com/p/veloeclipse/，&nbsp; <br />在myeclipse中安装Veloeclipse时，在地址栏中输入： http://veloeclipse.googlecode.com/svn/trunk/update/&nbsp; <br /> <br />2.在myeclipse中安装freemarker编辑器， <span style="color: #ff0000;">在URL栏中输入：http://www.freemarker.org/eclipse/update</span> </div> <div class="blog_content"> 这个地址已经不能用了，只能用下面的方法来添加了。</div> <div class="blog_content"> <br /></div> <div class="blog_content"> eclipse正常情况下 是能自动识别新添加的 插件，并自动添加相应信息，但是如果eclipse 不能自动识别时，你就需要手动为eclipse添加相应的插件信息，即为 下面红字部分</div> <div class="blog_content"> <br /></div> <div class="blog_content"> <span style="font-family: Arial, sans-serif, Helvetica, Tahoma; line-height: 18px;">&nbsp;&nbsp; 在MyEclipse7.0+的版本，自动安装行不通，因为在下载你填写的插件前，MyEclipse会下载一大堆自己的更新，这些更新 全都位于MyEclipse的服务器或者Pulse的服务器，这两个服务器在国内是无法访问的。<br /><strong style="font-weight: bold;"><br />既然无法自动安装，就手动安装：</strong>&nbsp;<br />先打开 http://sourceforge.net/projects/freemarker-ide/files/页面，点击“下载”，<br />注意，要下载eclipse插件，而不是freemarker本身。 在下面的文件列表中选择“eclipse-plugin”文件夹，展开的文件就是各个版本的eclipse插件，当前最新是：&nbsp;<a class="button button-dload dload { url: 'http://downloads.sourceforge.net/project/freemarker-ide/freemarker-ide/0.9.14/freemarker-ide-0.9.14.zip' }" style="color: #108ac6; text-decoration: underline;" title="/freemarker-ide/0.9.14/freemarker-ide-0.9.14.zip:  released on 2006-04-28 17:54:14 GMT" href="http://sourceforge.net/projects/freemarker-ide/files/freemarker-ide/0.9.14/freemarker-ide-0.9.14.zip/download"><span><strong style="font-weight: bold;"></strong>freemarker-ide-0.9.14.zip&nbsp;</span></a><br /><br />下载完插件后，解压缩到：<br />\Program Files\Genuitec\Common\plugins\<br /><br />解压后的目录：<br />\Program Files\Genuitec\Common\plugins\<strong style="font-weight: bold;">hudson.freemarker_ide_0.9.14</strong>&nbsp;<br /><br /><span style="color: #ff0000;">然后需要修改一个文件，这很关键：<br /></span><strong style="font-weight: bold;"><span style="color: #ff0000;">\Program Files\Genuitec\MyEclipse 7.0\configuration\org.eclipse.equinox.simpleconfigurator\bundles.info</span></strong><span style="color: #ff0000;">&nbsp;<br />在文件最后加入下面两行：<br /></span><strong style="font-weight: bold;"><span style="color: #ff0000;">hudson.freemarker_ide,0.9.14,file:plugins\hudson.freemarker_ide_0.9.14\,4,false</span></strong><span style="color: #ff0000;">&nbsp;</span><br />（格式大概为：插件名,版本号,file:插件目录,4,false<br />插件名和版本号是由插件目录名字以下划线分割而得，file:后如果是目录结尾要有反斜杠、如果是.jar就不用，最后的4,false不知道是什么意思，不用管他）<br /><br />然后重启动MyEclipse7.5，就可以用freemarker的eclipse plugin ide打开ftl文件了。<br /><br />最后，要注意一下，\Program Files\Genuitec\Common\plugins\<strong style="font-weight: bold;">hudson.freemarker_ide_0.9.14</strong>&nbsp;中的freemarker.jar可能是很旧的，如果发现ftl文件中的一些符号，如感叹号、双问号如果报告为错误，用新的 freemarker-2.3.15.jar替换之，把MANIFEST.MF里的Bundle-ClassPath也改为freemarker- 2.3.15.jar ，然后重启MyEclipse7.5就可以了。</span></div> <p>&nbsp;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2010/24.html" title="velocity 判空">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2010/22.html" title="freemarker 源码分析">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2010-09-19</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

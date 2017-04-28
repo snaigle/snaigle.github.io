@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>开始学grails ，练手应用 ： bug跟踪， 博客，和个人信息管理</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>开始学grails ，练手应用 ： bug跟踪， 博客，和个人信息管理 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>先写写思路，等代码出来再上代码。</p> <p>bug跟踪：</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 以项目为主线来做， 项目下有团队，团队有 项目经理，项目负责人，队员N个。</p> <p><span style="white-space: pre;"> </span>&nbsp;&nbsp;用例：</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;1，创建项目： 创建项目，并指定项目经理，项目负责人，成员等，分配项目资源，制定项目执行时间</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;2，bug提交和处理：bug可以匿名提交，需要项目经理来审核然后将bug分配给队员去处理， 队员处理后更改bug状态。</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;3，成员用户中心后： 显示自己需要修改的bug，已经修改的bug，并能更改需要修改的bug的状态</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;4，项目经理管理中心： 需要审核的bug， 需要修改的bug，已经修改的bug</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;5，项目负责人管理中心： 当前项目的bug总数，需要修改的总数，已经修改的总数，待审核的总数</p> <p>&nbsp;</p> <p>&nbsp;&nbsp; 基本表结构： 项目表： 编号，名称，介绍</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;项目经理： 编号，用户id ，项目</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;项目负责人； 编号，用户id，项目</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;队员表 &nbsp; &nbsp; ：编号，用户id，项目</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;用户表： &nbsp; &nbsp; 编号，名称，介绍</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;bug： 编号，名称，介绍，状态，负责人，提交人，项目</p> <p>&nbsp;</p> <p>这个项目只完成了 1 。 现在自己在用 jira，感觉自己做的很差劲</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/124.html" title="项目进度和bug跟踪 ，自己用的，不许偷看">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/121.html" title="正在转向linux， 这是linux记事本vi的命令：">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-03-29</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

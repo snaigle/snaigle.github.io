@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>protoBuf 语法介绍</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>protoBuf 语法介绍 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    先上个例子看看
+</p>
+<p>
+    <br />
+</p>
+<pre class="prettyprint lang-js linenums">package proto.test2;  
+  
+option java_package = "proto.test";  
+option java_outer_classname = "RequestBPO";  
+  
+option optimize_for = SPEED;  
+  
+message Request{  
+  optional int32 num = 1; &nbsp;
+  required string msg = 2;
+  repeated Keyval maps = 3 ;
+  optional bool right = 4 ;
+} 
+message Keyval{
+   optional string key = 1;
+   optional string value = 2;
+}</pre>
+
+使用protoc.exe --java_out=src\ &nbsp;src\request.proto 编译
+<p>
+    <br />
+</p>
+<p>
+    即可在 src\proto\test下生成 RequestBPO 类 &nbsp;
+</p>
+<p>
+    为什么不是proto.test2呢，因为 option java_package 的优先级比package的优先级要高
+</p>
+<p>
+    如果没有option java_package 那么就会在 proto.test2下生成。
+</p>
+<p>
+    文件里面要定义消息格式 &nbsp;例： message SomeMessage{...} 这个样子，可以定义多个，也可以嵌套定义
+</p>
+<p>
+    SomeMessage是最终生成BPO中的request message的类名
+</p>
+<p>
+    下面看message中支持的类型 &nbsp; 定义属性格式是这个样子滴： optional|required|repeated &nbsp; type &nbsp;name = order;
+</p>
+<p>
+    第一个是描述符只有那三种， type有 double，float，int32对应java中的double，float，int
+</p>
+<p>
+    还有string对应string， bool对应boolean， repeated则对应为list&nbsp;
+</p>
+<p>
+    名称随便起，貌似没有啥关键字。 最后这个是order，必须大于0 应该是在协议中传输时有用吧
+</p>
+<p>
+    <br />
+</p>
+<p>
+    上面repeated Keyval相当于自定义类型了。还有嵌套定义的情况，我没细看。等用到了再来更新。
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <br />
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/267.html" title="norbert HelloWorld教程">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/265.html" title="NOR的特性">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-06-19 09:57:08</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E5%8A%A8%E6%80%81%E8%AF%AD%E8%A8%80-ref">动态语言 <span>3</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

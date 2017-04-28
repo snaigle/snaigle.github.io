@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>spring insight 使用介绍</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>spring insight 使用介绍 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p> To install Spring Insight Developer, you install the vFabric tc Server Developer edition and then create a new tc Runtime instance using the&nbsp;insight&nbsp;template. </p> 
+<p> Follow these steps to install Spring Insight Developer edition: </p> 
+<div> 
+ <ol> 
+  <li> <p> From the&nbsp;<a href="http://downloads.vmware.com/">VMware Download Center</a>, download tc Server Developer Edition, which includes Spring Insight Developer. </p> 
+   <div> 
+    <ul> 
+     <li> <p> tc Server Developer Edition, for example,&nbsp;vfabric-tc-server-developer-2.5.<em>X.X</em>.zip </p> </li> 
+    </ul> 
+   </div> </li> 
+  <li> <p> Open a terminal (Unix) or Command Prompt (Windows) and create the main tc Server installation directory, such as&nbsp;/home/tcserver. For example, on Unix: </p> <pre>prompt$ mkdir /home/tcserver</pre> </li> 
+  <li> <p> Unzip or untar the bundle you downloaded into the new directory. </p> <p> For example, if you downloaded the tc Server Developer Edition into the&nbsp;/home/Downloads&nbsp;directory: </p> <pre>prompt$ cd /home/tcserver
+prompt$ unzip /home/Downloads/vfabric-tc-developer-2.5.<em>X.X</em>.zip</pre> <p> This creates a directory called&nbsp;vfabric-tc-server-developer-2.5.<em>X.X</em>. This directory contains the tc Runtime utility scripts, the templates directory (including the&nbsp;insight&nbsp;template), Tomcat 6 and 7, and so on. See<a href="http://static.springsource.com/projects/tc-server/2.1/getting-started/html/ch06s03.html">Overview of tc Server Directories, Variables, and Configuration Files&nbsp;</a>for details. </p> </li> 
+  <li> <p> Create a tc Server instance with the Spring Insight Developer template using the&nbsp;tcruntime-instance.sh&nbsp;(Unix) or&nbsp;tcruntime-instance.bat&nbsp;(Windows) script. On Unix, for example: </p> <pre>prompt$ cd /home/tcserver/vfabric-tc-server-developer-2.5.<em>X.X</em> prompt$ ./tcruntime-instance.sh create myInstanceName -t insight</pre> </li> 
+  <li> <p> Execute the tc Server instance you created using the&nbsp;tcruntime-ctl.sh&nbsp;(Unix) or&nbsp;tcruntime-ctl.bat&nbsp;(Windows) script. </p> <p> On Unix: </p> <pre>prompt$ ./tcruntime-ctl.sh <em>myInstanceName</em> start</pre> <p> On Windows, you must install the instance as a Windows service before you start it: </p> <pre>prompt$ tcruntime-ctl.bat <em>myInstanceName</em> install
+prompt$ tcruntime-ctl.bat <em>myInstanceName</em> start</pre> </li> 
+  <li> <p> Deploy your Web applications to tc Server. Copy the WAR files to the&nbsp;webapps&nbsp;directory of the tc runtime instance and make any necessary changes to the&nbsp;conf/server.xml&nbsp;and&nbsp;conf/context.xml&nbsp;files to support the deployed application. </p> </li> 
+  <li> <p> Access the Spring Insight Dashboard by loading the url&nbsp;http://localhost:8080/insight&nbsp;in your browser. </p> </li> 
+ </ol> 
+</div> 
+<p> See the<a href="http://static.springsource.com/projects/documentation/index.html">&nbsp;tc Server documentation</a>&nbsp;for more detailed information about installing and configuring tc Server. </p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2013/369.html" title="activemq 使用介绍">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2013/367.html" title="监控记要">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2013-03-21 12:29:26</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

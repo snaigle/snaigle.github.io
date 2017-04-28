@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>echo , exec,uname</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>echo , exec,uname </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><pre class="prettyprint lang-bsh linenums">tt@tt ~/workspace/java/ttcms $ uname
+Linux
+tt@tt ~/workspace/java/ttcms $ uname -s
+Linux
+tt@tt ~/workspace/java/ttcms $ uname -n
+tt
+tt@tt ~/workspace/java/ttcms $ uname -r
+3.0.0-12-generic
+tt@tt ~/workspace/java/ttcms $ uname -v
+#20-Ubuntu SMP Fri Oct 7 14:56:25 UTC 2011
+tt@tt ~/workspace/java/ttcms $ uname -m
+x86_64
+tt@tt ~/workspace/java/ttcms $ uname -o
+GNU/Linux
+tt@tt ~/workspace/java/ttcms $ uname -a
+Linux tt 3.0.0-12-generic #20-Ubuntu SMP Fri Oct 7 14:56:25 UTC 2011 x86_64 x86_64 x86_64 GNU/Linux
+</pre>
+<p>
+    echo &nbsp;可以接收多个参数,若用引号则表示一个参数，会保留其中的空格
+</p>
+<p>
+    <br />
+</p>
+<p>
+    命令链接可以用 ; （顺序执行）,&amp;&amp; (需要前面的命令返回0)&nbsp;,||(需要前面的命令返回非零) , 可以用()来表示命令序列
+</p>
+<p>
+    <br />
+</p>
+<p>
+    常用的环境变量 HOME, SHELL,PWD,$(进程ID)，？（前个命令返回代码） ，PPID（父进程ID）,UID(用户ID)
+</p>
+<p>
+    在命令行用VAR1=var1就能进行赋值，但是必须要export VAR1后，才能导出，貌似这样才能在其他进程中使用
+</p>
+<p>
+    exec 会在当前进程执行程序， 比如直接执行bash ，会新起新进程<img src="http://t.feiyan35488.com/editor/plugins/emoticons/images/8.gif" border="0" alt="" />
+</p>
+<p>
+    <br />
+</p>
+<p>
+    history 查看历史命令, 加参数 n表示 显示最近的n条记录
+</p>
+<p>
+    !! 显示就近的记录, &nbsp;！#当前正输入的命令, !String,以string 开头的命令 !?string？ 包含string 的命令
+</p>
+<p>
+    命令后加#可以用来注释
+</p>
+<p>
+    <br />
+</p>
+<p>
+    cd -可用来返回上一个工作目录， CDPATH 可以用来设置默认的工作目录
+</p>
+<p>
+    which,type 可以用来查看命令的实际路径
+</p>
+<p>
+    <br />
+</p>
+<p>
+    whatis 可以用来查看命令的简要功能介绍
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <span style="line-height:2;"></span>
+</p></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/210.html" title="cat , split , od ,wc , head ,tail,dmesg">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/208.html" title="bug and task">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-04-21 16:40:06</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4-ref">每日linux命令 <span>7</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

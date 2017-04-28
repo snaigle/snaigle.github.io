@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>norbert HelloWorld教程</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>norbert HelloWorld教程 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    为了避免依赖的问题，我采用了maven创建项目
+</p>
+<p>
+    下面是依赖的包
+</p>
+<p>
+    <br />
+</p>
+<pre class="prettyprint lang-xml linenums">&lt;dependency&gt;
+        &lt;groupId&gt;com.linkedin&lt;/groupId&gt;
+        &lt;artifactId&gt;norbert_2.8.1&lt;/artifactId&gt;
+        &lt;version&gt;0.6.12&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.scala-lang&lt;/groupId&gt;
+        &lt;artifactId&gt;scala-library&lt;/artifactId&gt;
+        &lt;version&gt;2.8.1&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;com.google.protobuf&lt;/groupId&gt;
+        &lt;artifactId&gt;protobuf-java&lt;/artifactId&gt;
+        &lt;version&gt;2.4.0a&lt;/version&gt;
+    &lt;/dependency&gt;
+    &lt;dependency&gt;
+        &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;
+        &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;
+        &lt;version&gt;3.3.3&lt;/version&gt;
+    &lt;/dependency&gt;</pre>
+<p>
+    <br />
+</p>
+<p>
+    &nbsp; 先上一个norbert官方的例子，官方的缺少protoc生成消息格式类的介绍，具体生成办法请参考 我的另一篇文章&lt;<a href="http://www.feiyan35488.com/show/266" target="_blank">protobuf介绍</a>&gt;<br />
+<span></span> 
+</p>
+<p>
+    &nbsp;&nbsp;
+</p>
+<pre class="prettyprint lang-java linenums">class PingSerializer implements Serializer&lt;Ping, Ping&gt; {
+    public String requestName() {
+      return "ping";
+    }
+
+    public String responseName() {
+      return "pong";
+    }
+
+    public byte[] requestToBytes(Ping message) {
+      return NorbertExampleProtos.Ping.newBuilder().setTimestamp(message.timestamp).build().toByteArray();
+    }
+
+    public Ping requestFromBytes(byte[] bytes) {
+      try {
+        return new Ping(NorbertExampleProtos.Ping.newBuilder().mergeFrom(bytes).build().getTimestamp());
+      } catch (InvalidProtocolBufferException e) {
+         System.out.println("Invalid protocol buffer exception " + e.getMessage());
+         throw new IllegalArgumentException(e);
+      }
+    }
+
+    public byte[] responseToBytes(Ping message) {
+      return requestToBytes(message);
+    }
+
+    public Ping responseFromBytes(byte[] bytes) {
+      return requestFromBytes(bytes);
+    }
+}</pre>
+<p>
+    必须要实现 serializer接口，这是使用netty传输时对内容进行转换的
+NorbertExampleProtos这个类是通过.proto文件生成的，具体生成办法请参考 我的另一篇文章&lt;<a href="http://www.feiyan35488.com/show/266" target="_blank">protobuf介绍</a>&gt;
+下面是客户端和服务端的写法， 直接运行就可以看到结果， 据我查到的情况是 norbert能支持1000并发以上没问题。这个对企业大并发还不是很了解，不评论
+</p>
+<p>
+    <br />
+</p>
+<p>
+<pre class="prettyprint lang-java linenums">import java.util.Set;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
+
+import proto.Request;
+import proto.RequestResponseSerializer;
+import proto.Response;
+
+import com.linkedin.norbert.cluster.InvalidClusterException;
+import com.linkedin.norbert.javacompat.cluster.ClusterClient;
+import com.linkedin.norbert.javacompat.cluster.ClusterListener;
+import com.linkedin.norbert.javacompat.cluster.Node;
+import com.linkedin.norbert.javacompat.cluster.ZooKeeperClusterClient;
+import com.linkedin.norbert.javacompat.network.Endpoint;
+import com.linkedin.norbert.javacompat.network.LoadBalancer;
+import com.linkedin.norbert.javacompat.network.LoadBalancerFactory;
+import com.linkedin.norbert.javacompat.network.NettyNetworkClient;
+import com.linkedin.norbert.javacompat.network.NettyNetworkServer;
+import com.linkedin.norbert.javacompat.network.NetworkClient;
+import com.linkedin.norbert.javacompat.network.NetworkClientConfig;
+import com.linkedin.norbert.javacompat.network.NetworkServer;
+import com.linkedin.norbert.javacompat.network.NetworkServerConfig;
+import com.linkedin.norbert.javacompat.network.RequestHandler;
+import com.linkedin.norbert.javacompat.network.RoundRobinLoadBalancerFactory;
+
+public class Start {
+    public static void main(String[] args)
+    {
+        final String serviceName = "norbert";
+        final String zkConnectStr = "localhost:2181";
+
+        configCluster(serviceName, zkConnectStr);
+        startServer(serviceName, 1, zkConnectStr);
+        startServer(serviceName, 2, zkConnectStr);
+
+        NetworkClientConfig config = new NetworkClientConfig();
+        config.setServiceName(serviceName);
+        config.setZooKeeperConnectString(zkConnectStr);
+        config.setZooKeeperSessionTimeoutMillis(30000);
+        config.setConnectTimeoutMillis(1000);
+        config.setWriteTimeoutMillis(150);
+        config.setMaxConnectionsPerNode(5);
+        config.setStaleRequestTimeoutMins(10);
+        config.setStaleRequestCleanupFrequencyMins(10);
+
+        final LoadBalancerFactory myLB = new LoadBalancerFactory()
+        {
+            @Override
+            public LoadBalancer newLoadBalancer(final Set&lt;Endpoint&gt; endpoints) throws InvalidClusterException
+            {
+                return new LoadBalancer()
+                {
+                    @Override
+                    public Node nextNode()
+                    {
+                        return endpoints.iterator().next().getNode();
+                    }
+                };
+            }
+        };
+        final NetworkClient nc = new NettyNetworkClient(config, new RoundRobinLoadBalancerFactory());
+        //PartitionedNetworkClient&lt;Integer&gt; nc = new NettyPartitionedNetworkClient&lt;Integer&gt;(config, new IntegerConsistentHashPartitionedLoadBalancerFactory());
+
+        //nc.registerRequest(NetqProtocol.AppendReq.getDefaultInstance(), NetqProtocol.AppendResp.getDefaultInstance());
+
+        for(int index = 0;index&lt;10;index++){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    for(int i=0;i&lt;10;i++){
+                        final Request request = new Request(5+i);
+                        System.out.println(Thread.currentThread().getName()+"-client request at "+(5+i));
+                        Future&lt;Response&gt; pingFuture = nc.sendRequest(request, new RequestResponseSerializer());
+                
+                        try
+                        {   
+                            final Response appendResp = pingFuture.get();
+                            System.out.println(Thread.currentThread().getName()+"-client got ping resp: " + appendResp.total);
+                        }
+                        catch( InterruptedException e )
+                        {
+                            e.printStackTrace();
+                        }
+                        catch( ExecutionException e )
+                        {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    
+                }
+            }).start();    
+       }
+    }
+</pre>
+</p>
+<p>
+<pre class="prettyprint lang-java linenums"> private static void startServer(String serviceName,final int nodeId, String zkConnectStr)
+    {
+        NetworkServerConfig config = new NetworkServerConfig();
+        config.setServiceName(serviceName);
+        config.setZooKeeperConnectString(zkConnectStr);
+        config.setZooKeeperSessionTimeoutMillis(30000);
+        config.setRequestThreadCorePoolSize(5);
+        config.setRequestThreadMaxPoolSize(10);
+        config.setRequestThreadKeepAliveTimeSecs(300);
+
+        NetworkServer ns = new NettyNetworkServer(config);
+
+        ns.registerHandler(new RequestHandler&lt;Request, Response&gt;()
+        {
+            @Override
+            public Response handleRequest(Request request) throws Exception
+            {
+                System.out.println("server_"+nodeId+":run at "+request.num);
+                return new Response(request.num+10);
+            }
+        }, new RequestResponseSerializer());
+
+
+        ns.bind(nodeId);
+    }
+
+    private static void configCluster(String serviceName, String zkConnectStr)
+    {
+        //ClusterClient cc = new InMemoryClusterClient("norbert");//, "localhost:2181", 30000);
+        final ClusterClient cc = new ZooKeeperClusterClient(serviceName, zkConnectStr, 30000);
+        cc.awaitConnectionUninterruptibly();
+
+        cc.addListener(new ClusterListener()
+        {
+            @Override
+            public void handleClusterConnected(Set&lt;Node&gt; nodes)
+            {
+                System.out.println("connected to cluster: " + nodes);
+            }
+
+            @Override
+            public void handleClusterNodesChanged(Set&lt;Node&gt; nodes)
+            {
+                System.out.println("nodes changed: ");
+                for( Node node : nodes )
+                {
+                    System.out.println("node: " + node);
+                }
+            }
+
+            @Override
+            public void handleClusterDisconnected()
+            {
+                final Set&lt;Node&gt; nodes = cc.getNodes();
+                System.out.println("dis-connected from cluster: " + nodes);
+            }
+
+            @Override
+            public void handleClusterShutdown()
+            {
+                final Set&lt;Node&gt; nodes = cc.getNodes();
+                System.out.println("cluster shutdown: " + nodes);
+            }
+        });
+
+        cc.removeNode(1);
+        cc.removeNode(2);
+        cc.addNode(1, "localhost:5002");
+        cc.addNode(2, "localhost:5003");
+
+//        cc.markNodeAvailable(1);
+//        cc.shutdown();
+    }</pre>
+</p>
+<p>
+    <br />
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/268.html" title="接下来的任务是玩转asm">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/266.html" title="protoBuf 语法介绍">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-06-20 01:56:12</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

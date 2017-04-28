@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>spring security 源码分析： 过滤器</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>spring security 源码分析： 过滤器 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    首先 请求进入 FilterChainProxy 这个类
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <span style="white-space:pre;">FilterChainProxy.java</span>
+</p>
+<p>
+    <span style="white-space:pre;">
+<pre class="prettyprint lang-java linenums">public void doFilter(ServletRequest request, ServletResponse response,
+            FilterChain chain) throws IOException, ServletException {
+        FilterInvocation fi = new FilterInvocation(request, response, chain);
+        List&lt;Filter&gt; filters = getFilters(fi.getRequestUrl());
+        if (filters == null || filters.size() == 0) {
+            if (logger.isDebugEnabled()) {
+                logger.debug(fi.getRequestUrl() + filters == null ? " has no matching filters"
+                        : " has an empty filter list");
+            }
+            chain.doFilter(request, response);
+            return;
+        }
+        VirtualFilterChain virtualFilterChain = new VirtualFilterChain(fi,
+                filters);
+        virtualFilterChain.doFilter(fi.getRequest(), fi.getResponse());
+    }
+
+    public List&lt;Filter&gt; getFilters(String url) {
+        if (stripQueryStringFromUrls) { // String query string - see SEC-953
+            int firstQuestionMarkIndex = url.indexOf("?");
+            if (firstQuestionMarkIndex != -1) {
+                url = url.substring(0, firstQuestionMarkIndex);
+            }
+        }
+        for (Map.Entry&lt;Object, List&lt;Filter&gt;&gt; entry : filterChainMap.entrySet()) {
+            Object path = entry.getKey();
+            if (matcher.requiresLowerCaseUrl()) {
+                url = url.toLowerCase();
+                if (logger.isDebugEnabled()) {
+                    logger.debug("Converted URL to lowercase, from: '" + url
+                            + "'; to: '" + url + "'");
+                }
+            }
+            boolean matched = matcher.pathMatchesUrl(path, url);
+            if (logger.isDebugEnabled()) {
+                logger.debug("Candidate is: '" + url + "'; pattern is " + path
+                        + "; matched=" + matched);
+            }
+            if (matched) {
+                return entry.getValue();
+            }
+        }
+        return null;
+    }</pre>
+<br />
+</span>
+</p>
+<p>
+    可以看出， FilterInvocation 是见 request 和 response ，chain 只是进行了封装， 然后根据 url 来判断这个请求是否需要进行拦截， 这里 getFilter（） 方法是查询的 intercepter-url 中配置的 内容。（这里具体的内容在下面）
+</p>
+<p>
+    接下来就是执行所有的List<filter> 。执行完所有的List<filter>之后会继续执行容器的filterChain</filter></filter>
+</p>
+<p>
+    <span style="white-space:pre;">VirtualFilterChain.java 这是 FilterChainProxy 的内部类&nbsp;</span>
+</p>
+<p>
+<pre class="prettyprint lang-java linenums">    public void doFilter(ServletRequest request, ServletResponse response)
+            throws IOException, ServletException {
+        if (currentPosition == additionalFilters.size()) {
+            if (logger.isDebugEnabled()) {
+                logger.debug(fi.getRequestUrl()
+                        + " reached end of additional filter chain; proceeding with original chain");
+            }
+            fi.getChain().doFilter(request, response);
+        } else {
+            currentPosition++;
+            Filter nextFilter = additionalFilters.get(currentPosition - 1);
+            if (logger.isDebugEnabled()) {
+                logger.debug(fi.getRequestUrl() + " at position "
+                        + currentPosition + " of " + additionalFilters.size()
+                        + " in additional filter chain; firing Filter: '"
+                        + nextFilter + "'");
+            }
+            nextFilter.doFilter(request, response, this);
+        }
+    }</pre>
+</p>
+<p>
+    下面先按顺序分析各Filter的作用 （security默认添加的filterChain，共11个 还有大概4，5个没有涉及到，以后涉及到再进行添加）
+</p>
+<p>
+    1.org.springframework.security.web.context.SecurityContextPersistenceFilter
+</p>
+<p>
+    （2.0中是这个<span style="font-family:Arial, sans-serif, Helvetica, Tahoma;line-height:18px;">HttpSessionContextIntegrationFilter</span>）
+</p>
+<p>
+    从这个类所在的包路径 &nbsp;context，大致知道这个类 只处理 上下文
+</p>
+<p>
+<pre class="prettyprint lang-java linenums">public void doFilter(ServletRequest req, ServletResponse res,
+            FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+        if (request.getAttribute(FILTER_APPLIED) != null) { // ensure that filter is only applied once per request
+            chain.doFilter(request, response);
+            return;
+        }
+        final boolean debug = logger.isDebugEnabled();
+        request.setAttribute(FILTER_APPLIED, Boolean.TRUE);
+        if (forceEagerSessionCreation) {
+            HttpSession session = request.getSession();
+            if (debug &amp;&amp; session.isNew()) {
+                logger.debug("Eagerly created session: " + session.getId());
+            }
+        }
+        HttpRequestResponseHolder holder = new HttpRequestResponseHolder(
+                request, response);
+        SecurityContext contextBeforeChainExecution = repo.loadContext(holder);
+        try {
+            SecurityContextHolder.setContext(contextBeforeChainExecution);
+            chain.doFilter(holder.getRequest(), holder.getResponse());
+        } finally {
+            SecurityContext contextAfterChainExecution = SecurityContextHolder
+                    .getContext(); // Crucial removal of SecurityContextHolder contents - do this before anything else.
+            SecurityContextHolder.clearContext();
+            repo.saveContext(contextAfterChainExecution, holder.getRequest(),
+                    holder.getResponse());
+            request.removeAttribute(FILTER_APPLIED);
+            if (debug) {
+                logger.debug("SecurityContextHolder now cleared, as request processing completed");
+            }
+        }
+    }</pre>
+</p>
+<p>
+    从代码看： 在一次request中只执行一次，并生成 SecurityContext(从session中读取，如果session中没有就创建一个新的)，注册到 SecurityContextHolder中，当请求执行完后，清除该SecurityContext 和request中的 filter_applied 属性。在源码中类注释提到: 这个类 一次请求中只能执行一次，并且它应该在 任何认证过程之前 执行。
+</p>
+<p>
+    ============================华丽丽的分割线===========================
+</p>
+<p>
+    2，<span style="white-space:pre;">org.springframework.security.web.authentication.logout.LogoutFilter</span>
+</p>
+<p>
+<pre class="prettyprint lang-java linenums">public void doFilter(ServletRequest req, ServletResponse res,
+            FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+        if (requiresLogout(request, response)) {
+            Authentication auth = SecurityContextHolder.getContext()
+                    .getAuthentication();
+            if (logger.isDebugEnabled()) {
+                logger.debug("Logging out user '" + auth
+                        + "' and transferring to logout destination");
+            }
+            for (LogoutHandler handler : handlers) {
+                handler.logout(request, response, auth);
+            }
+            logoutSuccessHandler.onLogoutSuccess(request, response, auth);
+            return;
+        }
+        chain.doFilter(request, response);
+    }
+
+    /**
+     *
+     * Allow subclasses to modify when a logout should take place. * * @param
+     * request the request * @param response the response * * @return true if
+     * logout should occur, false otherwise
+     */
+    protected boolean requiresLogout(HttpServletRequest request,
+            HttpServletResponse response) {
+        String uri = request.getRequestURI();
+        int pathParamIndex = uri.indexOf(';');
+        if (pathParamIndex &gt; 0) { // strip everything from the first semi-colon
+            uri = uri.substring(0, pathParamIndex);
+        }
+        int queryParamIndex = uri.indexOf('?');
+        if (queryParamIndex &gt; 0) { // strip everything from the first question
+                                    // mark
+            uri = uri.substring(0, queryParamIndex);
+        }
+        if ("".equals(request.getContextPath())) {
+            return uri.endsWith(filterProcessesUrl);
+        }
+        return uri.endsWith(request.getContextPath() + filterProcessesUrl);
+    }</pre>
+</p>
+<p>
+    这个处理比较简单， 只是检查是否为 登出地址，是的话就退出然后返回，不是的话就进行下一个filter。
+</p>
+<p>
+    这个判断是否为登录地址我感觉很不正常，他判断是否以 logout_url 结尾，直接判断是否相等才对啊。
+</p>
+<p>
+    而且他根据 contextpath 是否为“” ，其实不用的，直接判断 contextPath+logout_url 即可。
+</p>
+<p>
+    org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter .java
+</p>
+<p>
+<pre class="prettyprint lang-java linenums">public void doFilter(ServletRequest req, ServletResponse res,
+            FilterChain chain) throws IOException, ServletException {
+        HttpServletRequest request = (HttpServletRequest) req;
+        HttpServletResponse response = (HttpServletResponse) res;
+        if (!requiresAuthentication(request, response)) {
+            chain.doFilter(request, response);
+            return;
+        }
+        if (logger.isDebugEnabled()) {
+            logger.debug("Request is to process authentication");
+        }
+        Authentication authResult;
+        try {
+            authResult = attemptAuthentication(request, response);
+            if (authResult == null) {// return immediately as subclass has
+                                        // indicated that it hasn't completed
+                                        // authentication
+                return;
+            }
+            sessionStrategy.onAuthentication(authResult, request, response);
+        } catch (AuthenticationException failed) { // Authentication failed
+            unsuccessfulAuthentication(request, response, failed);
+            return;
+        } // Authentication success
+        if (continueChainBeforeSuccessfulAuthentication) {
+            chain.doFilter(request, response);
+        }
+        successfulAuthentication(request, response, authResult);
+    }
+
+    public Authentication attemptAuthentication(HttpServletRequest request,
+            HttpServletResponse response) throws AuthenticationException {
+        if (postOnly &amp;&amp; !request.getMethod().equals("POST")) {
+            throw new AuthenticationServiceException(
+                    "Authentication method not supported: "
+                            + request.getMethod());
+        }
+        String username = obtainUsername(request);
+        String password = obtainPassword(request);
+        if (username == null) {
+            username = "";
+        }
+        if (password == null) {
+            password = "";
+        }
+        username = username.trim();
+        UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
+                username, password); // Place the last username attempted into
+                                        // HttpSession for views
+        HttpSession session = request.getSession(false);
+        if (session != null || getAllowSessionCreation()) {
+            request.getSession().setAttribute(
+                    SPRING_SECURITY_LAST_USERNAME_KEY,
+                    TextEscapeUtils.escapeEntities(username));
+        } // Allow subclasses to set the "details" property
+        setDetails(request, authRequest);
+        return this.getAuthenticationManager().authenticate(authRequest);
+    }
+
+    public Authentication doAuthentication(Authentication authentication)
+            throws AuthenticationException {
+        Class toTest = authentication.getClass();
+        AuthenticationException lastException = null;
+        Authentication result = null;
+        for (AuthenticationProvider provider : getProviders()) {
+            if (!provider.supports(toTest)) {
+                continue;
+            }
+            logger.debug("Authentication attempt using "
+                    + provider.getClass().getName());
+            try {
+                result = provider.authenticate(authentication);
+                if (result != null) {
+                    copyDetails(authentication, result);
+                    break;
+                }
+            } catch (AccountStatusException e) { // SEC-546: Avoid polling
+                                                    // additional providers if
+                                                    // auth failure is due to
+                                                    // invalid account status
+                eventPublisher.publishAuthenticationFailure(e, authentication);
+                throw e;
+            } catch (AuthenticationException e) {
+                lastException = e;
+            }
+        }
+        if (result == null &amp;&amp; parent != null) { // Allow the parent to try.
+            try {
+                result = parent.authenticate(authentication);
+            } catch (ProviderNotFoundException e) { // ignore as we will throw
+                                                    // below if no other
+                                                    // exception occurred prior
+                                                    // to calling parent and the
+                                                    // parent
+                // may throw ProviderNotFound even though a provider in the
+                // child already handled the request
+            } catch (AuthenticationException e) {
+                lastException = e;
+            }
+        }
+        if (result != null) {
+            if (eraseCredentialsAfterAuthentication
+                    &amp;&amp; (result instanceof CredentialsContainer)) { // Authentication
+                                                                    // is
+                                                                    // complete.
+                                                                    // Remove
+                                                                    // credentials
+                                                                    // and other
+                                                                    // secret
+                                                                    // data from
+                                                                    // authentication
+                ((CredentialsContainer) result).eraseCredentials();
+            }
+            eventPublisher.publishAuthenticationSuccess(result);
+            return result;
+        } // Parent was null, or didn't authenticate (or throw an exception).
+        if (lastException == null) {
+            lastException = new ProviderNotFoundException(messages.getMessage(
+                    "ProviderManager.providerNotFound",
+                    new Object[] { toTest.getName() },
+                    "No AuthenticationProvider found for {0}"));
+        }
+        eventPublisher.publishAuthenticationFailure(lastException,
+                authentication);
+        throw lastException;
+    }</pre>
+</p>
+<p>
+    过程： 判断是否 为登录地址，是则进行认证，否则 继续下一个filter
+</p>
+<p>
+    认证过程： 取得 username,password, 调用 AuthenticationManager.authenticate(){<br />
+然后调用 所有的AuthenticationProvider 进行认证，有一个认证通过即可通过。在AuthenticationProvider中调用 配置的 UserDetailsService 的 loadUserByUserame() 得到 UserDetails, &nbsp;当第一次从数据库取得后，会将UserDetails保存到 Cache中，这给权限分配的 及时性带来了困难，不过它专门提供了一个filter来进行 热部署权限
+</p>
+<p>
+    <br />
+}<br />
+还有一点，这个filter中判断 "j_spring_security_check"这个地址也是以 endWith来匹配的，感觉不对。
+</p>
+<p>
+    回家了，晚上继续
+</p>
+<p>
+    <br />
+</p>
+<p>
+    ===========================华丽丽的分割线=================================
+</p>
+<p>
+    <br />
+</p>
+<p>
+    org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter
+</p>
+<p>
+    org.springframework.security.web.authentication.www.BasicAuthenticationFilter
+</p>
+<p>
+    org.springframework.security.web.savedrequest.RequestCacheAwareFilter
+</p>
+<p>
+    org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter
+</p>
+<p>
+    org.springframework.security.web.authentication.AnonymousAuthenticationFilter
+</p>
+<p>
+    org.springframework.security.web.session.SessionManagementFilter
+</p>
+<p>
+    org.springframework.security.web.access.ExceptionTranslationFilter
+</p>
+<p>
+    org.springframework.security.web.access.intercept.FilterSecurityInterceptor
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <br />
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/93.html" title="迅雷会员账号 需要的请转">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/91.html" title="spring security 3.0 logout filter 代码中的一个小bug">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-01-27</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

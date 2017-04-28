@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>python 语法入门 2</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>python 语法入门 2 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>python的数据类型有：</p> <p>&nbsp;&nbsp; &nbsp;列表，元组，set，字典</p> <p>&nbsp;&nbsp; &nbsp;列表有 append(n), insert(n,x),pop(n),remove(n),index(x),count(x),sort(),reverse();</p> <p>&nbsp;&nbsp; &nbsp;还有列表内置函数，&nbsp;</p> <p>&nbsp;&nbsp; filter(func,[x,y]) &nbsp; func 返回true or false， 将列表中的值，分别放到func中根据返回的true 来将该值取出</p> <p>&nbsp;&nbsp; map（func,[x,y]） 将列表中的值 放到func中，将返回值放到返回的列表中。</p> <p>&nbsp;&nbsp; map（func，[x,y],[x,7]）func中必须接受足够的参数，两个列表的长度必须一致</p> <p>&nbsp;&nbsp; reduce（func，【2，3】，0） 第三个数可选</p> <p>&nbsp;&nbsp; 计算前两个数，将返回值与第三个值进行计算。当有第三个参数时，将第三个参数和列表的第一个数进行计算，然后类推</p> <p>del 删除列表中的值，或删除变量</p> <p>&nbsp;&nbsp; del（a[2]）,del(a[1:2]) &nbsp;del(:)删除全部元素， del（a）,删除该变量</p> <p>set（）不重复的列表</p> <p>&nbsp;a, a - b, &nbsp; a &amp; b a | b , a^b</p> <p>&nbsp;</p> <p>循环语法： &nbsp;</p> <p>&nbsp;&nbsp; &nbsp; for &nbsp;n in range:</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;print n &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</p> <p>&nbsp;&nbsp; &nbsp; for k,v in dict.iteritems():</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; print k,v</p> <p>&nbsp;&nbsp; &nbsp; for i,v in range.enumerate():</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;print i,v</p> <p>for x,y in zip(list1,list2)</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; print x,y &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;zip可以同时解读两个列表</p> <p>sorted函数可以不改动原列表生成一个排好序的新列表</p> <p>&nbsp;</p> <p>python的脚本需要以 .py结尾，&nbsp;</p> <p>&nbsp;&nbsp; &nbsp;在python的包中必须要有 __init__.py，可以有初始化操作，也可以为空</p> <p>&nbsp;from &nbsp;module import submodule&nbsp;</p> <p>&nbsp;import module&nbsp;</p> <p>from module import *， 这样无法引入 __ 开始的定义</p> <p>&nbsp;dir()可以查看 模块的定义</p> <p>&nbsp;</p> <p>&nbsp;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/103.html" title="在线理财账本 后记">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/101.html" title="python 语法介绍（入门级）">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-02-28</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

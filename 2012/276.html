@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>TTCMS 0.a.5--0.a.*开发计划</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>TTCMS 0.a.5--0.a.*开发计划 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><ol>
+    <li>
+        将ttcms的连接池改为 druid &nbsp; 0.a.5 ，已完成
+    </li>
+    <li>
+        <span>添加图片，附件管理 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</span><span>0.a.5 ，</span><br />
+    </li>
+    <li>
+        改为 markdown 编辑器 &nbsp; &nbsp; &nbsp; &nbsp;0.a.6 ，完成
+    </li>
+    <li>
+        <span>添加h2备份功能 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;0.a.6&nbsp;</span><br />
+    </li>
+    <li>
+        加入同步接口 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.a.7
+    </li>
+    <li>
+        加入rss &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.a.7
+    </li>
+    <li>
+        添加二维码生成功能 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.a.8 &nbsp;，已完成，使用js生成，同样有相应的java类库未使用，减少服务器浪费
+    </li>
+    <li>
+        分享功能 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.a.8 &nbsp;，去除jiathis，太慢了 完成
+    </li>
+    <li>
+        改造为插件系统 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.a.9 &nbsp;
+    </li>
+    <li>
+        用户和权限插件 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.a.9 &nbsp;
+    </li>
+    <li>
+        文章管理插件 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.a.10
+    </li>
+    <li>
+        日历和天气插件 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 0.a.11
+    </li>
+    <li>
+        主题管理 &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;0.a.12
+    </li>
+    <li>
+        文章归档排序不对，请修改
+    </li>
+    <li>
+        添加对外关联接口，使用rpcxml接口即可，先完成wordpress的常用接口就行
+    </li>
+    <li>
+        添加husdson系统，自动发布ttcms
+    </li>
+</ol>
+<p>
+    #美化cms样式，制定页面布局，以便能制作主题css。
+</p>
+<p>
+    #监控druid，记录sql语句和运行时间，并希望能进行一定的分析统计
+</p>
+<p>
+    目前应该有发布状态管理了，默认的为未发布状态，添加《保存草稿》和《立刻发布》按钮，需要xiu
+</p>
+<p>
+    需要开放hudson系统，这样就可以直接在线发布了
+</p></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/277.html" title="菊花体生成代码">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/275.html" title="redis 命令学习 3">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-07-18 07:59:13</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86-ref">项目管理 <span>33</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E6%89%A7%E8%A1%8C%E4%BB%BB%E5%8A%A1%E5%88%97%E8%A1%A8-ref">执行任务列表 <span>3</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

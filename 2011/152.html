@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>windows下整合nginx（1.04）和php5.2（5.3）</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>windows下整合nginx（1.04）和php5.2（5.3） </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>首先去nginx官网下载nginx最新版，解压。
+下载window下的php5.2的zip包，不要下载exe的，否则你安不上，将php解压。
+首先配置$nginx_home$/conf/nginx.conf,修改内容
+<pre class="prettyprint lang-js linenums">
+server {
+        #端口不解释
+        listen       80;
+        server_name  localhost;</p>
+
+<pre><code>    #charset koi8-r;
+
+    #access_log  logs/host.access.log  main;
+
+    # 修改root为你的项目路径，或静态文件路径
+    location / {
+        root   D:/test-program/phpwww;
+        index  index.html index.htm index.php;
+    }
+
+    #error_page  404              /404.html;
+
+    # redirect server error pages to the static page /50x.html
+    #
+    error_page   500 502 503 504  /50x.html;
+   #  50x.htm所在的路径，同理可以配置404，403等
+    location = /50x.html {
+        root   html;
+    }
+
+    # proxy the PHP scripts to Apache listening on 127.0.0.1:80
+    #
+    #location ~ \.php$ {
+    #    proxy_pass   http://127.0.0.1;
+    #}
+
+    # pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000
+    #php后缀的处理，将此段前面的#都去掉
+    location ~ \.php$ {
+        root           D:/test-program/phpwww; #这个一定是项目路径
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;    #目录的默认页面
+        fastcgi_param  SCRIPT_FILENAME  D:/test-program/phpwww$fastcgi_script_name;## 将此也改为项目路径
+        include        fastcgi_params;
+    }
+
+    # deny access to .htaccess files, if Apache's document root
+    # concurs with nginx's one
+    #
+    location ~ /\.ht {
+        deny  all;
+    }
+     ## 静态文件的处理
+location = \.(css|jpg|gif|js|html|htm)$ {
+        root           D:/test-program/phpwww;
+    }
+}&lt;/pre&gt;
+</code></pre>
+
+<p>将$php-home$/php.ini-recommended改为 php.ini,修改内容如下
+<pre class="prettyprint lang-js linenums">; CGI 设置
+cgi.force_redirect = 1
+cgi.fix_pathinfo = 1
+cgi.rfc2616_headers = 1</p>
+
+<p>error_reporting = E_ALL
+display_errors = On
+extension_dir = &ldquo;C:\php5\ext&rdquo;
+; 找到以上两端，将其前面的；去掉，同时修改其值</p>
+
+<p>; 动态扩展，可以根据需要去掉 extension 前面的注释 ;
+; 如加载 PDO, MySQL
+extension=php_pdo.dll
+extension=php_pdo_mysql.dll
+; 这些 extension扩展，看你需要那些，就去掉前面的；即可。如果不熟悉那么只要把除了mysql的其他数据库插件不使用外，其他所用的插件都放开。这样确保第一次容易使用，等以后熟悉了再精确修改</pre>
+下面写了两个批处理用来启动和关闭nginx。
+<pre class="prettyprint lang-js linenums"># start
+@echo off
+echo start php fastcgi&hellip;
+RunHiddenConsole.exe ${php-home}/php-cgi.exe -b 127.0.0.1:9000 -c ${php-home}/php.ini</p>
+
+<p>echo starting nginx&hellip;
+${nginx-home}/nginx.exe
+#start</p>
+
+<p>#stop
+@echo off
+echo stopping nginx&hellip;
+taskkill /F /IM nginx.exe &gt; nul
+echo stopping php fastcgi &hellip;
+taskkill /F /IM php-cgi.exe &gt; nul
+exit
+#stop</pre>
+上面用到了一个RunHiddenConsole.exe小程序，用来隐藏dos窗口，只有几K，下载连接
+到此就配置完了，是不是很简单，启动服务器，自己去试试吧，建议下个wordpress来试试。</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/153.html" title="什么是爱情">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/151.html" title="关于的一些感想">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-06-17 17:12:08</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E9%83%A8%E7%BD%B2-ref">服务器优化部署 <span>11</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

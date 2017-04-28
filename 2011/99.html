@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>为nutz添加tiles视图</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>为nutz添加tiles视图 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>公司的项目使用struts1，这时我接触到了tiles，这个页面增强布局框架，使用了将近半年，感觉良好。最近有一个个人项目我采用nutz，感到只用jsp太麻烦，于是想将tiles整合进来。tiles一般是和struts这样的框架整合的例子多，单独用的几乎没有。于是狠下心去看tiles的主页，终于有了收获，用了一下午加一晚上终于跑通了例子，并将nutzView写好了<br /><br />首先我使用了tiles2.2，去官网下载 bin包。<br />解压后，选取 tiles-jsp,tiles-core,tiles-servlet,tiles-api,<br />slf4j-api,slf4j-log4j12,conmmons-beanutils,commons-digester,commons-logging,jcl-over-slf4j,log4j这些jar，copy到 lib下。<br />然后</p> &nbsp; <pre name="code" class="java">public class TestTileFactory extends BasicTilesContainerFactory {        @Override       protected List&lt;URL&gt; getSourceURLs(TilesApplicationContext applicationContext,             TilesRequestContextFactory contextFactory) {            List&lt;URL&gt; urls = new ArrayList&lt;URL&gt;();          try {               urls.add(applicationContext.getResource(&quot;/WEB-INF/tiles-defs.xml&quot;));          } catch (IOException e) {               throw new DefinitionsFactoryException(                      &quot;Cannot load definition URLs&quot;, e);            }           return urls;        }}  </pre> <p>&nbsp;&nbsp;再添加 类</p> <p>&nbsp;&nbsp;<span style="white-space: pre;">public class TestTilesListener extends AbstractTilesListener {</span></p> <pre name="code" class="java">     @Override       protected TilesInitializer createTilesInitializer() {           return new TestTilesListenerInitializer();      }       private static class TestTilesListenerInitializer extends AbstractTilesInitializer {            @Override           protected AbstractTilesContainerFactory createContainerFactory(                 TilesApplicationContext context) {              return new TestTileFactory();           }       }}</pre> <p>&nbsp;在web.xml中添加配置&nbsp;</p> <p>&nbsp;<span style="white-space: pre;">&lt;listener&gt;</span></p> <pre name="code" class="java">       &lt;listener-class&gt;com.sh169.util.TestTilesListener&lt;/listener-class&gt;  &lt;/listener&gt;</pre> <p>&nbsp;然后是，添加nutz的view</p> <p>&nbsp;下面是代码</p> <p>&nbsp;<span style="white-space: pre;">public class TilesView implements View{</span></p> <pre name="code" class="java">   private String viewName;        public TilesView(){}    public TilesView(String viewName){      this.viewName = viewName;   }   @SuppressWarnings(&quot;deprecation&quot;)  @Override   public void render(HttpServletRequest req, HttpServletResponse resp,            Object obj) throws Throwable {      req.setAttribute(&quot;obj&quot;, obj);     TilesContainer tc = TilesAccess.getContainer(req.getSession().getServletContext());     tc.render(viewName, req,resp);  }}public TilesViewMaker(){} @Override   public View make(Ioc ioc, String type, String value) {      if(&quot;tiles&quot;.equalsIgnoreCase(type))            return new TilesView(value);        return null;    }</pre> <p>&nbsp;</p> <p>&nbsp;使用时添加 @ok(&quot;tiles:yourdefname&quot;)即可</p> <p>&nbsp;</p> <p>使用感受：引用的jar包太多了，精简到4个比较能接受，还有这是2.1中的例子，在2.2中tilesAccess中的 getContainer方法被提示不可用，应该有其他方法可以替代，以后有时间研究下 tiles的源码，自己整理成一个jar包，这样引用比较方便</p> <p>我感觉包这样划分比较好，tile-core，tile-jsp，tile-freemarker，依次类推。这样使用起来将会很方便，而且logger也应该写一个logger类，替代common-logging的功能，这样能少引用几个类。</p> <p>好了要睡觉了，剩下的明天再研究。</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/101.html" title="python 语法介绍（入门级）">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/98.html" title="项目中的 点滴 经验">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-02-24</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

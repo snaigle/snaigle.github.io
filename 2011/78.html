@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>电脑报警音</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>电脑报警音 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>最近好几个朋友的笔记本的显卡都坏了，帮他们查了点资料。记下来，以后用的着</p> <p><span style="font-family: Simsun; font-size: 14px;">当打开电脑时，听到的不是平时清脆的启动声，而是一次又一次重复的奇怪的报警声时，或面对着不同BIOS的报警声，你能不能马上判断出故障的所在呢？虽然现在多家厂商都设计出一些智能化的功能，能将报警声转换成语音或是指示灯等，但是有这种功能的主板的价格比普通的主板要高出许多。将各种BIOS的报警声所对应的故障列出来，希望对大家有所帮助。&nbsp;&nbsp;<br />Award&nbsp;BIOS：&nbsp;&nbsp;<br />1短：系统正常启动。&nbsp;&nbsp;<br />2短：常规错误。解决方法：重设BIOS。&nbsp;&nbsp;<br />1长1短：RAM或主板出错。&nbsp;&nbsp;<br />1长2短：显示器或显示卡错误。&nbsp;&nbsp;<br />1长3短：键盘控制器错误。&nbsp;&nbsp;<br />1长9短：主板Flash&nbsp;RAM或EPROM错误，BIOS损坏。&nbsp;&nbsp;<br />不断地响（长声）：内存条未插紧或损坏。&nbsp;&nbsp;<br />不停地响：电源、显示器未和显卡连接好。&nbsp;&nbsp;<br />重复短响：电源有问题。&nbsp;&nbsp;<br />AWI&nbsp;BIOS：&nbsp;&nbsp;<br />1短：内存刷新失败。解决方法，更换内存条。&nbsp;&nbsp;<br />2短：内存ECC校验错误。解决方法：进入CMOS设置，将ECC校验关闭。&nbsp;&nbsp;<br />3短：系统基本内存（第1个64KB）检查失败。&nbsp;&nbsp;<br />4短：系统时钟出错。&nbsp;&nbsp;<br />5短：CPU错误。&nbsp;&nbsp;<br />6短：键盘控制器错误。&nbsp;&nbsp;<br />7短：系统实模式错误，不能切换到保护模式。&nbsp;&nbsp;<br />8短：显示内存错误。注：显卡内存简称显存。&nbsp;&nbsp;<br />9短：ROM&nbsp;BIOS检验和错误。&nbsp;&nbsp;<br />1长3短：内存错误。&nbsp;&nbsp;<br />1长8短：显示测试错误。&nbsp;&nbsp;<br /><br />Phoenix&nbsp;BIOS&nbsp;（以前的老板上有许多POENIX的，现在已经被AWARD收购了）&nbsp;<br />1短：系统启动正常。&nbsp;&nbsp;<br />1短1短1短：系统加电自检初始化失败。&nbsp;&nbsp;<br />1短1短2短：主板错误。&nbsp;&nbsp;<br />1短1短3短：CMOS或电池错误。&nbsp;&nbsp;<br />1短1短4短：ROM&nbsp;BIOS校验失败。&nbsp;&nbsp;<br />1短2短1短：系统时钟错误。&nbsp;&nbsp;<br />1短2短2短：DMA初始化失败。&nbsp;&nbsp;<br />1短2短3短：DMA页寄存器错误。&nbsp;&nbsp;<br />1短3短1短：RAM刷新错误。&nbsp;&nbsp;<br />1短3短2短：基本内存错误。&nbsp;&nbsp;<br />1短3短3短：基本内存错误。&nbsp;&nbsp;<br />1短4短1短：基本内存地址线错误。&nbsp;&nbsp;<br />1短4短2短：基本内存校验错误。&nbsp;&nbsp;<br />1短4短3短：EISA时序器错误。&nbsp;&nbsp;<br />1短4短4短：EASA&nbsp;NMI口错误。&nbsp;&nbsp;<br />2短1短2短到2短4短4短（即所有开始为2短的声音的组合）：基本内存错误。&nbsp;&nbsp;<br />3短1短1短：从DMA寄存器错误。&nbsp;&nbsp;<br />3短1短2短：主DMA寄存器错误。&nbsp;&nbsp;<br />3短1短3短：主中断处理寄存器错误。&nbsp;&nbsp;<br />3短1短4短：从中断处理寄存器错误。&nbsp;&nbsp;<br />3短2短4短：键盘控制器错误。&nbsp;&nbsp;<br />3短3短4短：显示卡内存错误。&nbsp;&nbsp;<br />3短4短2短：显示错误。&nbsp;&nbsp;<br />3短4短3短：未发现显示只读存储器。&nbsp;&nbsp;<br />4短2短1短：时钟错误。&nbsp;&nbsp;<br />4短2短2短：关机错误。&nbsp;&nbsp;<br />4短2短3短：A20门错误。&nbsp;&nbsp;<br />4短2短4短：保护模式中断错误。&nbsp;&nbsp;<br />4短3短1短：内存错误。&nbsp;&nbsp;<br />4短3短3短：时钟2错误。&nbsp;&nbsp;<br />4短3短4短：实时钟错误。&nbsp;&nbsp;<br />4短4短1短：串行口错误。&nbsp;&nbsp;<br />4短4短2短：并行口错误。&nbsp;&nbsp;<br />4短4短3短：数字协处理器错误。&nbsp;&nbsp;<br /><br />兼容BIOS:&nbsp;&nbsp;<br />1短：系统正常。&nbsp;&nbsp;<br />2短：系统加电自检（POST）失败。&nbsp;&nbsp;<br />1长：电源错误，如果无显示，则为显示卡错误。&nbsp;&nbsp;<br />1长1短：主板错误。&nbsp;&nbsp;<br />1长2短：显卡错误。&nbsp;&nbsp;<br />1短1短1短：电源错误。&nbsp;&nbsp;<br />3长1短：键盘错误。</span></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/79.html" title="spring 事件处理机制的原理分析和新的设想">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/76.html" title="gae 数据存储区说明 2">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-01-19</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

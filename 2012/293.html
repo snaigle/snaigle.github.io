@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>spring mvc 提升</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>spring mvc 提升 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p style="text-indent:2em;">
+    上一篇文章简单介绍了一下springmvc的使用情况，这里对mvc做进一步的改进
+</p>
+<p style="text-indent:2em;">
+    1， recourses
+</p>
+<p style="text-indent:2em;">
+    上一篇中 home方法直接返回了 "WEB-INF/views/home.jsp";&nbsp;
+</p>
+<p style="text-indent:2em;">
+    这里可以看到WEB-INF/views和jsp这些都是很多余只有home是真正可变量
+</p>
+<p style="text-indent:2em;">
+    所以我们希望能找到方法可以配置 这些即可，不用在多写
+</p>
+<p style="text-indent:2em;">
+    spring中有视图处理 是该接口&nbsp;<span style="color:#666666;font-family:monospace;line-height:20px;background-color:#EEEEEE;"><span style="background-color:#FFFFFF;color:#000000;">ViewResolver,而默认的生成的处理类是：InternalResourceViewResolver</span><span style="color:#000000;font-family:Arial, sans-serif;line-height:20px;background-color:#FFFFFF;">&nbsp;，仅仅生成了一个JSTLView， 而这个Resolver是可以定制的&nbsp;</span></span> 
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;">我们可以这样：</span></span> 
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;"> </span></span>
+</p>
+<pre class="prettyprint lang-java linenums">package xyz.sample.baremvc;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.ViewResolver;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+@Configuration
+public class AppConfig {
+
+    // Resolve logical view names to .jsp resources in the /WEB-INF/views directory
+    @Bean
+    ViewResolver viewResolver() {
+        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+        resolver.setPrefix("WEB-INF/views/");
+        resolver.setSuffix(".jsp");
+        return resolver;
+    }
+}
+</pre>
+<p>
+    <br />
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;">也可以这样：</span></span> 
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;"> </span></span>
+</p>
+<pre class="prettyprint lang-xml linenums">&lt;!-- Resolve logical view names to .jsp resources in the /WEB-INF/views directory --&gt;
+&lt;bean class="org.springframework.web.servlet.view.InternalResourceViewResolver"&gt;
+    &lt;property name="prefix" value="/WEB-INF/views/" /&gt;
+    &lt;property name="suffix" value=".jsp" /&gt;
+&lt;/bean&gt;
+</pre>
+<br />
+<p>
+    <br />
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;">是不是简单些了，下面再复杂一点</span></span> 
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;">2， 方法拦截和参数注入</span></span> 
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;">我们可以指定 action 只可以被 get访问, 也可以直接注入要接收的参数</span></span> 
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;">如下：</span></span> 
+</p>
+<p style="text-indent:2em;">
+    <span><span style="line-height:20px;"> </span></span>
+</p>
+<pre class="prettyprint lang-java linenums">package xyz.sample.baremvc;
+
+import java.util.Comparator;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+/**
+ * Handles requests for the application home page.
+ */
+@Controller
+public class HomeController {
+
+    @Autowired
+    Comparator&lt;String&gt; comparator;
+
+    @RequestMapping(value = "/")
+    public String home() {
+        System.out.println("HomeController: Passing through...");
+        return "home";
+    }
+
+    @RequestMapping(value = "/compare", method = RequestMethod.GET)
+    public String compare(@RequestParam("input1") String input1,
+            @RequestParam("input2") String input2, Model model) {
+
+        int result = comparator.compare(input1, input2);
+        String inEnglish = (result &lt; 0) ? "less than" : (result &gt; 0 ? "greater than" : "equal to");
+
+        String output = "According to our Comparator, '" + input1 + "' is " + inEnglish + "'" + input2 + "'";
+
+        model.addAttribute("output", output);
+        return "compareResult";
+    }
+}
+</pre>
+<br />
+<p>
+    <br />
+</p>
+<p style="text-indent:2em;">
+    <span style="font-size:14px;"><span style="color:#000000;">WEB-INF/views/compareResult.jsp&nbsp;<br />
+</span></span>&nbsp; &nbsp;
+</p>
+<pre class="prettyprint lang-html linenums">&lt;%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %&gt;
+&lt;%@ page session="false" %&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;title&gt;Result&lt;/title&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;&lt;c:out value="${output}"&gt;&lt;/c:out&gt;&lt;/h1&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>
+    <br />
+</p>
+<p style="text-indent:2em;">
+    要注入的service代码
+</p>
+<p style="text-indent:2em;">
+    <br />
+</p>
+<pre class="prettyprint lang-java linenums">package xyz.sample.baremvc;
+
+import java.util.Comparator;
+import org.springframework.stereotype.Component;
+
+@Service
+public class CaseInsensitiveComparator implements Comparator&lt;String&gt; {
+    public int compare(String s1, String s2) {
+        assert s1 != null &amp;&amp; s2 != null;
+        return String.CASE_INSENSITIVE_ORDER.compare(s1, s2);
+    }
+}</pre>
+<p>
+    <br />
+</p>
+<p style="text-indent:2em;">
+    至此，一个大致的mvc框架是就完工了， 基本零配置，比spring+struts简单多了吧&nbsp;
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/294.html" title="j2ee系统性能问题的总结及相应解决办法">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/292.html" title="spring mvc 使用教程">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-09-13 09:43:29</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

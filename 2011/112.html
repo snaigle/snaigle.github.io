@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>js 语法入门 1</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>js 语法入门 1 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>对象有： &nbsp;数组：[] , &nbsp;对象：{}, 字符串对象：&quot; &quot;, 方法： &nbsp;function , &nbsp;类&nbsp;</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;new &nbsp; Array(x,x,x,x) &nbsp; , Object() &nbsp; String(), &nbsp;Function &nbsp;Class</p> <p>typeof &nbsp; obj: &nbsp;显示对象的类型， 可以匹配的有 object，function,包括基本类型，不会区分 Array ,Array是object的一种。</p> <p>instanceof &nbsp; Type ,检测对象是什么类型，和java中的语法类似</p> <p>&nbsp;</p> <p>js判断对象的值时 ，首先调用valueOf() ，判断是否符合上下文，符合就返回，不符合就返回toString（） 值。需要覆盖toString 方法。</p> <p>&nbsp;</p> <p>==（类型不一致时 会做类型转换） &nbsp;!= &nbsp;===(这个符号需要类型和值 完全相等)</p> <p>&nbsp;</p> <p>对象的 prototype 属性，感觉跟 父类的概念很类似</p> <p>&nbsp;</p> <p>function &nbsp;有 call 和apply方法可以用来切换上下文</p> <p>js中一切皆为对象</p> <p>&nbsp;</p> <p>还有 try， catch finally 语法，throw new Error（“”）；</p> <p>列表中的常用方法： &nbsp;concat（）， join（）， pop（），push（）</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;reverse() , slice();shift(),unshift,sort(),splice(),valueOf()</p> <p>字符串也可以做下标 如 &nbsp;var a = new Array(); &nbsp;a['first'] = 'firse';</p> <p>&nbsp;</p> <p>js中的正则表达式 ： &nbsp; ^ 表示开始，$表示结束, &nbsp;* 0或者任意个，+ 表示 1个或多个， [] 从中取值，()表示分组，</p> <p>&nbsp;</p> <p>\r 回车， \n 换行， \t 制表符，\f 换页,\x# 十六进制数， \cX 控制字符</p> <p>[...] 集合中的任一个， [^...] 不在集合中的任一个字符， . 除\n 之外的任一个字符</p> <p>\w 所有的胆子，包括字符，数字及下划线， \W不包括所有的胆子，\w的补集</p> <p>\s 所有的空白字符，\S 所有的非空白字符,\d 所有的数字，\D 所有的非数字,\b 退格字符</p> <p>{n} 重复n次， &nbsp;() 分组的引用 &nbsp;\1 以1开始</p> <p>使用 正则 &nbsp; var regex = /pattern/</p> <p>i，g,m 三种模式， i: 大小写开关， g 全文搜索开关，m: 多行搜索开关。</p> <p>三个方法： &nbsp;test(), exec(); &nbsp;compile();</p> <p>String 中的方法 match(), replace (), search(), split()</p> <p>&nbsp;</p> <p>看了一个Y - 语法，晕死了，没看懂。闭包太能开发智力了</p> <p>&nbsp;</p> <p>&nbsp;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/113.html" title="安装 php5, apache2 mysql5，搭建php环境">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/104.html" title="mysql 导入导出 sql文件">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-03-02</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

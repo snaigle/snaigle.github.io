@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>velocity基本语法</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>velocity基本语法 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><span style="font-family: Arial, sans-serif, Helvetica, Tahoma; line-height: 18px;"> </span></p> <div class="blog_title" style="margin-bottom: 15px;">  <h3 style="font-size: 16px; line-height: 1.5em; margin-top: 0px; margin-right: 0px; margin-bottom: 0.5em; margin-left: 0px; padding-top: 10px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; color: black;"><br /></h3> </div> <div class="blog_content"> &nbsp;&nbsp;&nbsp; 一个基于java的模板引擎（Template engine），它允许任何人仅仅简单的使用模板语言（template language）来引用java代码定义的对象。当velocity应用于web开发时，界面设计人员可以和Java程序开发人员同步开发一个基于MVC框架web站点。&nbsp; <br />&nbsp;&nbsp;&nbsp; 也就是说，页面设计人员可以只关注页面的显示效果，而由java程序开发人员关注业务逻辑编码。Velocity将java代码从web页面中分离出来，这样为web站点的长期维护提供了便利，同时也为我们在JSP和PHP之外又提供了一种可选的方案。&nbsp; <br /> <br />&nbsp;&nbsp;&nbsp; 先来看看velocity的语法：vtl也就是velocity的基本语言.用过脚本语言的，对于这个应该会很容易上手，其实，基本上，语法可以分为变量和关键词。&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; <strong style="font-weight: bold;">定义变量：</strong>&nbsp; <br />&nbsp;&nbsp;&nbsp; 变量使用$作为开头符号，$a 和${a}是一致的。在模版中声明一个变量是很容易的，使用set关键字，例如：&nbsp; <br />&nbsp;&nbsp;&nbsp; #set( $foo = &quot;Velocity&quot; )&nbsp; <br /> <br />&nbsp;&nbsp;&nbsp; 对于velocity中，感觉比较灵活的就是变量中，可以直接使用方法，和javabean属性一样方便使用：&nbsp; <br />&nbsp;&nbsp;&nbsp; 如下：$customer.Address，$purchase.Total，$customer.Address.phone。不过好像不支持map语法，如：a[&quot;key&quot;]这种写法，但是可以使用方法代替：a.get(&quot;key&quot;)。而使用了方法，感觉就在使用java代码一样方便。当然变量中支持简单的表达式计算：$a+1等等。&nbsp; <br />&nbsp;&nbsp; 有一点需要注意的是，如果变量没有解析，还是会输出$a这个变量，而不是空白或者报错。&nbsp; <br /> <br />&nbsp;&nbsp;&nbsp;&nbsp; <strong style="font-weight: bold;">关键字：</strong>&nbsp; <br />&nbsp;&nbsp;&nbsp; 关键字使用#开头。&nbsp; <br />&nbsp;&nbsp; 其关键字也不多，只有少数的几个，但是已经足够用了。如前面的声明变量：#set&nbsp; <br />&nbsp;&nbsp; #if #elseif #else&nbsp; #end 这是最常用的条件判断，每个判断使用#end结尾&nbsp; <br />&nbsp;&nbsp; #if($a==1)true enough#{else}no way!#end&nbsp; <br /> <br />&nbsp;&nbsp; #foreach() #end用于循环输出&nbsp; <br />&nbsp;&nbsp; #foreach( $key in $allProducts.keySet() )&nbsp; <br />&nbsp;&nbsp;&nbsp; &lt;li&gt;Key: $key -&gt; Value: $allProducts.get($key)&lt;/li&gt;&nbsp; <br />&nbsp;&nbsp; #end&nbsp; <br />&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp; #include，用于包括一些资源文件，当然include是不会去解析资源文件，这和#parse不同&nbsp; <br />&nbsp;&nbsp; #include( &quot;one.txt&quot; )&nbsp; <br /> <br />&nbsp;&nbsp; #parse，用于解析并且包括相应的资源文件&nbsp; <br />&nbsp;&nbsp; #parse( &quot;me.vm&quot; )，和主文件共享相应的Context&nbsp; <br />&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp; #stop,用于停止执行解析，并返回，主要用于调试功能。&nbsp; <br /> <br />&nbsp;&nbsp; 基本上，使用以上的语法，可以定义出任何的模版了。当然，为了简化模版的定义，velocity特意推出了#macro这个强大的功能.&nbsp; <br />&nbsp;&nbsp; #macro，类似于宏定义，用于自定义相应的标记。&nbsp; <br />&nbsp;&nbsp; 如下定义了一段宏，用于输出表格中的列表&nbsp; <br />&nbsp;&nbsp; #macro( tablerows $color $somelist )&nbsp; <br />&nbsp;&nbsp;&nbsp; #foreach( $something in $somelist )&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;tr&gt;&lt;td bgcolor=$color&gt;$something&lt;/td&gt;&lt;/tr&gt;&nbsp; <br />&nbsp;&nbsp;&nbsp; #end&nbsp; <br />&nbsp;&nbsp; #end&nbsp; <br />&nbsp;&nbsp;&nbsp; <br />&nbsp;&nbsp; 在模版中，只需要使用#tablerows($color $somelist)就可以取代里面的代码了：&nbsp; <br />&nbsp;&nbsp; #set( $greatlakes = [&quot;Superior&quot;,&quot;Michigan&quot;,&quot;Huron&quot;,&quot;Erie&quot;,&quot;Ontario&quot;] )&nbsp; <br />&nbsp;&nbsp; #set( $color = &quot;blue&quot; )&nbsp; <br />&nbsp; &lt;table&gt;&nbsp; <br />&nbsp;&nbsp;&nbsp;&nbsp; #tablerows( $color $greatlakes )&nbsp; <br />&nbsp; &lt;/table&gt;&nbsp; <br />&nbsp;&nbsp; <br />&nbsp;&nbsp; 而且#macro 支持内嵌语法，所以对于模版的定义，就变得更加的灵活而简单了。&nbsp;</div> <p>&nbsp;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2010/29.html" title="打算开始学习flex和red5了">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2010/27.html" title="eclipse 下安装插件">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2010-09-28</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

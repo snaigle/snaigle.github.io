@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>html2pdf 实现思路和代码</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>html2pdf 实现思路和代码 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>主要代码参考了 这篇帖子<a href="http://www.iteye.com/topic/509417">http://www.iteye.com/topic/509417</a> ，写的非常不错。尤其看他的的解决问题的思路特别受启发，我在看这篇帖子之前也看到了<span style="font-family: arial,sans-serif;"><span style="color: #666666; font-size: x-small;">flying-saucer ，并且下载了jar包做了例子，但是没有成功我就匆忙放弃了，又踏上了寻找的路途。 以后要记得看 要找的项目的介绍，如果合适，就去看文档，文档里面一般是非常全面的。</span> </span></p>
+
+<p>首先itext就不用说了，自己去google。 直接上saucer的介绍：</p>
+
+<p>&nbsp;
+<pre class="java">Flying Saucer takes XML or XHTML and applies CSS 2.1-compliant stylesheets to it,</pre>
+<pre class="java"> in order to render to PDF (via iText), images, and on-screen using Swing or SWT.</pre>
+<pre class="java"> The library implements (basically) the entirety of CSS 2.1 and aims to be fully compliant with the W3C specification;</pre>
+<pre class="java"> it includes a small handful of CSS 3 features.</pre>
+意思： saucer支持 xml和xhtml css2.1，并且可以生成pdf，图片，这个貌似是 java可视化界面。</p>
+
+<p>这个库实现了 全部css2.1并致力于 符合w3c标准，同时包含一些css3的属性，如 @page,可以用来定制 pdf的宽高和margin。</p>
+
+<p>又从下面看到，它没有支持传统的html，只支持xhmtl和css； 它支持xhtml+css要弱于 xml+css。</p>
+
+<p>看来还可以生成image，这也是个不错的东东。</p>
+
+<p>&nbsp;</p>
+
+<p>我第一次实验saucer时 就用了 html，悲剧啊 <img src="/images/smiles/icon_cry.gif" alt="" /> 。</p>
+
+<p>还有它对中文支持情况，如果你打算在html中使用中文，就必须在 css中全局定义 字体。并在 代码中 添加该字体文件。否则是不能显示中文的。</p>
+
+<p>&nbsp;</p>
+
+<p>上代码</p>
+
+<p>&nbsp;
+<pre class="java">public static void main(String[] args) throws Exception {</pre>
+<pre class="java"> String inputFile = &ldquo;index11.html&rdquo;;</pre>
+<pre class="java">System.out.println(new File(inputFile).getAbsolutePath());</pre>
+<pre class="java">   String url = new File(inputFile).toURI().toURL().toString();</pre>
+<pre class="java">     String outputFile = &ldquo;firstdoc.pdf&rdquo;;</pre>
+<pre class="java">      OutputStream os = new FileOutputStream(outputFile);</pre>
+<pre class="java">          ITextRenderer renderer = new ITextRenderer();</pre>
+<pre class="java">  renderer.setDocument(url);              // 解决中文支持问题</pre>
+<pre class="java">    ITextFontResolver fontResolver = renderer.getFontResolver();</pre>
+<pre class="java">       fontResolver.addFont(&rdquo;<span style="background-color: #ffffff;"><span style="color: #ff0000;">C:/Windows/Fonts/SIMSUN.TTC</span></span>&rdquo;, BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);</pre>
+<pre class="java">  // 你可以把该文件放到项目中，这样打包后就不用依赖机器环境了<span style="white-space: pre;">         </span>// 我这里指定为sinsun 是因为我在css中指定 了字体为 宋体          // 解决图片的相对路径问题    (这里我发现不用指定 ，图片显示也会正常，只是图片必须要指定为相对路径)         // renderer.getSharedContext().setBaseURL(&ldquo;file:/D:/grails-work/html2pdf/&ldquo;);                         renderer.layout();              renderer.createPDF(os);                         os.close();     }</pre>
+&nbsp;</p>
+
+<p>&nbsp;</p>
+
+<p>rar中有html和css图片，还有生成的pdf，也有需要的jar，可以自行测试。仅在此记录一下，我也正在看 文档，有了新的想法，再加</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/132.html" title="构建高性能网站，针对前台工程师--总结篇">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/130.html" title="groovy 高效编程，">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-04-20</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

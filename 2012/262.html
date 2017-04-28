@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>zookeeper 简介及使用场景说明</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>zookeeper 简介及使用场景说明 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    首先先介绍配置文件吧,
+</p>
+<p>
+    conf/zoo.cfg ,zoo是默认名称，当然也可以随便改名，只需在在启动时指定一下就可以了如&nbsp;bin/zkServer.sh start xxx &nbsp;.
+</p>
+<p>
+    里面最少需要三个参数
+</p>
+<p>
+    tickTime 2000, &nbsp;zookeeper 最小单位是毫秒， 这个时间是心跳检测的时间, session最低的过期时间是两倍tickTime
+</p>
+<p>
+    dataDir /var/zookeeper/data &nbsp;指定数据文件路径. 里面会存储一些内存数据库的快照，以及更新数据库时的事务控制日志
+</p>
+<p>
+    port &nbsp;2181 &nbsp;监听的端口，不解释
+</p>
+<p>
+    <br />
+</p>
+<p>
+    initLimit &nbsp;5 , &nbsp;其他服务器连接到leader的最大时间，5×tickTime , 超过这个时间，则不再接受该服务器
+</p>
+<p>
+    syncLimit 2 &nbsp;是其他服务器与leader 最大可连续不同步的时间, 2*tickTime, 及如果服务器与leader失去连接长达4s则说明服务器掉线了
+</p>
+<p>
+    <br />
+</p>
+<p>
+    应用场景;&nbsp;
+</p>
+<p>
+    &nbsp; &nbsp; &nbsp; &nbsp;20台服务器, 1台主服务器，一台备用服务器
+</p>
+<p>
+    &nbsp; &nbsp; &nbsp; &nbsp; 主服务器在zookeeper中注册 /zookeeper/master &nbsp;hostName
+</p>
+<p>
+    &nbsp; &nbsp; &nbsp; &nbsp; 备用主服务器监控/zookeeper/master ，如果master中的值发生变化就把自己启动为主服务器，并将自己的ip放到/zookeeper/master中
+</p>
+<p>
+    &nbsp; &nbsp; &nbsp; &nbsp; 20台服务器在zookeeper中注册 /zookeeper/nodes/node1 &nbsp;ip,还有服务器的状态
+</p>
+<p>
+    &nbsp; &nbsp; &nbsp; &nbsp; 有一台web-cgi服务器，监控/zookeeper/master ,发生变化时取得最新的ip保存到本地
+</p>
+<p>
+    &nbsp; &nbsp; &nbsp; &nbsp; web-cgi 接收到搜索请求时，将请求转发到主服务器中，主服务器遍历出各分布式服务器的状态，等状态正常时，然后提供服务后将结果返回.
+</p>
+<p>
+    <br />
+</p>
+<p>
+    zookeeper的功能就是维护分布式系统的配置情况&nbsp;
+</p>
+<p>
+    <br />
+</p>
+<p>
+    <br />
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/263.html" title="工作中遇到一些不懂的东西，记录下来找机会学习以下">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/261.html" title="zookeeper 简介及安装说明">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-06-13 14:16:45</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

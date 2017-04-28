@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>spring mvc 学习笔记1</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>spring mvc 学习笔记1 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    还在弄springmvc的事，又遇到了 @RequestParam 和 @PathVarable的的区别
+</p>
+<p>
+    前者是用来自动注入request中的参数的，如果参数转换出错的话整个请求会报错，所以得指定默认值才行， 而后者是和@requestMapping配合实现路径参数的
+</p>
+<p>
+    还有就是重定向的问题： 默认的InnerResourceResolver 是生成jstlview的，它就可以处理重定向，我们通常action中返回“viewpath”， 只需这样返回“redirect:url” 即可，同理可以使用"forward:action"
+</p>
+<p>
+    但是要是想返回json视图的话就不行了，spring mvc
+</p>
+<p>
+    中可以通过@ResponseBody注解来将返回值直接解析为json然后写到response中，不过需要用到 jackson-mapping-asl
+</p>
+<p>
+    如果想文件上传的话就需要自己定义视图了如
+</p>
+<p>
+    <ol style="margin-left:0px;background-color:#FFFFFF;color:#2B91AF;font-family:Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace;text-align:left;">
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp; &lt;bean&nbsp;id=<span style="color:blue;">"multipartResolver"</span>&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7F0055;font-weight:bold;">class</span>=<span style="color:blue;">"org.springframework.web.multipart.commons.CommonsMultipartResolver"</span>&gt;&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;!--&nbsp;one&nbsp;of&nbsp;the&nbsp;properties&nbsp;available;&nbsp;the&nbsp;maximum&nbsp;file&nbsp;size&nbsp;in&nbsp;bytes&nbsp;--&gt;&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;property&nbsp;name=<span style="color:blue;">"maxUploadSize"</span>&nbsp;value=<span style="color:blue;">"100000"</span>&nbsp;/&gt;&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/bean&gt;&nbsp;</span>
+        </li>
+    </ol>
+</p>
+<p>
+    需要依赖两个jar包： apache.commons.fileupload 和apache.commons.io
+</p>
+<p>
+    这样就可以自动注入参数了
+</p>
+<p>
+    如
+</p>
+<p>
+    <ol style="margin-left:0px;background-color:#FFFFFF;color:#2B91AF;font-family:Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace;text-align:left;">
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;"><span style="color:#646464;">@RequestMapping</span>(value&nbsp;=&nbsp;<span style="color:blue;">"/form"</span>,&nbsp;method&nbsp;=&nbsp;RequestMethod.POST)&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;"><span style="color:#7F0055;font-weight:bold;">public</span>&nbsp;String&nbsp;handleFormUpload(<span style="color:#646464;">@RequestParam</span>(<span style="color:blue;">"name"</span>)&nbsp;String&nbsp;name,&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;"><span style="color:#646464;">@RequestParam</span>(<span style="color:blue;">"file"</span>)&nbsp;MultipartFile&nbsp;file)&nbsp;{&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;"><span style="color:#7F0055;font-weight:bold;">if</span>&nbsp;(!file.isEmpty())&nbsp;{&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;"><span style="color:#7F0055;font-weight:bold;">byte</span>[]&nbsp;bytes&nbsp;=&nbsp;file.getBytes();&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;"><span style="color:#008200;">//&nbsp;去理上传写文件代码</span>&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">} &nbsp;</span>
+        </li>
+    </ol>
+多文件上传的话就这样
+</p>
+<p>
+    <ol style="margin-left:0px;background-color:#FFFFFF;color:#2B91AF;font-family:Monaco, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Consolas, 'Courier New', monospace;text-align:left;">
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp; &nbsp;<span style="color:#646464;">@RequestMapping</span>(value&nbsp;=&nbsp;<span style="color:blue;">"/multipartFileUpload"</span>,method&nbsp;=&nbsp;RequestMethod.POST)&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7F0055;font-weight:bold;">public</span>&nbsp;String&nbsp;upload2(&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;MultipartHttpServletRequest&nbsp;request&nbsp;,&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#646464;">@RequestParam</span>(<span style="color:blue;">"name"</span>)&nbsp;String&nbsp;name&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#008200;">//&nbsp;页面上的控件值</span>&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;)&nbsp;<span style="color:#7F0055;font-weight:bold;">throws</span>&nbsp;Exception&nbsp;{&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List&lt;MultipartFile&gt;&nbsp;files&nbsp;=&nbsp;request.getFiles(<span style="color:blue;">"file"</span>);&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7F0055;font-weight:bold;">for</span>(&nbsp;<span style="color:#7F0055;font-weight:bold;">int</span>&nbsp;i=<span style="color:#C00000;">0</span>;&nbsp;i&lt;files.size()&nbsp;;i++){&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7F0055;font-weight:bold;">if</span>(!&nbsp;files.get(i).isEmpty())&nbsp;{&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info(<span style="color:blue;">"上传文件："</span>+files.get(i).getOriginalFilename());&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7F0055;font-weight:bold;">this</span>.copyFile(files.get(i).getInputStream(),&nbsp;files.get(i).getOriginalFilename());&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.info(<span style="color:blue;">"success"</span>);&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#7F0055;font-weight:bold;">return</span>&nbsp;<span style="color:blue;">"fileUpload/success"</span>;&nbsp;&nbsp;</span>
+        </li>
+        <li style="font-size:1em;margin-left:38px;background-color:#FAFAFA;">
+            <span style="color:black;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;</span>
+        </li>
+    </ol>
+还很方便的吧，有时间将springmvc的源码跟一遍，至少把它的基本特性都得熟悉了
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/347.html" title="micro cloud foundry">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/345.html" title="2012年11月27日  留念">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-11-28 15:15:22</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>eclipse 下安装插件</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>eclipse 下安装插件 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><span style=""><span id="ArticleContent1_ArticleContent1_lblContent">从别人那里搞的eclipse的安装tips&nbsp;<br />Eclipse的插件安装是很方便的，只需将插件目录拷贝到Eclipse安装目录下的Plugins子目录下即可，但有时候即使这样做了插件还是没有出来，目前来说可按下面几个步骤检查：&nbsp;<br /><br />1.首先看一下About中的Plugin装载清单，如果没有则需先确认所安装的插件的依赖插件已经安装。Eclipse的插件是有依赖关系的，具体表现在每个插件Plugin.xml中的&lt;requires&gt;标记中，里面的每个&lt;import&gt;标记即表示所依赖的插件ID，Eclipse在启动时会按照插件的依赖关系逐个将插件装载，若找不到所依赖的插件，则所安装的插件运行就有可能不正常。&nbsp;<br /><br />2.若装载的Plugin清单里已经有了，那可能是没有打开此插件的View或者需要在Preference里配置一些东西才有效，这个最好看一下所安装插件的Plugin.xml，看它都扩展了哪些扩展点，菜单无非就是actionSets这个扩展点，界面都是views这个扩展点，可以在Show View里设置一下，还有其它一些扩展点，可以具体问题具体分析。&nbsp;<br /><br />3.最有效的办法：看Log。在Eclipse安装目录Workspace/.metadata子目录下（若没有使用默认的工作空间，则目录结构可能会不同）有一个.log文件，从这里面一般可以找到失败的原因。&nbsp;<br /><br />4.如果插件还是没有安装，则删除Eclipse安装目录Configuration子目录下的org.eclipse.update目录，然后重新启动。&nbsp;<br /><br />若还是不行，那。。。去问Erich Gamma吧，^_^&nbsp;<br /><br />分类管理plugins&nbsp;<br />一般来说，安装插件都是直接拷贝到Plugins子目录下，但是这样有个缺陷，若插件太多，会使内容非常混乱，而且分不清哪个是系统自带的，哪个是以后安装的。这里提供一个办法：&nbsp;<br />在Eclipse安装目录下新建一个子目录links，里面新建一个文件abcd.link，文件名随便取，文件里的内容为path=D:/MyPlugins（目录可换成自己的），而在Path中指定的目录，即刚才的D:/MyPlugins目录下，一定要有一个eclipse子目录，在此子目录下再有features及plugins子目录（同Eclipse安装目录一样），新插件在安装时即可以拷贝到此plugins目录下，这样就避免了所有插件都放在一起的缺点。而且links目录下可以建多个*.link文件，每个.link文件中的内容可有多行path=...，极大的方便了将插件按照功能来进行分门别类。</span>&nbsp;</span></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2010/28.html" title="velocity基本语法">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2010/26.html" title="flex 入门学习 视频">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2010-09-21</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

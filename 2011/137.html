@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>抓取javaeye的帖子，存到数据库</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>抓取javaeye的帖子，存到数据库 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>用了jsoup和nutzDao来实现</p>
+
+<p>上代码
+<pre class="java" name="code">static NutDao dao = new NutDao();
+    static {
+    Properties pp = System.getProperties();
+    pp.put(&ldquo;driverClassName&rdquo;, &ldquo;com.mysql.jdbc.Driver&rdquo;);
+    pp.put(&ldquo;url&rdquo;, &ldquo;jdbc:mysql://localhost:3306/wordpress?useUnicode=true&amp;characterEncoding=utf-8&rdquo;);
+    pp.put(&ldquo;username&rdquo;, &ldquo;root&rdquo;);
+    pp.put(&ldquo;password&rdquo;, &ldquo;000000&rdquo;);
+    DataSource ds = null;
+    try {
+        ds = BasicDataSourceFactory.createDataSource(System.getProperties());
+        dao.setDataSource(ds);
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+    public static void main(String[] args) throws MalformedURLException, IOException, InterruptedException {</p>
+
+<pre><code>//createSqlFile();
+//  System.out.println(&quot;你好${1}&quot;.replace(&quot;${1}&quot;, &quot;world&quot;));
+}
+
+public static  void createSqlFile() throws IOException{
+    BufferedReader reader = new BufferedReader(new FileReader(new File(&quot;javaeyepost.txt&quot;)));
+    String line = &quot;&quot;;
+    boolean b = false;
+    String title = null;
+    String content = null;
+    String date = null;
+    int index = 25;
+    while((line=reader.readLine())!= null){
+        if(b){
+            break;
+        }
+        if(line.length()&amp;gt;0){
+            if(line.equals(&quot;post****over&quot;)){
+
+            }else if(line.startsWith(&quot;title: &quot;)){
+                title = line.substring(7);
+            }else if(line.startsWith(&quot;date: &quot;)){
+                System.out.println(line);
+                date = line.substring(6)+&quot; 00:00:00&quot;;
+            }else if(line.startsWith(&quot;content: &quot;)){
+                StringBuffer sb = new StringBuffer();
+                sb.append(line.substring(9));
+                while((line=reader.readLine())!= null){
+                    if(line.equals(&quot;post*****over&quot;)){
+                        content = sb.toString();
+                        String encode = URLEncoder.encode(title);
+                        encode = encode.length()&amp;gt;200? encode.substring(0,200):encode;
+                        dao.insert(&quot;wp_posts&quot;, Chain.make(&quot;post_author&quot;, 1).add(&quot;post_date&quot;, date)
+                                .add(&quot;post_date_gmt&quot;, date).add(&quot;post_content&quot;, content).add(&quot;post_title&quot;, title)
+                                .add(&quot;post_status&quot;, &quot;publish&quot;).add(&quot;comment_status&quot;, &quot;open&quot;).add(&quot;ping_status&quot;, &quot;open&quot;)
+                                .add(&quot;post_name&quot;, encode).add(&quot;post_modified&quot;, date).add(&quot;post_modified_gmt&quot;, date)
+                                .add(&quot;post_parent&quot;, 0).add(&quot;guid&quot;, &quot;http://localhost:89/?p=&quot;+ index++).add(&quot;menu_order&quot;, 0)
+                                .add(&quot;post_type&quot;, &quot;post&quot;).add(&quot;comment_count&quot;, 0).add(&quot;post_excerpt&quot;, &quot;&quot;).add(&quot;post_password&quot;, &quot;&quot;)
+                                .add(&quot;to_ping&quot;, &quot;&quot;).add(&quot;pinged&quot;, &quot;&quot;).add(&quot;post_content_filtered&quot;, &quot;&quot;).add(&quot;post_mime_type&quot;, &quot;&quot;));
+                    //  System.out.println(&quot;*************************************&quot;);
+                        //b = true;
+                        break;
+                    }else{
+                        sb.append(line);
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+// 需要注意的细节， 帖子类别可能不存在，要抓取下面的分页信息才行
+public static void fetchPost() throws UnsupportedEncodingException, IOException, InterruptedException{
+    //Document document = Jsoup.parse(new URL(&quot;http://feiyan35488.iteye.com/?show_full=false&quot;), 5000);
+    FileOutputStream fos = new FileOutputStream(&quot;javaeyepost.txt&quot;);
+    HttpConnection con = (HttpConnection) HttpConnection.connect(&quot;http://feiyan35488.iteye.com/?page=9&amp;amp;&amp;amp;show_full=true&quot;);
+    con.userAgent(&quot;Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/534.12 (KHTML, like Gecko) Chrome/9.0.576.0 Safari/534.12&quot;);
+    Document document = con.get();
+    Elements es = document.getElementsByClass(&quot;blog_main&quot;);
+    System.out.println(&quot;共有帖子 ：&quot;+es.size());
+    for(Element e : es){
+        fos.write((&quot;title：&quot;+e.child(0).child(2).child(0).html()+&quot;\n&quot;).getBytes(&quot;utf-8&quot;));
+        if(e.child(0).children().size()&amp;gt;3)
+          fos.write((&quot;classify: &quot;+e.child(0).child(3).child(0).html()+&quot;\n&quot;).getBytes(&quot;utf-8&quot;));
+        fos.write((&quot;date: &quot;+e.child(0).child(0).child(0).html()+&quot;-&quot;+e.child(0).child(0).child(2).html()+&quot;-&quot;+e.child(0).child(0).child(4).html()+&quot;\n&quot;).getBytes(&quot;utf-8&quot;));
+        fos.write((&quot;content: &quot;+e.child(1).html()+&quot;\n&quot;).getBytes(&quot;utf-8&quot;));
+        fos.write((&quot;post*****over\n&quot;).getBytes(&quot;utf-8&quot;));
+        //System.out.println(&quot;标题：&quot;+e.child(0).child(2).child(0).html());
+    }
+
+    for(int i=2;i&amp;lt;10;i++){
+        Thread.sleep(5000);
+        con.url(&quot;http://feiyan35488.iteye.com/?page=&quot;+i+&quot;&amp;amp;&amp;amp;show_full=true&quot;);
+        document = con.get();
+        Elements es1 = document.getElementsByClass(&quot;blog_main&quot;);
+        System.out.println(&quot;共有帖子 ：&quot;+es1.size());
+        for(Element e : es1){
+            fos.write((&quot;title：&quot;+e.child(0).child(2).child(0).html()+&quot;\n&quot;).getBytes(&quot;utf-8&quot;));
+            fos.write((&quot;classify: &quot;+e.child(0).child(3).child(0).html()+&quot;\n&quot;).getBytes(&quot;utf-8&quot;));
+            fos.write((&quot;date: &quot;+e.child(0).child(0).child(0).html()+&quot;-&quot;+e.child(0).child(0).child(2).html()+&quot;-&quot;+e.child(0).child(0).child(4).html()+&quot;\n&quot;).getBytes(&quot;utf-8&quot;));
+            fos.write((&quot;content: &quot;+e.child(1).html()+&quot;\n&quot;).getBytes(&quot;utf-8&quot;));
+            fos.write((&quot;post*****over\n&quot;).getBytes(&quot;utf-8&quot;));
+            //System.out.println(&quot;标题：&quot;+e.child(0).child(2).child(0).html());
+        }
+    }
+}&lt;/pre&gt;
+</code></pre>
+
+<p>两个方法，一 抓取帖子存到文件中，二，从文件中读取保存到数据库中</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/138.html" title="CMD命令行下修改网络IP设置的方法_DOS/BAT_脚本之家">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/136.html" title="论坛开放">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-05-23 09:46:51</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

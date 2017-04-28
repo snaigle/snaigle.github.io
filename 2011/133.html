@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>html 生成 pdf 实现思路和代码，基于itext</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>html 生成 pdf 实现思路和代码，基于itext </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><span class="Apple-style-span" style="border-collapse: separate; font-style: normal; font-variant: normal; font-weight: normal; letter-spacing: normal; line-height: normal; text-indent: 0px; white-space: normal; font-family: Simsun; color: #000000; font-size: medium;"><span class="Apple-style-span" style="font-size: 12px; font-family: Verdana,Arial,Helvetica,sans-serif;"> <p style="margin: 0px;">java中生成pdf最快的非itext莫属，itext常用的版本有2.0.8 ,2.1.7 ,以及5.x.x ,中间貌似有断层，而且5改动非常大，包结构都改变了。</p> <p style="margin: 0px;">我从google查到的html 生成pdf方案，最好的莫过于 flyingsaucer + itext, 目前flygingsaucer-r8(googlecode中有，源码在github)适配的itext版本为2.0.8, 不能使用itext 2.1.7,有些api改变了，运行时会报错。</p> <p style="margin: 0px;">flying 最好的地方莫过于支持css2.1,及css3少量，flying 实现了一个css解析器，可能为了减少解析的难度，它要求html必须为xhtml格式，而不支持普通的html，你可以使用jtidy将html专程xhtml（有兴趣请自己去查）。</p> <p style="margin: 0px;">itext默认是不支持中文的，虽然它里面有cjk字体类（中国，日本，韩国）。</p> <p style="margin: 0px;">这里解决中文有两个方法：1，直接引用中文字体文件</p> <p style="margin: 0px;">&nbsp;</p> <p style="margin: 0px;">&nbsp;</p> <pre name="code" class="java">  font.addFont(Html2Pdfs.class.getResource(&quot;SIMSUN.TTC&quot;).toString().substring(6), BaseFont.IDENTITY_H,BaseFont.NOT_EMBEDDED);</pre> <p style="margin: 0px;">&nbsp;2： 使用 itextAria.jar来支持中文</p> <p style="margin: 0px;">&nbsp;</p> <pre name="code" class="java">font.addFont(&quot;STSong-Light&quot;, &quot;UniGB-UCS2-H&quot;, BaseFont.NOT_EMBEDDED);</pre> <p style="margin: 0px;">解决了itext支持中文的问题，flying同样在支持中文上有问题，flying只支持字体文件 ttc或ttf等。我改了flying的源码重新打包了，使其能支持itextaria。jar，避免依赖中文字体文件。</p> <p style="margin: 0px;">其实在生成pdf的时候我比较了两种方法的执行时间，感觉用字体文件生成速度稳定一些，在500ms左右，而itextaria第一次执行则超过了1s，以后会降到400ms左右。而 itext直接生成则在10ms级。</p> <p style="margin: 0px;">性能方面大家要多加考虑，这绝对不能应用到高并发的情况。要不然你就等着重启机器吧 <img src="/images/smiles/icon_biggrin.gif" alt="" /></p> <p style="margin: 0px;">&nbsp;</p> <p style="margin: 0px;">解决了中文就该说说生成pdf常见的问题，如分页，如页眉，页脚，超链，图片，margin不过我懒得写了，附件中有个pdf里面都有解决方法。</p> <p style="margin: 0px;">&nbsp;</p> <p style="margin: 0px;">直接贴代码吧&nbsp;</p> <p style="margin: 0px;">&nbsp;</p> 
+<pre name="code" class="java">StringBuilder sb = new StringBuilder();   
+    BufferedReader reader = new BufferedReader(new FileReader(new File(&quot;abc.html&quot;))); 
+    String line = null; 
+    while((line = reader.readLine()) != null){      
+    sb.append(line).append(&quot;\r\n&quot;);   
+    }ITextRenderer render = new ITextRenderer();        
+       ITextFontResolver font = render.getFontResolver();   
+    try {       
+    font.addFont(&quot;STSong-Light&quot;, &quot;UniGB-UCS2-H&quot;, BaseFont.NOT_EMBEDDED);    
+     //   font.addFont(Html2Pdfs.class.getResource(&quot;SIMSUN.TTC&quot;).toString().substring(6), BaseFont.IDENTITY_H, BaseFont.NOT_EMBEDDED);    
+    } catch (DocumentException e) {     
+    e.printStackTrace();    
+    } catch (IOException e) {       
+    e.printStackTrace();        
+}       
+       OutputStream os = new FileOutputStream(pdf);     
+         render.setDocumentFromString(sb.toString());   
+    render.layout();        
+         render.createPDF(os);  
+    os.close();</pre>
+ &nbsp; <p style="margin: 0px;">很简单吧，不过生成速度非常慢，我测试过纯itext的生成速度非常快，那么应该是解析css慢。没办法谁叫只有这一家支持css呢，要不就只能去用itext了。</p> </span> </span> <br class="Apple-interchange-newline" /></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/134.html" title="ubuntu 离线升级办法">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/132.html" title="构建高性能网站，针对前台工程师--总结篇">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-05-11</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

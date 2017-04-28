@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>每日命令ls df</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>每日命令ls df </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>　名称:df
+　　使用方式: df [选项]&hellip; [FILE]&hellip;
+　　
+　　显示档案系统的状况，或是看所有档案系统的状况(预设值)
+　　
+　　
+　　-a, --all 包含所有的具有 0 Blocks 的档案系统
+　　--block-size={SIZE} 使用 {SIZE} 大小的 Blocks
+　　-h, --human-readable 使用人类可读的格式(预设值是不加这个选项的&hellip;)
+　　-H, --si 很像 -h, 但是用 1000 为单位而不是用 1024
+　　-i, --inodes 列出 inode 资讯，不列出已使用 block
+　　-k, --kilobytes 就像是 --block-size=1024
+　　-l, --local 限制列出的档案结构
+　　-m, --megabytes 就像 --block-size=1048576
+　　--no-sync 取得资讯前不 sync (预设值)
+　　-P, --portability 使用 POSIX 输出格式
+　　--sync 在取得资讯前 sync
+　　-t, --type=TYPE 限制列出档案系统的 TYPE
+　　-T, --print-type 显示档案系统的形式
+　　-x, --exclude-type=TYPE 限制列出档案系统不要显示 TYPE
+　　-v (忽略)
+　　--help 显示这个帮手并且离开
+　　--version 输出版本资讯并且离开</p>
+
+<p>　名称 : ls</p>
+
+<p>　　使用方式 : ls [-alrtAFR] [name&hellip;]
+　　
+　　说明 : 显示指定工作目录下之内容（列出目前工作目录所含之档案及子目录)。
+　　
+　　参数 :
+　　
+　　-a 显示所有档案及目录 (ls内定将档案名或目录名称开头为&rdquo;.&ldquo;的视为隐藏档，不会列出)
+　　-l 除档案名称外，亦将档案型态、权限、拥有者、档案大小等资讯详细列出
+　　-r 将档案以相反次序显示(原定依英文字母次序)
+　　-t 将档案依建立时间之先后次序列出
+　　-A 同 -a ，但不列出 &ldquo;.&rdquo; (目前目录) 及 &ldquo;..&rdquo; (父目录)
+　　-F 在列出的档案名称后加一符号；例如可执行档则加 &ldquo;<em>&rdquo;, 目录则加 &ldquo;/&rdquo;
+　　-R 若目录下有档案，则以下之档案亦皆依序列出
+　　
+　　范例：
+　　列出目前工作目录下所有名称是 s 开头的档案，愈新的排愈后面 :
+　　 ls -ltr s</em>
+　　
+　　将 /bin 目录以下所有目录及档案详细资料列出 :
+　　 ls -lR /bin
+　　
+　　列出目前工作目录下所有档案及目录；目录于名称后加 &ldquo;/&rdquo;, 可执行档于名称后加 &ldquo;*&rdquo; :
+　　 ls -AF
+　　</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/198.html" title="linux下无线驱动不能正常使用的解决办法">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/196.html" title="开始学习jetty的源码，也适当参考tomcat的源码">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-03-20 23:37:02</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4-ref">每日linux命令 <span>7</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

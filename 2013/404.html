@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>maven 笔记-仓库和打包</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>maven 笔记-仓库和打包 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p> maven默认有一个中央服务器，定义在<em>${M2_HOME}/lib/maven-2.0.10-uber.jar里</em> </p> 
+<p> maven的全局配制文件为 ${M2_HOME}/conf/settings.xml </p> 
+<p> maven的用户级配制文件在 ${user.home}/.m2/settings.xml </p> 
+<p> 这里可以 </p> 
+<p> 1. 修改 localRepository的路径，默认在&nbsp;${user.home}/.m2/repository下 </p> 
+<p> <br /> </p> 
+<pre> &lt;localRepository&gt;/path/to/local/repo&lt;/localRepository&gt;
+&lt;offline&gt;false&lt;/offline&gt;</pre> 
+<p> 2. &nbsp;server，在分发验证用户密码 </p> 
+<p> <br /> </p> 
+<pre>&lt;server&gt;
+      &lt;id&gt;deploymentRepo&lt;/id&gt;
+      &lt;username&gt;repouser&lt;/username&gt;
+      &lt;password&gt;repopwd&lt;/password&gt;
+    &lt;/server&gt;</pre> 
+<br /> 
+<p> 3. mirror ，设置repository的镜像，mirrorOf是指定哪个repository，*指所有repository </p> 
+<p> <br /> </p> 
+<pre>&lt;mirror&gt;
+      &lt;id&gt;mirrorId&lt;/id&gt;
+      &lt;mirrorOf&gt;repositoryId&lt;/mirrorOf&gt;
+      &lt;name&gt;Human Readable Name for this Mirror.&lt;/name&gt;
+      &lt;url&gt;http://my.repository.com/repo/path&lt;/url&gt;
+    &lt;/mirror&gt;</pre> 
+<br /> 
+<p> 4. profile 可以预先定义 repository和 pluginRepository，并可以通过activeProfiles指定哪个profile生效，也可以通过条件触发 </p> 
+<p> <br /> </p> 
+<pre>&lt;profile&gt;
+      &lt;id&gt;jdk-1.4&lt;/id&gt;
+      &lt;activation&gt;
+        &lt;jdk&gt;1.4&lt;/jdk&gt;
+      &lt;/activation&gt;
+      &lt;repositories&gt;
+        &lt;repository&gt;
+          &lt;id&gt;jdk14&lt;/id&gt;
+          &lt;name&gt;Repository for JDK 1.4 builds&lt;/name&gt;
+          &lt;url&gt;http://www.myhost.com/maven/jdk14&lt;/url&gt;
+          &lt;layout&gt;default&lt;/layout&gt;
+          &lt;snapshotPolicy&gt;always&lt;/snapshotPolicy&gt;
+        &lt;/repository&gt;
+      &lt;/repositories&gt;
+    &lt;/profile&gt;
+    &lt;activeProfiles&gt;
+      &lt;activeProfile&gt;alwaysActiveProfile&lt;/activeProfile&gt;
+      &lt;activeProfile&gt;anotherAlwaysActiveProfile&lt;/activeProfile&gt;
+    &lt;/activeProfiles&gt;</pre> 
+<br /> 
+<p> 5. repository定义时可以指定是否需要从snapshot和 release取得资源 </p> 
+<p> 6. 打包，maven会识别项目version是否含有 -SNAPSHOT 后缀，有的话则在deploy时自动将该包upload到SNAPSHOT repository中，若没有则upload 到 release repository中。 </p> 
+<p> 7. 项目构建时maven会先从local repository中取jar，如果没有则去remote中取得并缓存到local中，若该包version后缀为-SNAPSHOT,那么每次构建时都会自动去SNAPSHOT repository中抓取，release version有缓存就用缓存 </p> 
+<p> 8. install会将构件安装到 本地库中，deploy将构件安装到远程库中 </p> 
+<p> &nbsp; &nbsp; </p>
+<pre>mvn install:install-file  -Dfile=path-to-your-artifact-jar -DgroupId=your.groupId  -DartifactId=your-artifactId  -Dversion=your-version -Dpackaging=jar -DgeneratePom=true
+
+mvn deploy:deploy-file -DrepositoryId=your-repository-id -Durl=dav:your-repository-url  -DgroupId=your.groupId  -DartifactId=your-artifactId -Dversion=your-version -Dpackaging=jar  -Dfile=jar-name</pre>  
+<p> <br /> </p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2013/405.html" title="maven 笔记-版本管理">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2013/381.html" title="centos 下安装 redis">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2013-09-13 08:17:10</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#oschina-ref">oschina <span>6</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>cat , split , od ,wc , head ,tail,dmesg</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>cat , split , od ,wc , head ,tail,dmesg </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p style="text-align:justify;">
+    <ul>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;">cat 用来显示文件内容</span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;">cat text* &gt; text1 用来合并文件</span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;">cat &gt; text 用输入流创建文件, ctrl+d 表示文件结尾</span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;"><br />
+</span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;">split 分割文件, -l 行数 , -b 字节数, split -l 3 text3 y (y表示分割后文件名前缀，默认是x)</span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:medium;"><span style="line-height:27px;"><br />
+</span></span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;">od ,转储文件&nbsp;</span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;">wc ，可以用来统计 文件的行数，单词数，字节数</span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;">head ,tail ,显示文件开始，结尾, -n 可以指定显示行数</span>
+        </li>
+        <li>
+            <span style="font-family:SimSun;font-size:18px;">dmesg 显示登录信息</span>
+        </li>
+    </ul>
+    <p>
+        <span style="font-family:SimSun;font-size:medium;"><span style="line-height:27px;"><br />
+</span></span>
+    </p>
+</p>
+<p>
+    <br />
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/211.html" title="急需的基础知识">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/209.html" title="echo , exec,uname">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-04-22 01:51:09</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E6%AF%8F%E6%97%A5linux%E5%91%BD%E4%BB%A4-ref">每日linux命令 <span>7</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

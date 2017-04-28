@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>上周末用 grub 安装了ubuntu 10.10</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>上周末用 grub 安装了ubuntu 10.10 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>上周末 终于安装了 ubuntu10.10&nbsp; ，安装的是 kanas-ubuntu-10.10-desktop-i386.iso 中文定制版,&nbsp; 算是减小了入门的难度吧，里面默认安装了中文字体输入法，flash，播放器，chm等，感兴趣的可以安装试试。</p> <p>本来打算用wubi安装的，结果这个iso没提供这个选项，又没条件去刻一张dvd，只好查资料准备采用 grub安装，</p> <p>安装教程 网上有很多，我用的是这个。</p> <p>xp下安装和配置启动grub，以及grub【windows版】下载 看：<a class="external free" title="http://www.ylmf.net/read.php?tid=1329214" rel="nofollow" href="http://www.ylmf.net/read.php?tid=1329214">http://www.ylmf.net/read.php?tid=1329214</a> </p> <p>&nbsp;</p> <p>下载并解压缩后，将目录中的 grldr , grldr.mbr ， grub.exe 三个文件复制到 C 盘根目录下<br /><br /><strong>2、Grub安装Ubuntu在下载好的 ubuntu 10.10 系统 iso 文件中</strong> ， casper 文件夹目录下，找到 vmlinuz 、 initrd.lz （注意： ubuntu9.04 文件名为 initrd.gz ）解压，并复制到 C 盘根目录下（无需解压整个 casper 文件夹，整个 casper 文件夹很大）</p> <p>将iso 文件也放到C盘根目录上。</p> <p>&nbsp;</p> <p>新建 C:\menu.lst文件 打开C:menu.lst，在里面增加下面一段话。 </p> <pre>    title Boot ubuntuISO    find --set-root /ubuntu-9.04-desktop-i386.iso    map --mem /ubuntu-9.04-desktop-i386.iso (hd32)    map --hook    chainloader (hd32)    boot</pre> <p>保存并退出。 </p> <p><a class="image" title="Image:Grubiso.jpg" href="http://wiki.ubuntu.org.cn/File:Grubiso.jpg"><br /></a> </p> <p>&nbsp;</p> <p><br /> 六、下载ubuntu-9.04-desktop-i386.iso镜像文件，保存至X:\目录下，X代表xp下的任何一个盘符。记得一定要放到根目录下。至于为什么，大家应该都清楚吧。&nbsp; </p> <p> <a id=".E5.A6.82.E6.9E.9C.E4.BD.A0.E4.B8.8B.E8.BD.BD.E7.9A.84.E6.98.AFDVD.E9.95.9C.E5.83.8F.E6.88.96.E6.89.93.E7.AE.97.E4.B8.8B.E8.BD.BDDVD.E9.95.9C.E5.83.8F" name=".E5.A6.82.E6.9E.9C.E4.BD.A0.E4.B8.8B.E8.BD.BD.E7.9A.84.E6.98.AFDVD.E9.95.9C.E5.83.8F.E6.88.96.E6.89.93.E7.AE.97.E4.B8.8B.E8.BD.BDDVD.E9.95.9C.E5.83.8F"></a> </p> <h2> <span class="editsection">[<a title="编辑段落：如果你下载的是DVD镜像或打算下载DVD镜像" href="http://wiki.ubuntu.org.cn/index.php?title=%E4%BD%BF%E7%94%A8Windows%E4%B8%8BGRUB%E5%BC%95%E5%AF%BC%E5%90%AF%E5%8A%A8ubuntu%E5%AE%89%E8%A3%85%E9%95%9C%E5%83%8F&amp;action=edit&amp;section=2">编辑</a> ]</span> <span class="mw-headline"> 如果你下载的是DVD镜像或打算下载DVD镜像 </span> </h2> <p>前面四步完全和CD镜像相同，下面将从第五步开始讲述<br /> 五、配置C:\menu.lst文件 打开C:menu.lst，在里面增加下面一段话。 </p> <pre> title Boot UbuntuDVDfind --set-root /<span style="color: #ff0000;">ubuntu-10.10-dvd-i386.iso</span>kernel vmlinuz iso-scan/filename=/<span style="color: #ff0000;">ubuntu-10.10-dvd-i386.iso</span> boot=casper roinitrd initrd.gzboot</pre> <p>六、把ubuntu-10.10-dvd-i386.iso放到一个分区的根目录下，再用虚拟光驱挂上，把光盘目录里的 /casper/initrd.gz和 /casper/vmlinuz 两个文件拷到和ubuntu-10.10-dvd-i386.iso同一分区下<br /> 下载就可以重启进入Grub选择Boot UbuntuDVD来安装Ubuntu了</p> <p>&nbsp;&nbsp; <a class="image" title="Image:Grubiso5.jpg" href="http://wiki.ubuntu.org.cn/File:Grubiso5.jpg"></a> </p> <p>进入 livecd 后 在终端 执行&nbsp;&nbsp; sudo umount -l /isoservice 将虚拟光驱卸载，要不然 你利用分区安装 时 会报错</p> <p>&nbsp;</p> <p>安装完成后，会发现启动菜单上没有xp， 这个不用急，只需在终端 运行 sudo update-grub命令即可，然后重启就能在开机时看到 xp的选项了</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2010/39.html" title="今天用spring 事务出了一个很郁闷的问题">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2010/37.html" title="安装ubuntu之后">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2010-11-01</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

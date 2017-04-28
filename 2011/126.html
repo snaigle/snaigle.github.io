@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>jira 破解版 ，适用于 3.6企业版。 最好在本地运行，不怕死的可以放到外网</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>jira 破解版 ，适用于 3.6企业版。 最好在本地运行，不怕死的可以放到外网 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    <span>JIRA是一个优秀的问题(or bugs,task,improvement,new feature )跟踪及管理软件。<br style="padding:0px;margin:0px;" />
+它由Atlassian开发，采用J2EE技术.它正被广泛的开源软件组织，以及全球著名的软件公司使用，它堪称是J2EE的Bugzilla。<br style="padding:0px;margin:0px;" />
+<br style="padding:0px;margin:0px;" />
+JIRA提供了全面的功能，界面十分友好，可用性以及可扩展性方面都十分出色，如果购买商业版许可，还可以得到JIRA的源码（在开发许可协议下可以定制自己的JIRA系统）。<br />
+<br />
+organisation&nbsp;&nbsp;*****@Cracked By martin.xus@gmail.com <br style="padding:0px;margin:0px;" />
+Date Purchased&nbsp;&nbsp;28/四月/06 <br style="padding:0px;margin:0px;" />
+License Type&nbsp;&nbsp;JIRA Enterprise: Commercial Server <br style="padding:0px;margin:0px;" />
+License ID&nbsp;&nbsp;BABQW <br style="padding:0px;margin:0px;" />
+Support Period&nbsp;&nbsp;Your commercial JIRA support and updates are available until 03/九月/43. <br style="padding:0px;margin:0px;" />
+<br style="padding:0px;margin:0px;" />
+JIRA 3.6 下载:<br style="padding:0px;margin:0px;" />
+<a style="text-decoration:none;color:#000000;border-bottom-width:1px;border-bottom-style:dotted;border-bottom-color:#333333;padding:0px;margin:0px;" href="http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-enterprise-3.6-standalone.zip" target="_blank">http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira-enterprise-3.6-standalone.zip</a><br style="padding:0px;margin:0px;" />
+<br style="padding:0px;margin:0px;" />
+地址已更新:<br style="padding:0px;margin:0px;" />
+<br style="padding:0px;margin:0px;" />
+下载(请将rar中的文件释放下来,直接覆盖掉web-inf下面的包即可，适用版本3.6):<br style="padding:0px;margin:0px;" />
+<a style="text-decoration:none;color:#000000;border-bottom-width:1px;border-bottom-style:dotted;border-bottom-color:#333333;padding:0px;margin:0px;" href="http://www.blogjava.net/Files/martinx/atlassian-extras-0.7.19.rar" target="_blank">http://www.blogjava.net/Files/martinx/atlassian-extras-0.7.19.rar</a><br style="padding:0px;margin:0px;" />
+<br style="padding:0px;margin:0px;" />
+<br style="padding:0px;margin:0px;" />
+破解jira的License。只是把classes反编译过来，修改一下。效果如下，License的类型为JIRA Enterprise: Commercial Server。<br style="padding:0px;margin:0px;" />
+<br />
+//要让程序能找到这个包。atlassian-extras-0.7.19.jar<br style="padding:0px;margin:0px;" />
+</span> 
+</p>
+<p>
+<pre class="prettyprint lang-java linenums">package com.jira.util;
+
+import com.atlassian.license.LicensePair;
+import java.io.*;
+import java.security.KeyFactory;
+import java.security.Signature;
+import java.security.spec.PKCS8EncodedKeySpec;
+
+public class Cript {
+    public static void main(String args[]) throws IOException {
+        try {
+            long l = 267L;
+            long l1 = System.currentTimeMillis();
+            long l2 = System.currentTimeMillis();
+            String s = "";
+            System.out.println("Keygen for JIRA Enterprise Edition.");
+            System.out.print("created by mydaj[ROR].");
+            do {
+                System.out.print("\nEnter your organization name: ");
+                for (int i = System.in.read(); i != 10 &amp;&amp; i != 13; i = System.in
+                        .read())
+                    s = s + (char) i;
+            } while (s == "");
+            try {
+                PKCS8EncodedKeySpec pkcs8encodedkeyspec = new PKCS8EncodedKeySpec(
+                        EncodedPrvKey);
+                KeyFactory keyfactory = KeyFactory.getInstance("DSA", "SUN");
+                java.security.PrivateKey privatekey = keyfactory
+                        .generatePrivate(pkcs8encodedkeyspec);
+                String s1 = Long.toString(l, 10);
+                s1 = s1 + "^^";
+                s1 = s1 + Long.toString(l1, 10);
+                s1 = s1 + "^^";
+                s1 = s1 + Long.toString(l2, 10);
+                s1 = s1 + "^^";
+                s1 = s1 + s;
+                byte abyte0[] = s1.getBytes();
+                Signature signature = Signature.getInstance("SHA1withDSA");
+                signature.initSign(privatekey);
+                signature.update(abyte0);
+                byte abyte1[] = signature.sign();
+                LicensePair licensepair = null;
+                try {
+                    licensepair = new LicensePair(abyte0, abyte1);
+                } catch (Exception exception1) {
+                    exception1.printStackTrace();
+                }
+                System.out.println(s1);
+                System.out.println("Your license key is: ");
+                System.out.println(licensepair.toString());
+            } catch (Exception exception) {
+                exception.printStackTrace();
+            }
+        } catch (IOException ioexception) {
+        }
+    }
+
+    static byte EncodedPrvKey[] = { 48, -126, 1, 75, 2, 1, 0, 48, -126, 1, 44,
+            6, 7, 42, -122, 72, -50, 56, 4, 1, 48, -126, 1, 31, 2, -127, -127,
+            0, -3, 127, 83, -127, 29, 117, 18, 41, 82, -33, 74, -100, 46, -20,
+            -28, -25, -10, 17, -73, 82, 60, -17, 68, 0, -61, 30, 63, -128, -74,
+            81, 38, 105, 69, 93, 64, 34, 81, -5, 89, 61, -115, 88, -6, -65,
+            -59, -11, -70, 48, -10, -53, -101, 85, 108, -41, -127, 59, -128,
+            29, 52, 111, -14, 102, 96, -73, 107, -103, 80, -91, -92, -97, -97,
+            -24, 4, 123, 16, 34, -62, 79, -69, -87, -41, -2, -73, -58, 27, -8,
+            59, 87, -25, -58, -88, -90, 21, 15, 4, -5, -125, -10, -45, -59, 30,
+            -61, 2, 53, 84, 19, 90, 22, -111, 50, -10, 117, -13, -82, 43, 97,
+            -41, 42, -17, -14, 34, 3, 25, -99, -47, 72, 1, -57, 2, 21, 0, -105,
+            96, 80, -113, 21, 35, 11, -52, -78, -110, -71, -126, -94, -21,
+            -124, 11, -16, 88, 28, -11, 2, -127, -127, 0, -9, -31, -96, -123,
+            -42, -101, 61, -34, -53, -68, -85, 92, 54, -72, 87, -71, 121, -108,
+            -81, -69, -6, 58, -22, -126, -7, 87, 76, 11, 61, 7, -126, 103, 81,
+            89, 87, -114, -70, -44, 89, 79, -26, 113, 7, 16, -127, -128, -76,
+            73, 22, 113, 35, -24, 76, 40, 22, 19, -73, -49, 9, 50, -116, -56,
+            -90, -31, 60, 22, 122, -117, 84, 124, -115, 40, -32, -93, -82, 30,
+            43, -77, -90, 117, -111, 110, -93, 127, 11, -6, 33, 53, 98, -15,
+            -5, 98, 122, 1, 36, 59, -52, -92, -15, -66, -88, 81, -112, -119,
+            -88, -125, -33, -31, 90, -27, -97, 6, -110, -117, 102, 94, -128,
+            123, 85, 37, 100, 1, 76, 59, -2, -49, 73, 42, 4, 22, 2, 20, 42, 50,
+            -88, 30, 125, -37, 118, -50, 20, -82, -63, 0, 8, -36, 106, -9,
+            -110, 124, 107, 68 };
+}</pre>
+</p>
+<p>
+    <br />
+</p>
+<p>
+    送你们一个key：
+</p>
+<p>
+    name: tiantian
+</p>
+<p>
+    key:pqMomDgDQWXQuwINtKvsXuvOHNqorbvDSxBpkRwhJgmnhcX
+</p>
+<p>
+    mj2L0LAgbiEKysVnOTZs7odjy2Kka71ExsjBqL1aRXwN6Iw
+</p>
+<p>
+    pPRSwmqRnpQPmPQoPpstrNMqpPMpnqQMNtttVvxUsXWostU
+</p>
+<p>
+    UnpmoqutqusrtuUUnpmoqutqusrtuUUqfXkqfXk
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/127.html" title="hsqldb 使用心得">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/125.html" title="gorm 介绍">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-04-11</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86-ref">项目管理 <span>33</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

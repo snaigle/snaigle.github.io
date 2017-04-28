@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>jvm调优系列1，调优eclipse</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>jvm调优系列1，调优eclipse </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>
+    环境普通pc，4G内存，i3cpu，jdk 1.6
+</p>
+<p>
+    使用工具： jvisualvm 和其插件visualgc
+</p>
+<p>
+    首先启动jvisualvm，eclipse按默认配置启动，在jvisualvm中选择eclipse的进程，查看统计信息
+</p>
+<p>
+    jvm的默认参数是 xmx=256M maxpermsize = 64M
+</p>
+<p>
+    看heap曲线图，最大值前期会有一个上升阶段，应该会稳定在一个值，而使用值则会有一些波动，没有明显提升
+</p>
+<p>
+    再看permgem，也就是永久带，也是上来就一个上升，然后使用值和最大值一般会相同，没有大项目的话会稳定在50上下M<span></span>，一旦打开项目，就有可能会造成out of memory。
+</p>
+<p>
+    首先得到heap max 的稳定值&nbsp;和 &nbsp;和 maxpermsize的稳定值
+</p>
+<p>
+    这就是在eclipse。ini要进行设置的参数
+</p>
+<p>
+    -Xms512m -Xmx512m ，设置成一样，省的jvm去不停的进行full gc。 用来设置整个heap的大小
+</p>
+<p>
+    -Xmn128m &nbsp;用来设置年轻代的大小，一般不需要多大，这里面gc速度很快，可以被经常回收
+</p>
+<p>
+    -XX:PermSize=256m&nbsp;
+</p>
+<p>
+    -XX:MaxPermSize=256m&nbsp; 这个是设定永久代空间大小的，同样设为一样，防止去不停的触发full gc
+</p>
+<p>
+    跟年轻代的gc机制不同，fullgc是非常慢的，应该采用串行回收机制，回收过程整个jvm需要等待gc的完成，若通过gc还是没有足够的空间那么就会去申请新的空间，如果申请不到就报out of memory 错误了。
+</p>
+<p>
+    <br />
+</p>
+<p>
+    其实针对eclipse设置这些就够了，还有可以去指定java的路径也能提升一点。
+</p>
+<p>
+    如果是服务器则就要根据系统的整体情况，分别针对不同区域设置大小和gc机制
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/260.html" title="jvm调优系列0，jvm内存空间分配">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/258.html" title="每次找工作都会纠结">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-06-08 10:27:37</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E7%B1%BB--%E8%B0%8B%E7%94%9F%E7%AF%87-ref">开发技术类--谋生篇 <span>51</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E9%83%A8%E7%BD%B2-ref">服务器优化部署 <span>11</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

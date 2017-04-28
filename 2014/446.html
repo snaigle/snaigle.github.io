@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>关于开发模式的一点想法</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>关于开发模式的一点想法 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p> 开发分为几块：人员管理，任务管理，代码管理，测试管理，部署和运维管理 </p> 
+<p> 人员管理和任务管理已经说过了，下面继续聊一聊跟开发人员相关的事情，首先说代码管理： </p> 
+<p> 代码管理工具莫过于git,本地也可以使用、方便快捷，使用git也有几种使用模式， </p> 
+<p> 模式1： 所有人直接使用master提交代码，代码混乱、质量不可控 </p> 
+<p> 模式2：每个人仍然使用master,但会在本地开个分支，如果和其他人有共享需求则把分支上传到线上，分支开发完成后，合并回主线，。这种模式的好处是有个相对稳定的主线，适合开发小组采用这种方式 </p> 
+<p> 模式3：有一个主干，每个人开发的化则需要从主干中fork到自己工作区，自己则遵循本地分支的开发方式完成任务后提交回自己的Master,然后通知主干管理员将代码合并过去，主干管理员则自己开个分支合并修改，测试通过后合并回master ，供其他人更新。这样的好处是每个人都能很方便的管理自己的项目，这对大型项目来说非常有帮助，而当多人负责同一模块时则几个人使用一个fork后的项目，由主fork人负责主干的合并 </p> 
+<p> 模式4：有一个主负责人，加几个分模块负责人，所有人fork自己所属模块负责人的项目 ，并将完成后的代码提交给他，由他测试后合并到自己的主干，再提交给主负责人，主负责人则只合并所有分负责人的修改，合并到总主干，做为整个项目的基准。这种模式适合超大项目合作，如lihux内核等 </p> 
+<p> <br /> </p> 
+<p> 测试是个很复杂的话题，一、测试会浪费大量时间和人力，二、测试带来的好处不多，好多项目没有测试同样的线上跑的很好，或者只经过简单的功能测试就可以了 </p> 
+<p> 那我只能说他们还没感受到测试带来的好处，对于整体项目而言当项目越来越大时每次发版前的自动回归测试就必不可少了，人工已经很难测试这么庞大的业务了，庞大的业务带来的是开发人员的急速扩张，业务的各种重合，每当修改一处代码极有可能导致其他地方出现问题，因此只能自动化的回归测试才能解决。对个人而言，他不想测试的是，他对代码质量的不确定，对业务的不确定，他不能保证代码是否正确，只能说代码运行起来貌似是对的。因此最好是采用测试驱动，测试驱动对业务理解才是最准确的，没有写测试只能说他对业务理解不够准确，测试写好了，业务才有保证，也能方便他写完后检测成果 </p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2014/447.html" title="项目部署和运维的想法">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2014/445.html" title="开发模式的一点想法">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2014-07-25 23:19:44</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

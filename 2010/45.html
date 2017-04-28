@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>lucene 使用总结</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>lucene 使用总结 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>终于全文检索这块弄完了，在此总结一下。</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;先介绍一下为什么要用全文检索，当数据库查询字符串时 通常用like 来进行比较，当有大量文本时，从中检索出有用的信息会产生大量的性能开销，而全文检索，则是先对文本进行分词，然后对词进行索引，因此你搜索一个词时 ，速度会很快。</p> <p>不过建立索引的过程 也是一个很大的开销,^_^。索引只需要建立一次，以后就可以很方便的进行查询了。</p> <p>&nbsp;</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;lucene是一个用java编写的全文检索的组件，是对上面的全文检索原理的实现，可以很方便的集成到自己的系统中，实现自己的全文检索。lucene对中文支持不好，需要使用其他的中文分词包，目前比较好的 有:ik,paoding,je 等。</p> <p>&nbsp;&nbsp; &nbsp; lucene的基本存储单位是 &nbsp;document ，可以将其和record等价，因此你可以写convert方法，将record转换成document就能进行索引了。field可以看成字段</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;lucene有 &nbsp;delete，save,search三个基本操作。</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;delete操作， &nbsp;indexReader.delete(term),indexReader(int doc)</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;indexwriter 中也有相应的方法</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;save 操作，只能通过indexwriter 来进行 &nbsp;indexwrite.addDocument()</p> <p>&nbsp;</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;查询 &nbsp; &nbsp;. &nbsp;indexsearch.search(query ,topcollector)</p> <p>&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;有 termquery 可以查询一个字段，booleanquery可以查询多个字段</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;lucene还支持查询语法，常用的有 &nbsp;and &nbsp;or &nbsp;not 其他的我没去记 &nbsp;^_^</p> <p>&nbsp;&nbsp; &nbsp; &nbsp;topcollector 中有一个topdocs（）方法，这个方法是生成 topdoc[] 只能调用一次。</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2010/46.html" title="maven常用命令">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2010/44.html" title="spring事物和db连接池的一些想法">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2010-11-19</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

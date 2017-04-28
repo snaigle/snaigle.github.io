@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>html 动态引入 其他文件</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>html 动态引入 其他文件 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>&lt;!-- #include PathType = FileName --&gt; <br /><br /> 参数 <br /> PathType <br /><br /> 将 FileName 的路径类型。路径可为以下某种类型： <br /><br /> 路径类型 含义 <br /> 文件 该文件名是带有 #include 命令的文档所在目录的相对路径。被包含文件可位于相同目录或子目录中；但它不能处于带有 #include 命令的页的上层目录中。 <br /> 虚拟 文件名为 Web 站点上虚拟目录的完整虚拟路径。 <br /><br /> FileName <br /><br /> 指定要包含的文件名。FileName 必须包含文件名扩展，而且必须将文件名用引号 (&quot;) 引起来。 <br /><br /> 注释 <br /> 包 含 #include 命令的文件必须使用映射到 SSI 解释器的文件扩展名；否则，Web 服务器将不处理该命令。默认情况下，扩展名 .stm、.shtm 和 .shtml 将映射到解释器 (Ssinc.dll)。如果安装了 Internet 服务管理器，则可以修改默认扩展映射并添加新的映射。请参阅设置应用程序映射。被包含的文件可具有任何文件扩展名，但建议赋予它们 .inc 扩展名。 <br /><br /> 示例 <br /> &lt;!--被包含文件与父文件存在于相同目录中。 --&gt; <br /> &lt;!-- #include file = &quot;myfile.inc&quot; --&gt; <br /><br /> &lt;!--被包含文件位于脚本虚拟目录中。 --&gt; <br /> &lt;!-- #include virtual = &quot;/scripts/tools/global.inc&quot; --&gt; <br /><br /> include file 与include virtual的区别 <br /><br /> 1。#include file 包含文件的相对路径，#include virtual包含文件的虚拟路径。 <br /> 2。 在同一个虚拟目录内，&lt;!--#include file=&quot;file.asp&quot;--&gt;和&lt;!--#include virtual=&quot;file.asp&quot;--&gt;效果是相同的，但假设虚拟目录名为myweb,则&lt;!--#include virtual=&quot;myweb/file.asp&quot;--&gt;也可以通过调试，但我们知道&lt;!--#include file=&quot;myweb/file.asp&quot;--&gt;是绝对要报错的。 <br /> 3。如果一个站点下有2个虚拟目录myweb1和 myweb2,myweb1下有文件file1.asp,myweb2下有文件file2.asp,如果file1.asp要调用file2.asp,那 么在file1.asp中要这样写：&lt;!--#include virtual=&quot;myweb2/file2.asp&quot;--&gt;，在这种情况下用#include file是无法实现的，用&lt;!--#include file=&quot;myweb2/file2.asp&quot;--&gt;必然报错。相反，在myweb2的文件中包含myweb1中的文件也是一样。如果该被包含文 件在某个文件夹下面，只要在虚拟路径中加上该文件夹即可。 <br /> 4。不论用#include file 还是 #include virtual，在路径中用“/”还是“\”或者二者交叉使用都不会影响编译效果，程序会顺利执行。 <br /> 5。 以上情况不适用于2个站点文件的相互调用，而且在同一个站点内，&lt;!--#include file=&quot;file.asp&quot;--&gt;和&lt;!--#include virtual=&quot;file.asp&quot;--&gt;等效，但假设站点名为website,使用&lt;!--#include virtual=&quot;website/file.asp&quot;--&gt;是错误的。 <br /><br /> &lt;!--include file=&quot;abc/abc.asp&quot;--&gt; </p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2010/20.html" title="ssi server side include">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2010/18.html" title="freemarker 使用jsp标签">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2010-09-14</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

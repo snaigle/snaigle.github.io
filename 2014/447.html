@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>项目部署和运维的想法</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>项目部署和运维的想法 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p> 项目部署时会和运行环境相关，部署时也需要调整为生产环境参数以及预期压力，需要部署几台机器，有没有预期的性能瓶颈，有没有特殊的需求，这些其实是跟开发和测试相关度最高，测试可以发现性能上的瓶颈点，需要三方商讨解决，因此部署时需要开发、测试、运维三方都在场的，上线后，回归测试和运维监控性能是否合适，没问题就上线成功，有问题直接回滚，退回开发和测试。 </p> 
+<p> 之前开发组中配备运维也是这个原因，可以在前期测试阶段就预期到用户量和性能点，以及扩展性。 </p> 
+<p> 说了这么多，关键的部署，应该有一个部署服务器，可以直接从代码库中迁出需要发布的代码，然后运维根据需求调整代码中的参数，这个参数应该方便调整，最好有可视界面和模板来管理，为发布提供好需要的资源后，将新版上线，流量逐渐导入，期间观察服务性能，不断调大流量，直到流量全部到位。旧系统没有流量后，等新系统稳定后停止服务。生产环境的所有代码和相关运行环境和相关数据一定要备份归档，至少要在一个月后或半年后才能删除 </p> 
+<p> 这里其实用到了一些很强大的工具，如同时操作很多服务器，同时修改他们的配置。还有就是服务器的监控，这里有四个监控角度，一硬件数据如 内存、cpu、硬盘空间、连接数;二软件数据，如jvm的内存、mysql的连接数和负载，nginx的，cache的命中率等；三系统本身的数据，如连接池使用情况，各方法执行情况，服务调用率，服务出错率等；四：业务数据：如文章增长率，新用户增长率和用户总数据，以及相关统计数据等 </p> 
+<p> 部署和监控要分离，各级别的监控数据最好也要分离，监控数据分两大类：一是运维需要，二是产品需要。所有的事情必须要有反馈才能良好的做下去 </p> 
+<p> 下面说说部署服务器吧，首先可以把所有机器注册到服务中心，通过服务中心去管理，这里还需要一个执行脚本功能，可以把脚本推送到指定服务器群，而且也需要执行结果。每个机器也需要注册自己的服务，可以看到服务的使用。 </p> 
+<p> 每个系统发布前则需要新服务器，重新配置环境，如果不需要，则直接停止旧服务，备份后，更新新系统，也需要增量更新。更新前要有备份，这样才能在有问题时回滚。需要调整数据的一定停服务，新服务可以不用停 </p> 
+<p> 部署的最佳实践： 单台服务器： 一、停止流量，停止服务，备份数据，清理环境，更新代码，启动新服务，导入流量。这样会有一段时间无法访问服务 </p> 
+<p> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 二、开新机器，部署新系统，逐渐导入流量，流量全部导入后，停掉旧服务，并备份归档 </p> 
+<p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;集群环境： &nbsp; 也同样按上面单台单台的推送，这样防止有问题影响很大，也防止停掉大量机器导致大量流量导入到其他服务器中，建议集群下有1-10台备用机，更新时先从备用机逐渐推送到其他机器上，这样可以保证升级过程中的平稳，同样可以通过程序把这个流程固定下来，部署就方便多了 </p> 
+<p> 运维则通过每台机器上的监控数据（硬件参数、服务参数、应用参数）来确保每台机器是正常的，升级成功后可以启动自动监控和报警。 </p> 
+<p> 为了方便运维人员，通过硬件和服务、应用的自注册会更方便一些，这样只要网络正常运维人员是很方便管理的，也方便监控和报警。一切都要自动化，必须要基于最简单的逻辑，按层次逐渐复杂下来，但尽量不要引用网状逻辑，这样必须需要服务器自管理，运维人员没办法控制这样的系统 </p> 
+<p> <br /> </p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2014/448.html" title="我想要一辆汽车">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2014/446.html" title="关于开发模式的一点想法">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2014-07-26 18:19:00</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86-ref">项目管理 <span>33</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%BC%98%E5%8C%96%E9%83%A8%E7%BD%B2-ref">服务器优化部署 <span>11</span></a>
+</li>
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

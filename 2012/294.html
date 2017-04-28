@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>j2ee系统性能问题的总结及相应解决办法</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>j2ee系统性能问题的总结及相应解决办法 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p style="font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;font-size:14px;background-color:#FFFFFF;">
+    接下来他列举了在过去十年中所遇到的Java EE性能问题的原因，并做出了一些高层次的建议。十大原因包括：
+</p>
+<ol style="font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;font-size:14px;background-color:#FFFFFF;">
+    <li>
+        缺少合适的容量计划。
+    </li>
+    <li>
+        Java EE中间件环境规格说明不充分。
+    </li>
+    <li>
+        过度的Java虚拟机垃圾回收。
+    </li>
+    <li>
+        与外部系统过多或者很差的集成。
+    </li>
+    <li>
+        缺少合适的数据库SQL调优和容量计划。
+    </li>
+    <li>
+        对应用程序特定的性能问题。
+        <ol>
+            <li>
+                线程安全代码的问题。
+            </li>
+            <li>
+                缺少通信API的超时处理。
+            </li>
+            <li>
+                I/O、JDBC或者关系型持久API资源管理的问题。
+            </li>
+            <li>
+                缺少合适的数据缓存。
+            </li>
+            <li>
+                过度的数据缓存。
+            </li>
+            <li>
+                过度的日志记录。
+            </li>
+        </ol>
+    </li>
+    <li>
+        Java EE中间件调优问题。
+    </li>
+    <li>
+        主动监控不充分。
+    </li>
+    <li>
+        通用基础设备上硬件饱和。
+    </li>
+    <li>
+        网络延迟问题。
+    </li>
+</ol>
+<p style="font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;font-size:14px;background-color:#FFFFFF;">
+    针对这些问题，P-H做出的建议包括：
+</p>
+<ul style="font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;font-size:14px;background-color:#FFFFFF;">
+    <li>
+        项目团队应该花足够的时间，为Java EE生产环境创建合适的运营模型。
+    </li>
+    <li>
+        找到Java EE中间件规格的平衡点，像业务和运维团队提供足够的灵活性，以应对运行中断的情况。
+    </li>
+    <li>
+        避免在32位的JVM中部署过多Java EE应用程序。中间件的设计可以处理多个应用程序，但是JVM可能不行。
+    </li>
+    <li>
+        在需要的时候选择64位JVM替换32位的JVM，但是要有合适的容量计划和性能测试，以确保硬件能够支持它。
+    </li>
+    <li>
+        确保你的监控程序对JVM的垃圾回收有很好的理解。
+    </li>
+    <li>
+        要记住，垃圾回收相关的问题可能不会再开发或者功能测试阶段发现。
+    </li>
+    <li>
+        合适的容量计划包括负载和性能测试，在调优数据库环境的时候非常重要，它能够在SQL级别找到问题。
+    </li>
+    <li>
+        如果你使用Oracle数据库，要确保DBA团队对AWR报告做出了评审。
+    </li>
+    <li>
+        利用JVM Thread Dump和AWR报告找到运行缓慢的SQL，并使用选定的监控工具来做同样的工作。
+    </li>
+    <li>
+        确保花费足够时间来增强数据库环境的运行能力（磁盘空间、数据文件、REDO日志、表空间等等），还要做出合适的监控和警告。
+    </li>
+    <li>
+        评审你当前的Java EE环境监控能力，并找到提升的机会。
+    </li>
+    <li>
+        你的监控解决方案应该尽可能覆盖端到端的环境，包括主动的警告。
+    </li>
+    <li>
+        监控解决方案应该与容量计划过程保持一致。
+    </li>
+</ul>
+<p>
+    <span><span style="font-size:14px;line-height:21px;"><br />
+</span></span>
+</p>
+<p>
+    <span><span style="font-size:14px;line-height:21px;">自己的最小团队分工为 ： &nbsp;</span></span>
+</p>
+<p>
+    <ul>
+        <li>
+            <span style="font-size:14px;line-height:21px;font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;"></span><span style="font-size:14px;line-height:21px;font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;">运营1-2 负责生产和测试环境配置调优，系统监控，硬件性能监控和系统性能监控（触发警戒线后报警）， 还有崩溃后自动回滚机制（报警）， 当机报警等</span>
+        </li>
+        <li>
+            <span style="font-size:14px;line-height:21px;font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;"></span><span style="font-size:14px;line-height:21px;font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;">dba 1， 负责数据库搭建调优，及日常开发中sql的优化， 满足当前容量</span>
+        </li>
+        <li>
+            <span style="font-size:14px;line-height:21px;font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;">&nbsp;开发2, &nbsp;1java, 1 python/nodejs, 负责前后台，</span>
+        </li>
+        <li>
+            <span style="font-size:14px;line-height:21px;font-family:Lucida, 'Lucida Grande', Tahoma, sans-serif;">ui +产品经理&nbsp;1， 页面要简单，并且稳定，产品不断优化。 后期再拆开</span>
+        </li>
+    </ul>
+</p>
+<p>
+    <span><span style="font-size:14px;line-height:21px;"><br />
+</span></span>
+</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2012/295.html" title="预言歌">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2012/293.html" title="spring mvc 提升">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2012-09-14 09:19:56</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

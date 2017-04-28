@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>构建高性能网站，针对前台工程师--总结篇</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>构建高性能网站，针对前台工程师--总结篇 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p>首先从一次完整的的请求说起：（以此为例get,www,baidu.com）</p> <p>1，webbrower 发出request，</p> <p>2，然后解析www.baidu.com为ip,找到ip的服务器，</p> <p>3，服务器处理请求资源并返回请求的内容，</p> <p>4，browser接受请求内容过程，（返回内容是按顺序读取的）</p> <p><span style="white-space: pre;"> </span>4.1遇到外联css，就会并发去读取css内容（），</p> <p><span style="white-space: pre;"> </span>4.2遇到图片时，回去并发读取图片，目前浏览器的并发数为2，</p> <p><span style="white-space: pre;"> </span>4.3遇到js时则会阻塞其他请求。</p> <p><span style="white-space: pre;"> </span>4.4加载完css后，browse开始渲染页面，</p> <p><span style="white-space: pre;"> </span>4.5直到加载完页面中的文本资源，这时dom的结构已经确定，会出发 document.ready方法</p> <p><span style="white-space: pre;"> </span>4.6 browse继续加载 图片和js，完成后。页面就全部加载完成，这时会出发 window.onload()方法</p> <p>&nbsp;</p> <p>来分析一下里面具体的时间开销：</p> <p><span style="white-space: pre;"> </span>1，从1--4.4 用户才开始看到页面上有内容，在这以前页面就是空白的</p> <p><span style="white-space: pre;"> </span>2，解析域名也是有一定时间开销的，如果是大机房的可以通过路由配置 dns 缓存，依赖于外部机房环境，可控性比较小。 &nbsp;</p> <p><span style="white-space: pre;"> </span>3，这是服务器处理的时间，优化程序代码可以减少这里的时间</p> <p>&nbsp;&nbsp;<span style="white-space: pre;"> </span>4，</p> <p><span style="white-space: pre;"> </span>4.1浏览器在接收完css之前，一般是不去渲染dom的，以避免无所谓的刷新和闪烁。所以直到4.4用户才真正在页面上看到内容。</p> <p><span style="white-space: pre;"> </span>4.2 浏览器的单域名并发访问数&nbsp;为2，多域名下并发数没限制，可以通过定义域名别名改善</p> <p><span style="white-space: pre;"> </span>4.3 浏览器加载js时会阻塞其他请求，直到加载完成。改善的话可以把js放到页面下面去加载。</p> <p>&nbsp;</p> <p>从上面的流程可以分析出以下建议：</p> <p><span style="white-space: pre;"> </span>1，减少连接数（原因：并发限制，dns开销）</p> <p><span style="white-space: pre;"> </span>2，将css放到 head中。（1,首先这符合w3c规范，2,应为css加载完后，遇到dom对象时就会直接显示，可以更快的显示页面。）</p> <p><span style="white-space: pre;"> </span>3，将js放到页面底部，（加载js时会阻塞其他请求，这段时间页面没有反映，如果js中没有write的话应该放到底部，页面渲染完后再加载js）</p> <p><span style="white-space: pre;"> </span>4，减少下载内容（网络是有速度限制的，内容越少当然加载越快）</p> <p>&nbsp;</p> <p>针对上面4条建议给出具体做法：</p> <p><span style="white-space: pre;"> </span>1，使用 css sprite将小图片合并，合并css、js。使用浏览器缓存： cache-control、expires。不使用etag</p> <p><span style="white-space: pre;"> </span>2、3不用说了，上面已经解释清楚了。</p> <p><span style="white-space: pre;"> </span>4，采用gzip压缩，可以使用 jsmin 将js精简，使用工具将css，html精简，尽可能缩减图片。</p> <p>按照 性能黄金法则 说明： 文本内容只占所有时间的10%-20%, 这样做以后 至少能将时间缩小40%-50%。能明显改善用户体验。</p> <p>&nbsp;</p> <p>这只是一些建议参考，具体的需要你针对自己的网站进行分析，分析工具可以使用firedebug,yslow，（这两个可以集成）</p> <p>yslow会直接给出你建议。</p> <p>&nbsp;</p> <p>&nbsp;</p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2011/133.html" title="html 生成 pdf 实现思路和代码，基于itext">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2011/131.html" title="html2pdf 实现思路和代码">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2011-04-21</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

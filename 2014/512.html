@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>html5 学习</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>html5 学习 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><p> html5学习 </p>
+<ul>
+ <li> 新特性
+  <ul>
+   <li> video </li>
+   <li> audio </li>
+   <li> cavas </li>
+   <li> svg </li>
+   <li> location </li>
+   <li> localStorage </li>
+   <li> sessionStorage </li>
+   <li> + - cache manifest
+    <ul>
+     <li> &lt;html manifest=&quot;demo.appcache&quot;
+      <ul>
+       <li> 指定了manifest的页面都会被缓存 </li>
+      </ul> </li>
+     <li> manifest 需要配置正确的mime-type 即&nbsp;text/cache-manifest </li>
+     <li> 文件格式
+      <ul>
+       <li> CACHE MANIFEST
+        <ul>
+         <li> 需要缓存的 </li>
+        </ul> </li>
+       <li> NETWORK
+        <ul>
+         <li> 不需要缓存的 </li>
+        </ul> </li>
+       <li> FALLBACK
+        <ul>
+         <li> 当无法连网时，用offline.html 替换无法连接的页面 </li>
+        </ul> </li>
+       <li> 用#开始的是注释行 </li>
+      </ul> </li>
+     <li> 更新缓存
+      <ul>
+       <li> 用户清空浏览器缓存 </li>
+       <li> manifest文件被修改 </li>
+       <li> 程序更新应用缓存 </li>
+      </ul> </li>
+    </ul> </li>
+   <li> web worker
+    <ul>
+     <li> 后台线程 </li>
+    </ul> </li>
+   <li> EventSource
+    <ul>
+     <li> 事件流===定时轮询后台数据 </li>
+     <li> 后台的请求需要把Content-Type 设置为text/event-stream </li>
+    </ul> </li>
+   <li> 新输入组件
+    <ul>
+     <li> email </li>
+     <li> url </li>
+     <li> number </li>
+     <li> range </li>
+     <li> date pickers </li>
+     <li> search </li>
+     <li> color </li>
+    </ul> </li>
+   <li> 表单属性
+    <ul>
+     <li> datalist
+      <ul>
+       <li> 在一个输入框支持下拉，类似可编辑的select </li>
+      </ul> </li>
+     <li> keygen </li>
+     <li> submit 支持修改&nbsp;form的属性 </li>
+     <li> input 支持image &nbsp;&nbsp; </li>
+    </ul> </li>
+  </ul> </li>
+</ul></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2014/513.html" title="社区功能">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2014/511.html" title="android学习路线分析">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2014-12-25 11:16:06</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#%E9%BB%98%E8%AE%A4-ref">默认 <span>101</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>

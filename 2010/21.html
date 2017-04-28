@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>js或css文件后面为什么有参数</title>
+  
+    <meta name="author" content="王成">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le styles -->
+    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+<script src="/assets/twitter/javascripts/qrcode.js"></script>
+<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
+ 
+
+    <!-- Le fav and touch icons -->
+  <!-- Update these with your own images
+    <link rel="shortcut icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+  -->
+  </head>
+
+  <body>
+
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="brand" href="/">知行道馆</a>
+          <ul class="nav">
+            
+              
+
+
+  <li><a href="/archive">归档</a></li>
+
+
+            
+              
+
+
+  <li><a href="/tags">标签</a></li>
+
+
+            
+              
+
+
+  <li><a href="/categories">分类</a></li>
+
+
+            
+              
+
+
+  <li><a href="/pages">分页</a></li>
+
+
+            
+              
+
+
+  <li><a href="/about">关于我</a></li>
+
+
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="content">
+        <div class="page-header">
+  <h1>js或css文件后面为什么有参数 </h1>
+</div>
+
+<div class="row">
+  <div class="span8">
+    <p><p>有同学经常遇到<a href="http://www.dreamdu.com/xhtml/">html</a> 页面里加载的js与<a href="http://www.dreamdu.com/css/">css</a> 文件带有参数，比如：</p> <pre>&lt;script type=&quot;text/javascript&quot; src=&quot;dreamdu.js?1217128319&quot;&gt;&lt;/script&gt;</pre> <pre>&lt;link rel=&lsquo;stylesheet&rsquo; href=&lsquo;<a href="http://www.dreamdu.com/n.css?version=2.3.3'">http://www.dreamdu.com/n.css?version=2.3.3'</a> type=&lsquo;text/css&rsquo; /&gt;&lt;link rel=&lsquo;stylesheet&rsquo; href=&lsquo;<a href="http://www.dreamdu.com/n.css?version=20080727182553'">http://www.dreamdu.com/n.css?version=20080727182553'</a> type=&lsquo;text/css&rsquo; /&gt;</pre> <p>使用参数有两种可能，</p> <ul>  <li>脚本并不存在，而是服务端动态生成的，因此带了个版本号，以示区别。</li>  <li>客户端会缓存这些css或js文件，因此每次升级了js或css文件后，改变版本号，客户端浏览器就会重新下载新的js或css文件</li> </ul> <p>第二种情况最多，也可能两种同时存在。</p> <p>版本号，可以是一个随机数，也可以是一个递增的值，大版本小版本的方式，或者根据脚本的生成时间书写，比如 20080727182553 就是精确到了生成脚本的秒，而 2.3.3 就是大版本小版本的方式。</p> <p>补充疯中男子所说的几种可能：</p> <ul>  <li>服务器端使用了URLRewrite，实际上最终访问的是动态服务器文件，例如xxx.php，而这个服务器端文件运行完毕后，response 出来一个标准的 JS 字串流。</li>  <li>根本就是从客户端提交参数上去的。我就在项目中使用过这种方式，页面都是自动生成的，因此在生成的页面中打上特殊标记。，这样在运行脚本时，能够知道是哪个页面在请求脚本，可以运行不同的方法。用这个方法偷偷记录PV很不错。</li> </ul></p>
+
+    <hr>
+    <div class="pagination">
+      <ul>
+        <ul>
+          
+            <li class="prev"><a href="/2010/22.html" title="freemarker 源码分析">&larr; Previous</a></li>
+          
+          
+
+            <li><a href="/archive">Archive</a></li>
+
+          
+            <li class="next"><a href="/2010/20.html" title="ssi server side include">Next &rarr;</a></li>
+          
+          
+        </ul>
+      </ul>
+    </div>
+    <hr>
+     
+  </div>
+  
+  <div class="span4">
+    <h4>Published</h4>
+    <div class="date"><span>2010-09-14</span></div>
+    <br>
+    <h4>Share to Weixin</h4>
+    <div id="share-qrcode"></div>
+    <script type="text/javascript">
+      new QRCode(document.getElementById("share-qrcode"), {
+        text:document.URL,
+        width:128,
+        height:128
+      });
+    </script>
+    <br>
+    <h4>Categories</h4>
+    <ul class="tag_box">
+    
+      <li>
+  <a href="/categories/#default-ref">default <span>108</span></a>
+</li>
+    
+    </ul>
+    <br>
+    <h4>Tags</h4>
+    <ul class="tag_box">
+    
+    </ul>
+  </div>
+</div>
+
+      </div>
+
+      <footer>
+        <p>&copy; 王成 2016
+          with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
+          and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>
+		  and Idea from <a href="http://ruhoh.com" target="_blank" title="The Definitive Technical Blogging Framework">ruhoh</a>
+        </p>
+      </footer>
+
+    </div> <!-- /container -->
+
+    
+<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
+<script>
+  var pres = document.getElementsByTagName("pre");
+  for (var i=0; i < pres.length; ++i) {
+    pres[i].className = "prettyprint linenums";
+  }
+  prettyPrint();
+</script>
+
+  </body>
+</html>
