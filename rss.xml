@@ -2,7 +2,13 @@
 <rss version="2.0">  <channel>
     <title>知行道馆</title>
     <link>http://helao.net</link>
-    <pubDate>30 Nov 17 19:05 CST</pubDate>
+    <pubDate>20 Mar 18 11:12 CST</pubDate>
+    <item>
+      <title>2018年如何前行</title>
+      <link>http://helao.net/2018/how-to-run.html</link>
+      <pubDate>2018-03-14 11:47:00 +0800</pubDate>
+      <description>&lt;h3&gt;2018已来&lt;/h3&gt;&#xA;</description>
+    </item>
     <item>
       <title>双因素认证之TOTP</title>
       <link>http://helao.net/2017/2fa-totp.html</link>
