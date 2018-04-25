@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ page.title }}</title>
   {{# page.description }}
     <meta name="description" content="{{ . }}">
@@ -27,25 +28,22 @@
 
   <body>
 
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="/">{{ site.title }}</a>
-          <ul class="nav">
-            {{# site.navigation?to_pages }}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">{{ site.title }}</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+     {{# site.navigation?to_pages }}
               {{> pages_list }}
-            {{/ site.navigation?to_pages }}
-          </ul>
-        </div>
-      </div>
-    </div>
-
+      {{/ site.navigation?to_pages }}
+    </ul>
+  </div>
+</nav>
     <div class="container">
-
-      <div class="content">
         {{{ content }}}
-      </div>
-
       <footer>
         <p>&copy; {{ site.author.name }} 2016
           with help from <a href="http://github.com/wendal/gor" target="_blank" title="Gor -- Fast Blog">Gor</a>
@@ -54,9 +52,6 @@
             <a href="http://www.miitbeian.gov.cn" target="_blank">京ICP备17040577号-1</a> 
         </p>
       </footer>
-
     </div> <!-- /container -->
-
-    {{{ google_prettify }}}
   </body>
 </html>

@@ -2,6 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>首页</title>
   
     <meta name="description" content="随机漫步的傻瓜">
@@ -14,10 +15,11 @@
     <![endif]-->
 
     <!-- Le styles -->
-    <link href="/assets/twitter/stylesheets/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
-<link href="/assets/twitter/stylesheets/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.min.css" type="text/css" rel="stylesheet" media="all">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="/assets/twitter/javascripts/qrcode.js"></script>
-<link href="/assets/twitter/widgets/google_prettify/stylesheets/twitter-bootstrap.css" type="text/css" rel="stylesheet" media="all">
  
 
     <!-- Le fav and touch icons -->
@@ -31,67 +33,73 @@
 
   <body>
 
-    <div class="navbar">
-      <div class="navbar-inner">
-        <div class="container">
-          <a class="brand" href="/">知行道馆</a>
-          <ul class="nav">
-            
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="/">知行道馆</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+     
               
 
 
-  <li><a href="/archive">归档</a></li>
+   <li class="nav-item">
+        <a class="nav-link" href="/archive">归档</a>
+      </li>
 
 
-            
+      
               
 
 
-  <li><a href="/tags">标签</a></li>
+   <li class="nav-item">
+        <a class="nav-link" href="/tags">标签</a>
+      </li>
 
 
-            
+      
               
 
 
-  <li><a href="/categories">分类</a></li>
+   <li class="nav-item">
+        <a class="nav-link" href="/categories">分类</a>
+      </li>
 
 
-            
+      
               
 
 
-  <li><a href="/pages">分页</a></li>
+   <li class="nav-item">
+        <a class="nav-link" href="/pages">分页</a>
+      </li>
 
 
-            
+      
               
 
 
-  <li><a href="/about">关于我</a></li>
+   <li class="nav-item">
+        <a class="nav-link" href="/about">关于我</a>
+      </li>
 
 
-            
-          </ul>
-        </div>
-      </div>
-    </div>
-
+      
+    </ul>
+  </div>
+</nav>
     <div class="container">
-
-      <div class="content">
         
-<div class="page-header">
-  <h1>首页 </h1>
-</div>
+<h1>首页 </h1>
 
-<div class="row">
-  <div class="span12">
-    
+
 <h2>最近更新</h2>
 
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/英语/study-english-day-03/">study-english-day-03</a> <span class="date">2018-04-25</span></h3>
 
   <p>revolution
@@ -104,9 +112,11 @@ Coomperation between team members will be necessary to finish the task.</p>
   <div class="more">
     <a href="/英语/study-english-day-03/" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/study/study-english-day-02/">study-english-day-02</a> <span class="date">2018-04-24</span></h3>
 
   <p>gallery
@@ -119,9 +129,11 @@ Capitalism works for making money, but it doesn&rsquo;t help the poor very much.
   <div class="more">
     <a href="/study/study-english-day-02/" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/默认/english-day-01/">english-day-01</a> <span class="date">2018-04-23</span></h3>
 
   <p>obsessed
@@ -134,9 +146,11 @@ This Western saddle is comfortable when I have to ride all day.</p>
   <div class="more">
     <a href="/默认/english-day-01/" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2018/how-to-run.html">2018年如何前行</a> <span class="date">2018-03-14 11:47:00</span></h3>
 
   <h3>2018已来</h3>
@@ -147,9 +161,11 @@ This Western saddle is comfortable when I have to ride all day.</p>
   <div class="more">
     <a href="/2018/how-to-run.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2017/2fa-totp.html">双因素认证之TOTP</a> <span class="date">2017-11-30 16:21:03</span></h3>
 
   <h2>从认证说起</h2>
@@ -162,9 +178,11 @@ This Western saddle is comfortable when I have to ride all day.</p>
   <div class="more">
     <a href="/2017/2fa-totp.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2017/Y-lambda.html">Y组合子</a> <span class="date">2017-01-04 17:35:11</span></h3>
 
   <h3>牢骚</h3>
@@ -179,9 +197,11 @@ This Western saddle is comfortable when I have to ride all day.</p>
   <div class="more">
     <a href="/2017/Y-lambda.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2016/install-https-certs-by-letsencrypt.html">使用letsencrypt申请https证书</a> <span class="date">2016-12-09</span></h3>
 
   <h3>安装certbot-auto</h3>
@@ -196,9 +216,11 @@ chmod a+x certbot-auto
   <div class="more">
     <a href="/2016/install-https-certs-by-letsencrypt.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2016/learn-android.html">这两周学习android的总结</a> <span class="date">2016-11-10 12:47:17</span></h3>
 
   <p>学习android两个星期了，总结下自己的知识点</p>
@@ -219,9 +241,11 @@ chmod a+x certbot-auto
   <div class="more">
     <a href="/2016/learn-android.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2016/how-to-learn-a-language.html">怎样学习一门语言</a> <span class="date">2016-09-08 15:47:00</span></h3>
 
   <h3>7步学会一门外语</h3>
@@ -240,9 +264,11 @@ chmod a+x certbot-auto
   <div class="more">
     <a href="/2016/how-to-learn-a-language.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2016/what-is-the-cost.html">什么是成本</a> <span class="date">2016-09-05 17:58:58</span></h3>
 
   <h2>成本</h2>
@@ -266,9 +292,11 @@ chmod a+x certbot-auto
   <div class="more">
     <a href="/2016/what-is-the-cost.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2016/517.html">停滞多年，准备上路</a> <span class="date">2016-06-02 08:37:36</span></h3>
 
   <h1>开始上路了</h1>
@@ -279,9 +307,11 @@ chmod a+x certbot-auto
   <div class="more">
     <a href="/2016/517.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2015/516.html">在Ubuntu中安装Python科学计算环境</a> <span class="date">2015-05-08 21:30:08</span></h3>
 
   <div> 
@@ -510,9 +540,11 @@ sudo make install
   <div class="more">
     <a href="/2015/516.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2015/515.html">ubuntu 下安装 ipython notebook</a> <span class="date">2015-05-08 21:27:34</span></h3>
 
   <h1>执行以下命令</h1>
@@ -533,9 +565,11 @@ sudo make install
   <div class="more">
     <a href="/2015/515.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2015/514.html">2014年度公司年终总结</a> <span class="date">2015-01-26 11:29:44</span></h3>
 
   <h1>2014年年终总结</h1>
@@ -554,9 +588,11 @@ sudo make install
   <div class="more">
     <a href="/2015/514.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2014/513.html">社区功能</a> <span class="date">2014-12-25 11:27:22</span></h3>
 
   <p><p> 车轮 </p>
@@ -716,9 +752,11 @@ sudo make install
   <div class="more">
     <a href="/2014/513.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2014/512.html">html5 学习</a> <span class="date">2014-12-25 11:16:06</span></h3>
 
   <p><p> html5学习 </p>
@@ -798,9 +836,11 @@ sudo make install
   <div class="more">
     <a href="/2014/512.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2014/511.html">android学习路线分析</a> <span class="date">2014-12-25 11:15:41</span></h3>
 
   <p><p> android 分析 </p>
@@ -843,9 +883,11 @@ sudo make install
   <div class="more">
     <a href="/2014/511.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2014/510.html">技术委员会职责划分</a> <span class="date">2014-12-25 11:14:44</span></h3>
 
   <p><p> 技术部职责 </p>
@@ -1098,9 +1140,11 @@ sudo make install
   <div class="more">
     <a href="/2014/510.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2014/509.html">采集系统分析和设计</a> <span class="date">2014-12-25 11:13:13</span></h3>
 
   <p><p>  </p>
@@ -1212,9 +1256,11 @@ sudo make install
   <div class="more">
     <a href="/2014/509.html" class="btn">read more..</a>
   </div>
+  </div>
 </div>
 
-<div class="post">
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2014/508.html">人的定义</a> <span class="date">2014-09-19 09:11:09</span></h3>
 
   <p> 人所拥有的标签<br /> 热情、懒惰、创造、技术、专业、毁灭 </p> 
@@ -1225,12 +1271,9 @@ sudo make install
   <div class="more">
     <a href="/2014/508.html" class="btn">read more..</a>
   </div>
-</div>
-
   </div>
 </div>
 
-      </div>
 
       <footer>
         <p>&copy; 王成 2016
@@ -1240,18 +1283,6 @@ sudo make install
             <a href="http://www.miitbeian.gov.cn" target="_blank">京ICP备17040577号-1</a> 
         </p>
       </footer>
-
     </div> <!-- /container -->
-
-    
-<script src="//cdnjscn.b0.upaiyun.com/libs/prettify/r298/prettify.min.js"></script>
-<script>
-  var pres = document.getElementsByTagName("pre");
-  for (var i=0; i < pres.length; ++i) {
-    pres[i].className = "prettyprint linenums";
-  }
-  prettyPrint();
-</script>
-
   </body>
 </html>
