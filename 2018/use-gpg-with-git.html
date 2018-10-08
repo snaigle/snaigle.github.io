@@ -3,7 +3,9 @@
   <head>
     <meta charset="utf-8">
      <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>经典加密学和现代加密学-读书笔记-0</title>
+    <title>使用gpg签名git中的commit</title>
+  
+    <meta name="description" content="使用gpg签名，让commit更安全">
   
     <meta name="author" content="盒子">
 
@@ -90,30 +92,50 @@
 </nav>
     <div class="container">
         <div class="page-header">
-  <h1>经典加密学和现代加密学-读书笔记-0 </h1>
+  <h1>使用gpg签名git中的commit </h1>
 </div>
 
 <div class="row">
   <div class="span8">
-    <p> 概念介绍： </p> 
-<p> &nbsp; &nbsp; 加密过程分为 编码法和加密法 </p> 
-<p> &nbsp; &nbsp; 编码法是通过字符的置换来得到密文的 </p> 
-<p> &nbsp; &nbsp; 而加密法则是通过各种规则直接打乱明文取得密文，根据加密方式又分为 可逆和不可逆两种，可逆的分为 公钥，密钥等， 不可逆的如hash等 </p> 
-<p> <br /> </p>
+    <h3>使用gpg来签名commit</h3>
+
+<blockquote>
+<p>以下以mac平台为例说明</p>
+</blockquote>
+
+<ul>
+<li>安装gnu-suite , <code>brew install gpg</code></li>
+<li>生成密钥 <code>gpg --gen-key</code> ，输入名称、邮箱等信息</li>
+<li>显示生成的密钥 <code>gpg --list-secret-keys --keyid-format LONG</code>
+<code>
+sec   rsa2048/98A8D73449878FED 2018-10-08 [SC] [expires: 2020-10-07]
+  08FDCA340E820D3FBB207A7598A8D73449878FED
+uid                 [ultimate] demo &lt;demo@126.com&gt;
+ssb   rsa2048/34ED32BF8596D3FC 2018-10-08 [E] [expires: 2020-10-07]
+</code>
+<code>98A8D73449878FED</code> 为密钥id</li>
+<li><code>gpg --armor --output pubkey.txt --export 98A8D73449878FED</code> 导出公钥，并将公钥内容添加到github中</li>
+<li>在本地项目下, 执行
+<code>
+git config commit.gpgsign true
+git config user.signingkey 98A8D73449878FED
+</code></li>
+<li>正常提交commit 即可，push后在github上即可看到 <code>verified</code> 标识</li>
+</ul>
 
     <hr>
     <div class="pagination">
       <ul>
         <ul>
           
-            <li class="prev"><a href="/2013/359.html" title="轨迹记录">&larr; Previous</a></li>
           
+            <li class="prev disabled"><a>&larr; Previous</a></li>
           
 
             <li><a href="/archive">Archive</a></li>
 
           
-            <li class="next"><a href="/2012/349.html" title="spring 3.2.0ga 测试框架">Next &rarr;</a></li>
+            <li class="next"><a href="/study/study-english-day-06/" title="study-english-day-06">Next &rarr;</a></li>
           
           
         </ul>
@@ -125,7 +147,7 @@
   
   <div class="span4">
     <h4>Published</h4>
-    <div class="date"><span>2012-12-28 02:14:49</span></div>
+    <div class="date"><span>2018-10-08 11:23:00</span></div>
     <br>
     <h4>Share to Weixin</h4>
     <div id="share-qrcode"></div>
@@ -148,6 +170,10 @@
     <br>
     <h4>Tags</h4>
     <ul class="tag_box">
+    
+      <li>
+  <a href="/tags/#%E5%B7%A5%E5%85%B7-ref">工具 <span>1</span></a>
+</li>
     
     </ul>
   </div>
