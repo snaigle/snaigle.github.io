@@ -1,2 +1,2 @@
 FROM openresty/openresty:alpine
-COPY * /usr/local/openresty/nginx/html/ 
+ADD . /usr/local/openresty/nginx/html 
