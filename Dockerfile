@@ -1,2 +1,3 @@
 FROM openresty/openresty:alpine
-ADD . /usr/local/openresty/nginx/html 
+ADD default.conf /etc/nginx/conf.d
+ADD . /data/www
