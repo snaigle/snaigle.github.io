@@ -100,6 +100,45 @@
 
 <div class="row">
   <div class="col">
+  <h3 class="title"><a href="/2021/how-to-capture-http-request.html">浅析HTTP(S)抓包</a> <span class="date">2021-05-14 14:19:00</span></h3>
+
+  <h3>背景</h3>
+
+<ol>
+<li>常用抓包工具：charles,fiddler,mitm等，
+
+<ol>
+<li>http：设置系统代理</li>
+<li>https:  导入根证书</li>
+</ol></li>
+<li>为什么有些app上抓不到包
+
+<ol>
+<li>no-proxy , 原因：httpclient实现比较多，并不能保证都完整支持http协议规范
+
+<ol>
+<li>drony,Thor,surge 模拟vpn网络，拦截请求后转发到代理服务</li>
+</ol></li>
+<li>ssl pinning，例：nodejs 自带根证书，不使用操作系统中的根证书
+
+<ol>
+<li>根证书</li>
+<li>https证书校验：可考虑关闭https 证书校验</li>
+<li>使用http请求</li>
+<li>导入生产环境的证书（不安全）</li>
+</ol></li>
+</ol></li>
+</ol>
+
+
+  <div class="more">
+    <a href="/2021/how-to-capture-http-request.html" class="btn">read more..</a>
+  </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col">
   <h3 class="title"><a href="/2018/use-gpg-with-git.html">使用gpg签名git中的commit</a> <span class="date">2018-10-08 11:23:00</span></h3>
 
   <h3>使用gpg来签名commit</h3>
@@ -111,21 +150,23 @@
 <ul>
 <li>安装gnu-suite , <code>brew install gpg</code></li>
 <li>生成密钥 <code>gpg --gen-key</code> ，输入名称、邮箱等信息</li>
-<li>显示生成的密钥 <code>gpg --list-secret-keys --keyid-format LONG</code>
-<code>
-sec   rsa2048/98A8D73449878FED 2018-10-08 [SC] [expires: 2020-10-07]
+
+<li><p>显示生成的密钥 <code>gpg --list-secret-keys --keyid-format LONG</code></p>
+
+<pre><code>sec   rsa2048/98A8D73449878FED 2018-10-08 [SC] [expires: 2020-10-07]
   08FDCA340E820D3FBB207A7598A8D73449878FED
 uid                 [ultimate] demo &lt;demo@126.com&gt;
 ssb   rsa2048/34ED32BF8596D3FC 2018-10-08 [E] [expires: 2020-10-07]
-</code>
-<code>98A8D73449878FED</code> 为密钥id</li>
-<li><code>gpg --armor --output pubkey.txt --export 98A8D73449878FED</code> 导出公钥，并将公钥内容添加到github中</li>
-<li>在本地项目下, 执行
-<code>
-git config commit.gpgsign true
+</code></pre>
+
+<pre><code class="language-98A8D73449878FED```">* ```gpg --armor --output pubkey.txt --export 98A8D73449878FED``` 导出公钥，并将公钥内容添加到github中
+* 在本地项目下, 执行 
+</code></pre>
+
+<p>git config commit.gpgsign true
 git config user.signingkey 98A8D73449878FED
-</code></li>
-<li>正常提交commit 即可，push后在github上即可看到 <code>verified</code> 标识</li>
+<code>
+* 正常提交commit 即可，push后在github上即可看到</code>verified``` 标识</p></li>
 </ul>
 
 
@@ -955,53 +996,6 @@ sudo make install
 
   <div class="more">
     <a href="/2014/512.html" class="btn">read more..</a>
-  </div>
-  </div>
-</div>
-
-<div class="row">
-  <div class="col">
-  <h3 class="title"><a href="/2014/511.html">android学习路线分析</a> <span class="date">2014-12-25 11:15:41</span></h3>
-
-  <p><p> android 分析 </p>
-<ul>
- <li> 环境
-  <ul>
-   <li> 平台
-    <ul>
-     <li> android-sdk </li>
-     <li> android-虚机 </li>
-    </ul> </li>
-   <li> ide
-    <ul>
-     <li> idea + android plugin </li>
-     <li> android studio </li>
-     <li> eclipse +adt </li>
-    </ul> </li>
-   <li> 构建系统
-    <ul>
-     <li> ant </li>
-     <li> maven </li>
-     <li> gradle </li>
-    </ul> </li>
-  </ul> </li>
- <li> 开发
-  <ul>
-   <li> ui构建及设计思路
-    <ul>
-     <li> ui
-      <ul>
-       <li> view </li>
-       <li> activity </li>
-      </ul> </li>
-     <li> 设计 &nbsp; </li>
-    </ul> </li>
-  </ul> </li>
-</ul></p>
-
-
-  <div class="more">
-    <a href="/2014/511.html" class="btn">read more..</a>
   </div>
   </div>
 </div>
