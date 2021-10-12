@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF8">
+	<title>通用网络检测分析页面</title>
+	<style>
+		html{-overflow-y:scroll}  
+		body{color:#000;background:#fff;font-size:12px;line-height:1.666;-webkit-text-size-adjust:none}  
+		body,textarea{font-family:arial}  
+		header,footer,section,aside,article,nav,hgroup,figure,figcaption,  
+		body,h1,h2,h3,h4,h5,h6,ul,ol,li,form,p,dl,dt,dd,blockquote,legend,table,th,td,fieldset,menu,pre{margin:0;padding:0}  
+		table,th,td,img,fieldset{border:0}  
+		time,mark,output,meter,  
+		address,cite,em,code,var,dfn,ins,i,th,caption{font-style:normal;text-decoration:none}  
+		h1,h2,h3,h4,h5,h6,th{font-size:100%;font-weight:normal}  
+		input,select,button,textarea,table{margin:0;font-family:inherit;font-size:100%}  
+		abbr,acronym{border:0;font-variant:normal}  
+		q:before,q:after{content:""}  
+		ul,ol{list-style:none}  
+		table{border-collapse:collapse;border-spacing:0}  
+		th,caption{text-align:left}  
+		header,footer,section,aside,article,nav,hgroup,figure,figcaption{display:block}
+		/* info */
+		body{background:#fff;}
+		h1{font-size:14px;font-weight:700;line-height:4;width:960px;margin:0 auto;}
+		.testinfo{tabel-layout:fixed;border:1px solid #c8d7e3;width:960px;margin:0 auto;}
+		.testinfo td{border-right:1px solid #c8d7e3;border-bottom:1px solid #c8d7e3;padding:10px;font-size:14px;background:#f2f7fb;background:#fff;}
+		.testinfo .testinfoti{font-size:12px;color:#456c89;background:#ebf2f6;}
+		
+		.pluginfo{tabel-layout:fixed;border:1px solid #c8d7e3;font-size:12px;}
+		.pluginfo td{border-right:1px solid #c8d7e3;border-bottom:1px solid #c8d7e3;padding:10px;font-size:14px;background:#fff;font-size:12px;}
+		
+		.ico{display:inline-block;vertical-align:middle;width:17px;height:17px;overflow:hidden;background:url(https://mimg.127.net/xm/all/clientinfo/img/info.png) no-repeat;margin-right:8px}
+		
+		#locationTest{font-size:14px;}
+		#locationTest .fontWeight{margin-left:4px}
+		
+		.testinfo .textinfoPass,
+		.testinfo .textinfoWarn{background:url(https://mimg.127.net/xm/all/clientinfo/img/info.png) no-repeat #fff;padding-left:30px;}
+		.testinfo .textinfoPass{background-position:-166px 14px;color:#1f8919}
+		.testinfo .textinfoWarn{background-position:-166px -18px;background-color:#f8ebea;color:#cc0000}
+		
+		.footer{width:800px;height:63px;overflow:hidden;margin:0 auto;color:#848585;position:relative;background:#fff;line-height:63px;margin-top:12px;}
+		.footer a{color:#999;margin-right:12px;text-decoration:none;}
+		.copyright{margin-left:12px;}
+		.footerLogo{display:inline-block;float:left;height:22px;width:70px;margin-right:12px;background:url(https://mimg.127.net/xm/all/clientinfo/img/info.png) no-repeat;vertical-align:top;overflow:hidden;margin-top:20px;}
+		.footerLogo163{background-position:-96px -96px;}
+		.footerLogo126{background-position:0px -128px;}
+		.footerLogoYeah{background-position:-96px -128px;}
+		
+		#preload-info,
+		#nstool-info{display:none;}
+	</style>
+	<script>
+		// document.domain = '163.com';
+		function fSetLocation(data){
+			var aData = data.split('&');
+			// IP
+			window.userIp = '获取失败';
+			var aIp = aData[1].split('=');
+			if(aIp[0] == 'qip'){
+				window.userIp = aIp[1];
+			}
+			// 用户网络匹配
+			window.userISP = '获取失败';
+			var aISP = aData[5].split('=');
+			var oISP = {
+				 c : '联通'
+				,t : '电信'
+				,e : '教育网'
+			};
+			if(aISP[0] == 'net'){
+				window.userISP = oISP[aISP[1]];
+			}
+			// 用户IP归属地
+			window.userLoca = '获取失败';
+			var aLoca = aData[3].split('=');
+			if(aLoca[0] == 'province'){
+				window.userLoca = decodeURIComponent(aLoca[1]);
+			}
+			var aLocaCity = aData[4].split('=');
+			if(aLocaCity[0] == 'city'){
+				window.userLoca += ' ' + decodeURIComponent(aLocaCity[1]);
+			}
+			// IP
+			var oIp = document.getElementById('network-ip');
+			oIp.innerHTML = window.userIp;
+			// ISP
+			var oISP = document.getElementById('network-isp');
+			oISP.innerHTML = window.userISP;
+			// Loca
+			var oLoca = document.getElementById('network-loca');
+			oLoca.innerHTML = window.userLoca;
+			// 测速
+			setTimeout(function(){
+				fSelectLoaction('show');
+			},500);
+		}
+		
+		function fDetectPlugin(){
+			var sPlugin = '';
+			var n = window.navigator;
+			if (n.plugins && n.plugins.length) {
+				for (var ii = 0; ii < n.plugins.length; ii++) {
+					var sEachPlugin = '<tr><td>'
+						+ n.plugins[ii].name
+						+ '</td><td>'
+						+ n.plugins[ii].description
+						+ '</td></tr>';
+					sPlugin += sEachPlugin;
+				} 
+			}else{
+				var aDetectActiveX = [
+					 {name : 'ShockwaveFlash11',activeX : 'ShockwaveFlash.ShockwaveFlash.11'}
+					,{name : 'ShockwaveFlash10',activeX : 'ShockwaveFlash.ShockwaveFlash.10'}
+					,{name : 'ShockwaveFlash9',activeX : 'ShockwaveFlash.ShockwaveFlash.9'}
+					,{name : 'ShockwaveFlash8',activeX : 'ShockwaveFlash.ShockwaveFlash.8'}
+					,{name : 'ShockwaveFlash7',activeX : 'ShockwaveFlash.ShockwaveFlash.7'}
+					,{name : 'ShockwaveFlash6',activeX : 'ShockwaveFlash.ShockwaveFlash.6'}
+					,{name : 'ShockwaveFlash5',activeX : 'ShockwaveFlash.ShockwaveFlash.5'}
+					,{name : 'Microsoft.XMLHTTP',activeX : 'Microsoft.XMLHTTP'}
+					,{name : 'Microsoft.XMLHTTP.1',activeX : 'Microsoft.XMLHTTP.1'}
+					,{name : 'Microsoft.XMLHTTP.1.0',activeX : 'Microsoft.XMLHTTP.1.0'}
+				];
+				for(var i = 0; i < aDetectActiveX.length; i++){
+					var sResult = 'No';
+					try{
+						var oo = new ActiveXObject(aDetectActiveX[i].activeX);
+						sResult = 'Yes'
+					}catch(e){}
+					var sEachPlugin = '<tr><td>'
+						+ aDetectActiveX[i].name
+						+ '</td><td>'
+						+ sResult
+						+ '</td></tr>';
+					sPlugin += sEachPlugin;
+				}
+			}
+			return '<table class="pluginfo" cellpadding="0" cellspacing="0"><tr><td>name</td><td>description</td></tr>' + sPlugin + '</table>';
+		}
+		
+		
+		window.oBrowser = {};
+	 
+		function _fPraseBrowser(){
+			var sUserAgent = navigator.userAgent
+			// match的结果
+			var m;
+			// 判断IE
+			m = sUserAgent.match(/MSIE\s([^;]*)/);
+			if (m && m[1]) {
+				oBrowser["appName"] = "MSIE";
+				oBrowser["version"] = m[1];
+				return;
+			}
+			// 判断Firefox		
+			m = sUserAgent.match(/Firefox\/([^\s]*)/);
+			if(m&&m[1]){
+				oBrowser["appName"] = "Firefox";
+				oBrowser["version"] = m[1];
+				return;
+			}
+			// 判断Chrome
+			m = sUserAgent.match(/Chrome\/([^\s]*)/);
+			if(m&&m[1]){
+				oBrowser["appName"] = "Chrome";
+				oBrowser["version"] = m[1];
+				return;
+			}
+			// 判断Safari
+			m = sUserAgent.match(/Version\/([^\s]*).+Safari/);
+			if(m&&m[1]){
+				oBrowser["appName"] = "Safari";
+				oBrowser["version"] = m[1];
+				return;
+			}
+			// 判断Opera
+			m = sUserAgent.match(/Opera.+Version[\s\/]([^\s]*)/);
+			if (m && m[1]) {
+				oBrowser["appName"] = "Opera";
+				oBrowser["version"] = m[1];
+				m = sUserAgent.match(/Opera Mini[^;]*/);
+				if (m) {
+					oBrowser["appName"] = m[0];
+				}
+				return;
+			}
+			// 判断AppleWebKit
+			m = sUserAgent.match(/AppleWebKit\/([^\s]*)/);
+			if (m && m[1]){
+				oBrowser["appName"] = "AppleWebKit";
+				oBrowser["version"] = m[1];
+				return;
+			}
+		}
+	 
+		function _fPraseFlash(){
+			var sFlashVersion = "您没有安装flash";
+			// 读取分析flash信息
+			// 如果是ie浏览器
+			var oFlash = false;
+			if(oBrowser["appName"] == "MSIE"){
+				// 创建一个activeobject
+				try{
+					oFlash = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+				}catch(e){
+					sFlashVersion = "flash初始化失败"
+				}
+				if(oFlash){
+					sFlashVersion = oFlash.getVariable("$version").split(" ")[1];
+				}
+			// 其他浏览器
+			}else{
+				if(navigator.plugins && navigator.plugins.length > 0){
+					var oFlash=navigator.plugins["Shockwave Flash"];
+					if(oFlash){
+						var aInfo = oFlash.description.split(" ");
+						for(var i=0,m=aInfo.length;i<m;i++){
+							if(parseInt(aInfo[i])>0){
+								sFlashVersion = aInfo[i];
+								break;
+							}
+						}
+					}
+				}
+			}
+			oBrowser["flash"] = sFlashVersion;
+		}
+		
+		
+		//测速服务2
+		//电信t:0,联通c:1,教育网e:2
+		var oSpdTestPosition = {
+			 gz : ['gzt', 'gzc', 'gze']
+			,hz : ['hz']
+			,bj : ['t', 'c', 'e']
+		};
+		var aSpdResult = [-2,-2,-2,'db'],
+		aSpdStartTime = [],
+		aSpdEndTime = [],
+		aSpdTmpTime = [];
+		window.bSpdAuto = true;
+		var aSpdQueue = ['t','c','e'];
+		/**
+		if(nSpdRndPosition <= 100){
+			aSpdQueue = oSpdTestPosition.hz;
+			aSpdResult[3] = 'hz';
+		}
+		*/
+		/**
+		if(nSpdRndPosition <= 100){
+			aSpdQueue = oSpdTestPosition.bj;
+			aSpdResult[3] = 'bj';
+		}
+		*/
+		var fSpeedTestPre = function(sArea){
+			var nSpdRndPosition = Math.random() * 100;
+			// 默认几率
+			aSpdQueue = oSpdTestPosition.gz;
+			aSpdResult[3] = 'gz';
+			if(nSpdRndPosition <= 33){
+				aSpdQueue = oSpdTestPosition.hz;
+				aSpdResult[3] = 'hz';
+			}
+			if(nSpdRndPosition >33 && nSpdRndPosition <= 66){
+				aSpdQueue = oSpdTestPosition.bj;
+				aSpdResult[3] = 'bj';
+			}
+			
+			if(sArea){
+				aSpdQueue = oSpdTestPosition[sArea];
+				aSpdResult[3] = sArea;		
+			}
+			try{
+				for(i=0;i<aSpdQueue.length;i++){
+					var sLoca = aSpdQueue[i];
+					fGetScript('https://'+ sLoca +'webmail.mail.163.com/cte/' + sLoca + 'test?' + (new Date()).getTime());
+				}
+			}catch(e){
+				fNetErrDebug('ErrfSpeedTestPre');	
+			}
+		},
+		fSpeedTest = function(nCount){
+			try{
+				var nRnd;
+				if(bSpdAuto){
+					fNetErrDebug('fSpeedTest' + nCount);
+					aSpdStartTime[nCount] = (new Date()).getTime();
+					nRnd = aSpdStartTime[nCount];
+				}else{
+					aSpdStartTimeUser[nCount] = (new Date()).getTime();
+					nRnd = aSpdStartTimeUser[nCount];
+				}
+				var sLoca = aSpdQueue[nCount];
+				fGetScript('https://'+ sLoca +'webmail.mail.163.com/cte/' + sLoca +'p?' + nRnd);
+				if(bSpdAuto){
+					aSpdResult[nCount] = -1;
+				}
+			}catch(e){
+				fNetErrDebug('ErrfSpeedTest' + nCount);	
+			}
+		};
+		var fSpd = function(nCount){
+			try{
+				if(bSpdAuto){
+					fNetErrDebug('Spd' + nCount);
+					aSpdEndTime[nCount] = (new Date()).getTime();
+					aSpdResult[nCount] = aSpdEndTime[nCount] - aSpdStartTime[nCount];
+				}else{
+					aSpdEndTimeUser[nCount] = (new Date()).getTime();
+					aSpdResultUser[nCount] = aSpdEndTimeUser[nCount] - aSpdStartTimeUser[nCount];	
+					var sIdTmp = 'locationTest';
+					var oTar = $id(sIdTmp + nCount);
+					var nResult = Number(aSpdResultUser[nCount]);
+					/**
+					if(nResult < 100){
+						oTar.style.color = "green";
+					}else if(nResult < 300 && nResult > 100 ){
+						oTar.style.color = "#ff7200";
+					}else{
+						oTar.style.color = "red";
+					}
+					*/
+					oTar.innerHTML = '<span class="fontWeight">' + nResult + '</span>ms';
+				}
+			}catch(e){
+				fNetErrDebug('ErrSpd' + nCount);
+			}
+		};
+
+		//locationDot
+		var fLocationDot = function(nCount){
+			var sId = 'locationDot';
+			var oTar = $id(sId + nCount);
+			return setInterval(
+				function(){
+					if(oTar.innerHTML == '...'){
+						oTar.innerHTML = '';
+					}else{
+						oTar.innerHTML += '.';
+					}
+				},200);
+		}
+
+		//测速弹框
+		var aLocationDot = [];
+		var fSelectLoaction = function(sFunc){
+			var oDiv = $id('locationTest');
+			var oExt = $id('loginExt');
+			if(sFunc == 'show'){
+				oDiv.style.display = 'block';
+				var sIdTmp = 'locationTest';
+				for( var i=0 ; i<=2 ; i++){
+					$id(sIdTmp + i).innerHTML = '测速中<span id="locationDot'+ i +'"></span>';
+					//$id('locationBest' + i).style.display = 'none';
+					aLocationDot[i] = fLocationDot(i);
+				}
+				fSpdUserInit();
+				fSpeedTestPre('bj');
+				window.oSelectLoaction = setInterval(
+					function(){
+						var nBest = 4;
+						aSpdResultUser[nBest] = 999;
+						for( var i=0 ; i<=2 ; i++){
+							clearInterval(aLocationDot[i]);
+							var sTxt = $id(sIdTmp + i).innerHTML;
+							if( sTxt.match('测速中') ){
+								$id(sIdTmp + i).style.color = '#999';
+								$id(sIdTmp + i).innerHTML = '超时';
+							}
+							if(aSpdResultUser[i] != -1){
+								if(aSpdResultUser[nBest] > aSpdResultUser[i]){
+									nBest = i;
+								}
+							}
+						}
+						if( nBest !=4 ){
+							$id('locationTest' + nBest).style.color = '#22ac38';
+							$id('locationTest' + nBest).style.fontWeight = '700';
+						}
+						clearInterval(oSelectLoaction);
+					},1000)
+			}else{
+				clearInterval(oSelectLoaction);
+				for( var i=0 ; i<=2 ; i++){
+					clearInterval(aLocationDot[i]);
+				}
+				oDiv.style.display = 'none';
+			}
+		},
+		fSpdUserInit = function(){
+			bSpdAuto = false;
+			window.aSpdResultUser = [-1,-1,-1];
+			window.aSpdStartTimeUser = [];
+			window.aSpdEndTimeUser = [];
+			window.aSpdResult = [-3,-3,-3,'db'];
+			var sIdTmp = 'locationTest';
+			for( var i=0 ; i<=2 ; i++){
+				$id(sIdTmp + i).style.color = '#848585';
+			}
+		},
+		fLocationChoose = function(sOperator){
+			clearInterval(oSelectLoaction);
+			for( var i=0 ; i<=2 ; i++){
+				clearInterval(aLocationDot[i]);
+				$id('locationHref' + i).className = $id('locationHref' + i).className.replace(/\sservSelected/g, '');
+			}
+			$id('selectLocationTips').style.display = 'none';
+			$id('selectLocationTipsDone').style.display = 'inline';
+			$id('locationTest').style.display = 'none';
+			var oOperators = {
+				t : '电信',
+				c : '联通',
+				e : '教育网'
+			};
+			var sTmpSelect = 0;
+			for( j in oOperators ){
+				if( j == sOperator ){
+					$id('locationHref' + sTmpSelect).className += ' servSelected';
+					break;
+				}
+				sTmpSelect++;
+			}
+			$id('selectLocation').innerHTML = oOperators[sOperator];
+			sLocationInfo = sOperator;
+		}
+
+		//定位服务
+		var sLocationInfo = 'failed',
+		fSetLocationNext = function(data){
+			var tmpData = '';
+			var aData = data.split('&');
+			for(var i = 0; i < aData.length; i++){
+				var aParam = aData[i].split('=');
+				if(aParam.length >= 2){
+					if(aParam[0] == 'net'){
+						tmpData = aParam[1];
+						break;
+					}
+				}
+			}
+			if(tmpData == ''){
+				sLocationInfo = 'err';
+			}else{
+				sLocationInfo = tmpData;
+			}
+			//使用此服务用户阀值
+			var nPct = 100;// 0 - 100
+			var rnd = Math.random()*100;
+			if(rnd < nPct){
+				fNetErrDebug('rnd' + ((rnd + '').split('.'))[0]);
+				fSpeedTestPre();
+			}else{
+				bSpdAuto = false;
+			}
+		};
+		
+		//net=err debug
+		var fNetErrDebug = function(sStep){
+			try{
+				if(sLocationInfo.match('err') != null){
+					var sFlow = '-' + sStep;
+					aSpdResult[3] += sFlow;
+				}
+			}
+			catch(e){
+			}
+		};
+		
+		function $id(sId){
+			return document.getElementById(sId);
+		}
+		
+		//跨域调用方法
+		function fGetScript(sUrl){
+			var oScript = document.createElement("script");
+			oScript.setAttribute("type", "text/javascript");
+			oScript.setAttribute("src", sUrl);
+			try{oScript.setAttribute("defer", "defer");}catch(e){}
+			window.document.body.appendChild(oScript);
+		}
+		
+		// entry连通测试
+		function fEntryTest(bRes, sMode){
+			var oTar = $id('mail-entry-' + sMode);
+			var sCls = 'textinfoPass';
+			var sTxt = '连接成功';
+			if(!bRes){
+				sCls = 'textinfoWarn';
+				sTxt = '连接失败';
+			}
+			oTar.innerHTML = sTxt;
+			oTar.className = sCls
+		}
+		
+		// nstool
+		//搭建js与flash互通的环境
+		function thisMovie(movieName) {
+			if (navigator.appName.indexOf("Microsoft") != -1) {
+			   return window[movieName]
+			}else{
+			   return document[movieName]
+			}
+		}
+		///////////////////////
+		//调用flash中的方法，"swfId"为html页中swf的id
+		function getNsToolInfo(s){
+			$id('nstool-info').innerHTML = s;
+		}
+		//本地文件不能调试成功！必须使用服务器！
+		
+		
+		
+		function fInit(){
+			fGetScript('https://iplocator.mail.163.com/iplocator?callback=fSetLocation');
+			//
+			fFinishDetect();
+		}
+		
+		// 10S 强制完成
+		setTimeout(function(){
+			if(!window.bSubmit){
+				fFinishDetect();
+			}
+		}, 10000);
+		
+		function fFinishDetect(){
+			// $id('submitbtn').style.display = 'inline';
+			$id('detecting').style.display = 'none';
+			window.bSubmit = true;
+		}
+		
+		function fSubmit(){
+			if(bSubmit){
+			}else{
+				return;
+			}
+		}
+	</script>
+</head>
+<body onload="fInit();">
+	<h1>通用网络检测分析页面 &nbsp; <a href="javascript:void(0)" id="submitbtn" style="display:none;" onclick="fSubmit();">提交报告</a><span id="detecting">检测中...请稍候</span></h1>
+	<table class="testinfo" border="1" cellpadding="3" cellspacing="0">
+		<tbody valign="top">
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:-64px 0"></i>浏览器版本：</td>
+				<td id="browser-ver">获取中...</td>
+			</tr>
+			<tr>
+				<td class="testinfoti" width="120"><i class="ico" style="background-position:-32px 0"></i>浏览器UA：</td>
+				<td>
+					<script>
+						var sUA;
+						try{
+							sUA = window.navigator.userAgent.toLowerCase()
+						}catch(e){
+							sUA = '获取浏览器ua失败' + e;
+						}
+						document.write(sUA);
+					</script>
+				</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:-96px 0"></i>Flash版本：</td>
+				<td id="flash-ver">获取中...</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:0px -32px"></i>屏幕分辨率：</td>
+				<td>
+					<script>document.write(screen.width + 'x' + screen.height);</script>
+				</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:-32px -32px"></i>客户端时间：</td>
+				<td><script>document.write(new Date());</script></td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico"></i>用户IP：</td>
+				<td id="network-ip">获取中...</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:-64px -32px"></i>用户网络匹配：</td>
+				<td id="network-isp">获取中...</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:-64px -32px"></i>用户IP归属地：</td>
+				<td id="network-loca">获取中...</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:-96px -32px"></i>测速：</td>
+				<td>
+					<div id="locationTest">
+						<ul>
+							<li>
+								<span id="locationHref0">
+								电&nbsp;&nbsp;&nbsp;信<span class="locationTestEach" id="locationTest0"></span>
+								</span>
+							</li>
+							<li>
+								<span id="locationHref1">
+								联&nbsp;&nbsp;&nbsp;通<span class="locationTestEach" id="locationTest1"></span>
+								</span>
+							</li>
+							<li>
+								<span id="locationHref2">
+								教育网<span class="locationTestEach" id="locationTest2"></span>
+								</span>
+							</li>
+							<li style="font-size:12px;color:#999;">
+								(&nbsp;响应时间越短，速度越快&nbsp;)
+							</li>
+						</ul>
+					</div>	
+				</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:-96px -64px"></i>DNS：</td>
+				<td>
+					<div id="nstool-info"></div>
+					<div id="nstool-info-js"></div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" class="testinfoti">线路检测</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:-32px -64px"></i>主站:<img src="/favicon.ico" alt="" onload="fEntryTest(true, 't163')" onerror="fEntryTest(false, 't163')" style="display:none"/></td>
+				<td id="mail-entry-t163">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="testinfoti"><i class="ico" style="background-position:0px -64px"></i>插件信息：</td>
+				<td id="client-plugin">获取中...</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="footer">
+	</div>
+	<script>
+		_fPraseBrowser();
+		_fPraseFlash();
+		// Browser
+		var oBrowserVer = document.getElementById('browser-ver');
+		oBrowserVer.innerHTML = oBrowser['appName'] + ' ' + oBrowser['version'];
+		// flash
+		var oFlash = document.getElementById('flash-ver');
+		oFlash.innerHTML = oBrowser["flash"];
+		// Plugin
+		var oPlugin = document.getElementById('client-plugin');
+		oPlugin.innerHTML = fDetectPlugin();
+		
+		var oNstool = document.getElementById('nstool-info-js');
+		function fGetNstool(){
+			if(window.msg){
+				oNstool.innerHTML = 
+					msg + '<br/>' +
+					'ip:' + ip + '<br/>' +
+					'dns:' + dns + '<br/>' +
+					'省份:' + ip_province + '<br/>' +
+					'城市:' + ip_city + '<br/>' +
+					'ISP:' + ip_isp + '<br/>' +
+					'DNS省份:' + dns_province + '<br/>' +
+					'DNS城市:' + dns_city + '<br/>' +
+					'DNS ISP:' + dns_isp + '<br/>' +
+					'结果:' + res + '<br/>';
+			}else{
+				setTimeout(function(){
+					fGetNstool();
+				}, 200);
+			}
+		}
+		fGetNstool();
+	</script>
+	<script src="https://nstool.netease.com/info.js"></script>
+</body>
+</html>
