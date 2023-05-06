@@ -6,13 +6,15 @@ export default defineUserConfig({
   lang: 'zh-CN',
   title: '随机漫步的傻瓜',
   description: '这是我的第一个 VuePress 站点',
+  pagePatterns: ['**/*.md', '!**/README.md', '!.vuepress', '!node_modules'],
   theme: defaultTheme({
-    lastUpdated:true,
+    lastUpdated: false,
+    contributors: false,
     // 默认主题配置
     navbar: [
       {
         text: '首页',
-        link: '/home.md',
+        link: '/',
       },
       {
         text: '关于',
