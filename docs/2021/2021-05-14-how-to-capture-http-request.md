@@ -42,11 +42,11 @@ capture-server ->> real-server: 解析请求，抓包，并转发请求
 
 效果图：
 
-<img src="./assets/images/image-20210514171857844.png" alt="" width="600">
+<img src="../assets/images/image-20210514171857844.png" alt="" width="600">
 
 ### 管理后台
 
-<img src="./assets/images/image-20210514171653804.png" alt="" width="600">
+<img src="../assets/images/image-20210514171653804.png" alt="" width="600">
 
 ### 使用说明
 
