@@ -23,7 +23,14 @@ export default defineUserConfig({
     ],
     sidebar: [
       {
+        text: "2023",
+        children: [
+          "/2023/2022-year-end-summary.md"
+        ]
+      },
+      {
         text: "2021",
+        collapsible: true,
         children: [
           "/2021/2021-05-14-how-to-capture-http-request.md"
         ]
