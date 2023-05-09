@@ -1,0 +1,1 @@
+import{_ as r,p as _,q as c,R as e,t}from"./framework-5866ffd3.js";const o={},s=e("p",null,[t("1.创造有价值的东西 "),e("br"),t(" 2. 赌博、投机、婚姻 "),e("br"),t(" 3. 继承、偷窃、敲诈 "),e("br"),t(" 4. 垄断、诈骗、行贿 "),e("br"),t(" 5. 游说、造假、开矿 "),e("br")],-1),n=[s];function a(l,d){return _(),c("div",null,n)}const i=r(o,[["render",a],["__file","2014-451.html.vue"]]);export{i as default};

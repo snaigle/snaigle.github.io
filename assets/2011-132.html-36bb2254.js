@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-168bbfe0","path":"/2011/2011-132.html","title":"构建高性能网站，针对前台工程师--总结篇","lang":"zh-CN","frontmatter":{"date":"2011-04-21T00:00:00.000Z","title":"构建高性能网站，针对前台工程师--总结篇"},"headers":[],"git":{},"filePathRelative":"2011/2011-132.md"}');export{t as data};

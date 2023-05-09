@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-7217dc5e","path":"/2012/2012-266.html","title":"protoBuf 语法介绍","lang":"zh-CN","frontmatter":{"date":"2012-06-19T09:57:08.000Z","title":"protoBuf 语法介绍"},"headers":[],"git":{},"filePathRelative":"2012/2012-266.md"}');export{t as data};

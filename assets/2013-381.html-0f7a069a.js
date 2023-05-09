@@ -1,0 +1,1 @@
+import{_ as t,p as c,q as l,R as e}from"./framework-5866ffd3.js";const o={},_=e("p",null," 1. 下载 ",-1),s=e("p",null," 2. yum install gcc ",-1),n=e("p",null," 3. make malloc=libc , 可以会有 jemalloc error ",-1),a=[_,s,n];function r(i,m){return c(),l("div",null,a)}const u=t(o,[["render",r],["__file","2013-381.html.vue"]]);export{u as default};

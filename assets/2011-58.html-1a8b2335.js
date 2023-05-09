@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-0607d5df","path":"/2011/2011-58.html","title":"关于单元测试的一些想法","lang":"zh-CN","frontmatter":{"date":"2011-01-12T00:00:00.000Z","title":"关于单元测试的一些想法"},"headers":[],"git":{},"filePathRelative":"2011/2011-58.md"}');export{t as data};

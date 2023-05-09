@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-ca4265d0","path":"/2012/2012-305.html","title":"hadoop 学习笔记1","lang":"zh-CN","frontmatter":{"date":"2012-10-25T07:31:17.000Z","title":"hadoop 学习笔记1"},"headers":[],"git":{},"filePathRelative":"2012/2012-305.md"}');export{t as data};

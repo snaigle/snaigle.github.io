@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-22ff5ac0","path":"/2013/2013-363.html","title":"sublime2 的准备","lang":"zh-CN","frontmatter":{"date":"2013-03-03T04:48:16.000Z","title":"sublime2 的准备"},"headers":[],"git":{},"filePathRelative":"2013/2013-363.md"}');export{t as data};

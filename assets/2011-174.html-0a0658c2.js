@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"要勇于承认自己的缺点，不要炫耀自己的优点，更不能借此去打击别人。 不要追求完美，完美的人是不存在，善于夸奖别人，可以严格要求自己，但不能把自己的要求加到别人身上。可以吹牛但不要得意忘形。如果别人有缺点可以委婉的告诉他，他一次不听劝就不要再说他，这种人不值得去浪费时间",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-174.html.vue"]]);export{f as default};

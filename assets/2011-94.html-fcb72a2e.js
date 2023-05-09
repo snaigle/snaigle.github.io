@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-5a653f32","path":"/2011/2011-94.html","title":"一个理财账本应用","lang":"zh-CN","frontmatter":{"date":"2011-02-14T00:00:00.000Z","title":"一个理财账本应用"},"headers":[],"git":{},"filePathRelative":"2011/2011-94.md"}');export{t as data};

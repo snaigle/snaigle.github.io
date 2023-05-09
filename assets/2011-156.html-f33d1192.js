@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"没钱难倒英雄汉，一扣保险工资立马缩水了1/4。还剩下3000多点，我要存2000，还剩1000多，交了房租就没钱吃饭了。 每个月我拿出500元来消费，买书和其他自己想要的，用500来满足自己的愿望非常不错了",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-156.html.vue"]]);export{f as default};

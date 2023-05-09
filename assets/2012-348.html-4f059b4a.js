@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-739643f9","path":"/2012/2012-348.html","title":"研究cloudfoundry有感","lang":"zh-CN","frontmatter":{"date":"2012-12-10T00:55:00.000Z","title":"研究cloudfoundry有感"},"headers":[],"git":{},"filePathRelative":"2012/2012-348.md"}');export{t as data};

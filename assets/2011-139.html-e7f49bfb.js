@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-227dac39","path":"/2011/2011-139.html","title":"谈谈linux下的版本问题","lang":"zh-CN","frontmatter":{"date":"2011-05-26T16:45:44.000Z","title":"谈谈linux下的版本问题"},"headers":[],"git":{},"filePathRelative":"2011/2011-139.md"}');export{t as data};

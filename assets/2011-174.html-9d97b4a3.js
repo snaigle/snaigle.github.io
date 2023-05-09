@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-24e343bc","path":"/2011/2011-174.html","title":"理科生的嘴很欠的","lang":"zh-CN","frontmatter":{"date":"2011-11-21T15:18:53.000Z","title":"理科生的嘴很欠的"},"headers":[],"git":{},"filePathRelative":"2011/2011-174.md"}');export{t as data};

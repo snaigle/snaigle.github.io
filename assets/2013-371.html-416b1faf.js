@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as o,R as n}from"./framework-5866ffd3.js";const s={},_=n("p",null,"不能停下前进的脚步啊，要不然就落后了 python 准备了，开始学习。 第一期目标就是用python完成 ttcms ，数据库使用mongodb，模板引擎什么的都需要自己动手 再下一步使用go 完成一个api服务器，或jms , 爬虫等",-1),c=[_];function a(r,l){return t(),o("div",null,c)}const p=e(s,[["render",a],["__file","2013-371.html.vue"]]);export{p as default};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-34a96602","path":"/2012/2012-251.html","title":"验证码bug","lang":"zh-CN","frontmatter":{"date":"2012-06-04T06:05:01.000Z","title":"验证码bug"},"headers":[],"git":{},"filePathRelative":"2012/2012-251.md"}');export{t as data};

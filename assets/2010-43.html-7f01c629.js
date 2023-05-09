@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-527726e3","path":"/2010/2010-43.html","title":"谷歌地图，要研究谷歌地图了","lang":"zh-CN","frontmatter":{"date":"2010-11-19T00:00:00.000Z","title":"谷歌地图，要研究谷歌地图了"},"headers":[],"git":{},"filePathRelative":"2010/2010-43.md"}');export{t as data};

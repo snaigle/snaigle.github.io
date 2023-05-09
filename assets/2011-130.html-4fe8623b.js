@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-13220ea2","path":"/2011/2011-130.html","title":"groovy 高效编程，","lang":"zh-CN","frontmatter":{"date":"2011-04-15T00:00:00.000Z","title":"groovy 高效编程，"},"headers":[],"git":{},"filePathRelative":"2011/2011-130.md"}');export{t as data};

@@ -1,0 +1,71 @@
+import{_ as e,p as t,q as r,a1 as n}from"./framework-5866ffd3.js";const o={},i=n(`<p> sitemesh3是一个页面布局框架，可以是你的页面无缝的嵌入到一个整体页面中，从而是你的页面看起来风格是一致的。 我刚开始学习j2ee 时，用的jsp:include , 用iframe来保持页面风格，但是自己总感觉那玩意不好，感觉应该用个什么玩意来组合成一个整体页面比较好，这是参考大公司的页面得出来的，虽然当时已经有sitemesh了，但是我搞不清楚它是做什么用的，与其擦肩而过。 然后毕业后开始进了一家小公司，开始用tiles+ssh,于是乎繁琐的配置文件一度让我无可奈何。这短时间我已经知道了javaweb 开发是有好多约定的，应用的好是可以省略掉配置文件的，但是我不知道具体的约定有哪些，后来看到了nutz，被它的小巧所吸引，但是它大量采用了注解，依然让我感到困扰，我认为这些注解是可以消失的，我只能开始慢慢接受现状，争取多接触些项目能让我明白这其中的约定是什么。 再后来就到了现在的公司，这里用的是goovy动态语言，框架是grails，正好我对动态语言比较感兴趣，就打算在这里工作，在熟悉grails的过程我逐渐发现，这就是我要找的东西，基本没有配置文件，写一个controller，写一个view，连dao层也是通用的，太完美了。我喜欢，借这个机会我了解到了那些约定都是什么 正好在这个公司不是很忙，空闲时间我就在熟悉nutz，我感觉可以把这些约定应用在nutz上，然后nutz就无敌了，开发时简直太完美了，为了这个理想我将url和ioc的一些规则配置到了nutz上，然后还有布局没有搞定，sitemesh的资料太少，于是研究源码吧。言归正传，所有的一切从这里开始 ConfigurableSiteMeshFilter; </p><p><br></p><pre class="prettyprint lang-java linenums">public void init(FilterConfig filterConfig) throws ServletException { 
+     this.filterConfig = filterConfig; 
+     configProperties = getConfigProperties(filterConfig); 
+     autoReload = getAutoReload();  
+     logger.config(&quot;Auto reloading &quot; + (autoReload ? &quot;enabled&quot; : &quot;disabled&quot;)); 
+     synchronized (configLock) { 
+     deployNewFilter(setup()); } initialized = true; 
+}
+ public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+     if (!initialized) {
+        throw new ServletException(getClass().getName() + &quot;.init(FilterConfig) was not called&quot;); } 
+       reloadIfNecessary();
+      filter.doFilter(servletRequest, servletResponse, filterChain); 
+ }
+ </pre><p><br></p><p> sitemesh3是从该filter开始的，首先看init(),了解它初始化过程 我们看到configProperties = getConfigProperties(filterConfig);，是filter的配置信息，autoReload = getAutoReload();  查看配置文件是否需要自动重加载，默认是开启的。从后边可以知道它是通过对比sitemesh3.xml的最后修改时间来确定是不是需要加载的 这些只是准备工作，关键点在 deployNewFilter(setup()); ,也就是setup方法中 setup会创建一个filter，当执行到doFilter（） ,内部实际执行的就是filter.doFilter(),到这里就可以肯定所有核心内容都在这个filter中，包括init和filter的过程，首先我们看init的过程，了解它都需要那些东西，然后再看doFilter中的内容，来决定我们怎么改进它。 </p><pre class="prettyprint lang-java linenums"> 
+protected Filter setup() throws ServletException {
+    ObjectFactory objectFactory = getObjectFactory();
+    SiteMeshFilterBuilder builder = new SiteMeshFilterBuilder();
+    new PropertiesFilterConfigurator(objectFactory, configProperties).configureFilter(builder);
+    new XmlFilterConfigurator(getObjectFactory(),
+    loadConfigXml(filterConfig, getConfigFileName())).configureFilter(builder);
+    applyCustomConfiguration(builder);
+    return builder.create();
+}
+</pre><p> 一行一行的来讲ObjectFactory里面其实只有一行代码 return class.forName(className) ,就是为类生成对象，同时隔离到那些exception。 builder 这个类很重要，所有的配置信息都会存到里面，PropertiesFilterConfigurator 这行是将web.xml 中sitemeshfilter中的配置信息，存放到builder中 下面一行是将sitemesh3.xml中的配置信息，存放到builder中。 applyCustomConfiguration(builder);这行是为了通过java编码的方式来配置filter 配置信息有 exclude, decorate, minetype,content-processor,tag-rule-bundle exclude 是不需要装饰，decorate是需要装饰的， minetype 是默认返回的页面类型， content-processor 是自定义的页面内容处理器，tag-rule-bundle 是自定义的标签，如等。 这里就可以看清楚sitemesh配置有三种方式 1,filter,2,sitemesh.xml, 3 java硬编码 ，混合使用的话，优先级从搞到低 下面我们去详细看看builder中有什么东西 </p><pre class="prettyprint lang-java linenums"> Filter create() {
+        return new SiteMeshFilter(
+                getSelector(),
+                getContentProcessor(),
+                getDecoratorSelector());
+    } 
+</pre><p> 看到没有一个热乎的filter出炉了， 用到了builder的三个属性， selector 选择器，contentProcessor 内容处理器,decoratorSelector 装饰选择器 我们继续深入：selector 是关于mineType决定是否拦截 , contentProcessor 是解析标签的 ，decoratorSelector 是关于装饰页面和被装饰页面的关系 好了，初始化过程基本就看完了，接下来就到正餐时间了，从上面我们没有看到更多的默认配置信息， 下一步就是这里filter.doFilter() ，等把这个过程理完了，然后再把代码通读一遍就能明白了 SiteMeshFilter.class </p><pre class="prettyprint lang-java linenums">    FilterConfig filterConfig = getFilterConfig();
+    if (filterConfig == null) { // TODO: Is this really necessary? Can we survive without init() being called? 
+         throw new ServletException(getClass().getName() + &quot;.init() has not been called.&quot;); } 
+    HttpServletRequest request = (HttpServletRequest) servletRequest; 
+    HttpServletResponse response = (HttpServletResponse) servletResponse; 
+    ServletContext servletContext = filterConfig.getServletContext(); 
+    if (!selector.shouldBufferForRequest(request)) { // Optimization: If the content doesn&#39;t need to be buffered,
+    // skip the rest of this filter. 
+       filterChain.doFilter(request, response); return; }
+    if (containerTweaks.shouldAutoCreateSession()) { // Some containers (such as Tomcat 4) will not allow sessions
+     // to be created in the decorator. (i.e after the // response has been committed). 
+        request.getSession(true); } 
+    try { // The main work. 
+         bufferAndPostProcess(filterChain, request, response, selector); } 
+    catch (IllegalStateException e) { // Some containers (such as WebLogic) throw an IllegalStateException when an error page is served. 
+    // It may be ok to ignore this. However, for safety it is propegated if possible. 
+       if (!containerTweaks.shouldIgnoreIllegalStateExceptionOnErrorPage()) { throw e; }
+    } catch (RuntimeException e) { 
+        if (containerTweaks.shouldLogUnhandledExceptions()) { // Some containers (such as Tomcat 4) swallow RuntimeExceptions in filters.
+       servletContext.log(&quot;Unhandled exception occurred whilst decorating page&quot;, e); }
+       throw e; 
+    }
+</pre><br><p><br></p><p> FilterConfig filterConfig = getFilterConfig(); 还记得这是什么时候注入的吗 !selector.shouldBufferForRequest(request) 初步判断： 是否已经呗sitemesh filter拦截过了， 是否不需要装饰 if (containerTweaks.shouldAutoCreateSession()) { 是否返回false, 是为适应tomcat4 写的 接下来看 关键部分 bufferAndPostProcess ，前面几行可以不用看 关键在于： </p><pre class="prettyprint lang-java linenums">     filterChain.doFilter(wrapRequest(request), responseBuffer); 
+     CharBuffer buffer = responseBuffer.getBuffer(); // If content was buffered, post-process it. boolean processed = false;
+    if (buffer != null &amp;&amp; !responseBuffer.bufferingWasDisabled()) { 
+        processed = postProcess(responseBuffer.getContentType(), buffer, request, response, metaData); } 
+    if (!response.isCommitted()) {
+         responseBuffer.preCommit(); } // If no decoratoes applied, and we have some buffered content, write the original. 
+    if (buffer != null &amp;&amp; !processed) { 
+        writeOriginal(response, buffer, responseBuffer); 
+    }
+</pre><p><br></p><p> 省略的几行是封装response，以便得到返回的html内容，还有就是控制response 的状态 如 if_modified_since 等 buffer是 返回的页面内容，已经被web容器解析过了。 在postProcess 开始进行装饰，如果没有成功就就buffer直接写入到response中 看postProcess 方法： </p><pre class="prettyprint lang-java linenums">    WebAppContext context = createContext(contentType, request, response, metaData);
+    Content content = contentProcessor.build(buffer, context);
+    if (content == null) { return false; }
+    String[] decoratorPaths = decoratorSelector.selectDecoratorPaths(content, context);
+    for (String decoratorPath : decoratorPaths) { 
+        content = context.decorate(decoratorPath, content); 
+   } 
+   if (content == null) { return false; } 
+   content.getData().writeValueTo(response.getWriter()); return true;
+  </pre><p><br></p><p> 首先用rule规则将内容解析一遍，再找到要装饰的页面，然后用dispatch去解析，取得内容后，用context将被装饰页面和装饰页面一起解析 接下来我们着重看看一下 contentProccesor.build() 和 context.decorate() 和 context.build() 即可 就先到这里吧，自己一边看一边写挺累的 </p>`,19),s=[i];function l(a,c){return t(),r("div",null,s)}const u=e(o,[["render",l],["__file","2012-187.html.vue"]]);export{u as default};

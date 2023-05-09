@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-5630bd62","path":"/2013/2013-372.html","title":"想做一个三国杀游戏","lang":"zh-CN","frontmatter":{"date":"2013-05-29T01:04:36.000Z","title":"想做一个三国杀游戏"},"headers":[],"git":{},"filePathRelative":"2013/2013-372.md"}');export{t as data};

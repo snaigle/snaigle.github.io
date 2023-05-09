@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-c6d8b492","path":"/2012/2012-306.html","title":"大数据处理和分布式计算，等稍后再搞","lang":"zh-CN","frontmatter":{"date":"2012-10-26T04:10:22.000Z","title":"大数据处理和分布式计算，等稍后再搞"},"headers":[],"git":{},"filePathRelative":"2012/2012-306.md"}');export{t as data};

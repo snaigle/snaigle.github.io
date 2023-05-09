@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"详细了解了一下，发现实际使用还是挺麻烦的，最好就是再配一块小的可触摸屏幕，就是为了控制更好一些。还可以把触摸控制器开放接口与屏幕分离，这样就能实现控制器的无缝切换了，这样岂不是更好",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2012-288.html.vue"]]);export{f as default};

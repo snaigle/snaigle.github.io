@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-0452fd40","path":"/2011/2011-57.html","title":"spring junit集成测试","lang":"zh-CN","frontmatter":{"date":"2011-01-04T00:00:00.000Z","title":"spring junit集成测试"},"headers":[],"git":{},"filePathRelative":"2011/2011-57.md"}');export{t as data};

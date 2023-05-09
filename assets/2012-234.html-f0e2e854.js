@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-60090d46","path":"/2012/2012-234.html","title":"checkout googlecode svn to git","lang":"zh-CN","frontmatter":{"date":"2012-05-15T14:25:40.000Z","title":"checkout googlecode svn to git"},"headers":[],"git":{},"filePathRelative":"2012/2012-234.md"}');export{t as data};

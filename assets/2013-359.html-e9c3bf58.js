@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as s,R as _}from"./framework-5866ffd3.js";const c={},o=_("p",null,"本来想做个关于公交到站提醒的，原来的设计是通过指定到站站点的经纬度，然后应用实时更新gps直到接近到500米内时,响铃或震动提示用户下车。 这个思路其实还可以，后来查资料发现手机中gps的精度和响应速度都不够理想，也没有各站点的数据，就先做轨迹记录然后等积累一些数据再说",-1),n=[o];function r(a,l){return t(),s("div",null,n)}const d=e(c,[["render",r],["__file","2013-359.html.vue"]]);export{d as default};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-55de1f38","path":"/2012/2012-282.html","title":"如何学好外语","lang":"zh-CN","frontmatter":{"date":"2012-07-31T06:03:42.000Z","title":"如何学好外语"},"headers":[],"git":{},"filePathRelative":"2012/2012-282.md"}');export{t as data};

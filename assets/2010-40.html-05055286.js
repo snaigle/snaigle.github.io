@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-4d589d06","path":"/2010/2010-40.html","title":"今天遇到一个weblogic的 奇怪的问题","lang":"zh-CN","frontmatter":{"date":"2010-11-12T00:00:00.000Z","title":"今天遇到一个weblogic的 奇怪的问题"},"headers":[],"git":{},"filePathRelative":"2010/2010-40.md"}');export{t as data};

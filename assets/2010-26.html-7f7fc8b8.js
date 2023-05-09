@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-246d8b84","path":"/2010/2010-26.html","title":"flex 入门学习 视频","lang":"zh-CN","frontmatter":{"date":"2010-09-21T00:00:00.000Z","title":"flex 入门学习 视频"},"headers":[],"git":{},"filePathRelative":"2010/2010-26.md"}');export{t as data};

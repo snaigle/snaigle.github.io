@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-1a3077ca","path":"/2010/2010-29.html","title":"打算开始学习flex和red5了","lang":"zh-CN","frontmatter":{"date":"2010-10-09T00:00:00.000Z","title":"打算开始学习flex和red5了"},"headers":[],"git":{},"filePathRelative":"2010/2010-29.md"}');export{e as data};

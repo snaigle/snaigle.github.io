@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-50282b78","path":"/2011/2011-97.html","title":"要研究 html5， tiles，nutz,freemarker","lang":"zh-CN","frontmatter":{"date":"2011-02-16T00:00:00.000Z","title":"要研究 html5， tiles，nutz,freemarker"},"headers":[],"git":{},"filePathRelative":"2011/2011-97.md"}');export{t as data};

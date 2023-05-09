@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-606dd11c","path":"/2013/2013-378.html","title":"昨晚研究了一下node如何实现三国杀","lang":"zh-CN","frontmatter":{"date":"2013-07-26T01:24:24.000Z","title":"昨晚研究了一下node如何实现三国杀"},"headers":[],"git":{},"filePathRelative":"2013/2013-378.md"}');export{t as data};

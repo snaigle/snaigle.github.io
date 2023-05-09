@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-73ccb4fd","path":"/2012/2012-267.html","title":"norbert HelloWorld教程","lang":"zh-CN","frontmatter":{"date":"2012-06-20T01:56:12.000Z","title":"norbert HelloWorld教程"},"headers":[],"git":{},"filePathRelative":"2012/2012-267.md"}');export{t as data};

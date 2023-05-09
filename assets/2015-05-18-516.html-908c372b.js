@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-b4697e98","path":"/2015/2015-05-18-516.html","title":"在Ubuntu中安装Python科学计算环境","lang":"zh-CN","frontmatter":{"date":"2015-05-08T21:30:08.000Z","title":"在Ubuntu中安装Python科学计算环境"},"headers":[],"git":{},"filePathRelative":"2015/2015-05-18-516.md"}');export{t as data};

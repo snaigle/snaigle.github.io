@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-36675177","path":"/2012/2012-207.html","title":"这个博客(wordpress)要封笔了，转到我自己的cms(ttcms)上了","lang":"zh-CN","frontmatter":{"date":"2012-04-19T15:35:03.000Z","title":"这个博客(wordpress)要封笔了，转到我自己的cms(ttcms)上了"},"headers":[],"git":{},"filePathRelative":"2012/2012-207.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-7369bb18","path":"/2009/2009-8.html","title":"flash安全沙箱问题，访问域外的网站","lang":"zh-CN","frontmatter":{"date":"2009-11-06T00:00:00.000Z","title":"flash安全沙箱问题，访问域外的网站"},"headers":[],"git":{},"filePathRelative":"2009/2009-8.md"}');export{t as data};

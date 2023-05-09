@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-776cd73f","path":"/2012/2012-188.html","title":"贪吃蛇伪码","lang":"zh-CN","frontmatter":{"date":"2012-03-12T14:28:12.000Z","title":"贪吃蛇伪码"},"headers":[],"git":{},"filePathRelative":"2012/2012-188.md"}');export{t as data};

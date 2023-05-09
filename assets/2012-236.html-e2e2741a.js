@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-5935aaca","path":"/2012/2012-236.html","title":"scaffold实现思路","lang":"zh-CN","frontmatter":{"date":"2012-05-16T13:47:12.000Z","title":"scaffold实现思路"},"headers":[],"git":{},"filePathRelative":"2012/2012-236.md"}');export{t as data};

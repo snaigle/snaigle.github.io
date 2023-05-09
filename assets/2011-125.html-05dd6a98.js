@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-3277e308","path":"/2011/2011-125.html","title":"gorm 介绍","lang":"zh-CN","frontmatter":{"date":"2011-04-06T00:00:00.000Z","title":"gorm 介绍"},"headers":[],"git":{},"filePathRelative":"2011/2011-125.md"}');export{t as data};

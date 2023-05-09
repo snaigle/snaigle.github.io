@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-5262484e","path":"/2012/2012-238.html","title":"redis 入门","lang":"zh-CN","frontmatter":{"date":"2012-05-18T03:25:38.000Z","title":"redis 入门"},"headers":[],"git":{},"filePathRelative":"2012/2012-238.md"}');export{t as data};

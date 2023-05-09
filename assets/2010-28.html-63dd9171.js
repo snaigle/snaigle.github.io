@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-1d9a2908","path":"/2010/2010-28.html","title":"velocity基本语法","lang":"zh-CN","frontmatter":{"date":"2010-09-28T00:00:00.000Z","title":"velocity基本语法"},"headers":[],"git":{},"filePathRelative":"2010/2010-28.md"}');export{t as data};

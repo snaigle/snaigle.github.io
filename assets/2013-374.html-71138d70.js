@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-599a6ea0","path":"/2013/2013-374.html","title":"最近情绪有些不稳定","lang":"zh-CN","frontmatter":{"date":"2013-06-08T01:49:46.000Z","title":"最近情绪有些不稳定"},"headers":[],"git":{},"filePathRelative":"2013/2013-374.md"}');export{t as data};

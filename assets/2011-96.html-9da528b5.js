@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-5391dcb6","path":"/2011/2011-96.html","title":"公司项目的破需求","lang":"zh-CN","frontmatter":{"date":"2011-02-15T00:00:00.000Z","title":"公司项目的破需求"},"headers":[],"git":{},"filePathRelative":"2011/2011-96.md"}');export{t as data};

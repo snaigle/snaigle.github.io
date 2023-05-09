@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-950d6482","path":"/2010/2010-14.html","title":"要学velocity了，先用自定义标签实现模块展示问题","lang":"zh-CN","frontmatter":{"date":"2010-09-14T00:00:00.000Z","title":"要学velocity了，先用自定义标签实现模块展示问题"},"headers":[],"git":{},"filePathRelative":"2010/2010-14.md"}');export{t as data};

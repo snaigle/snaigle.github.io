@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-283acf4e","path":"/2011/2011-128.html","title":"shell 很强大，应该认真的研究一下（包括cmd）","lang":"zh-CN","frontmatter":{"date":"2011-04-13T00:00:00.000Z","title":"shell 很强大，应该认真的研究一下（包括cmd）"},"headers":[],"git":{},"filePathRelative":"2011/2011-128.md"}');export{t as data};

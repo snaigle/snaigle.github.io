@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-ae9a1f84","path":"/2012/2012-277.html","title":"菊花体生成代码","lang":"zh-CN","frontmatter":{"date":"2012-07-20T08:36:23.000Z","title":"菊花体生成代码"},"headers":[],"git":{},"filePathRelative":"2012/2012-277.md"}');export{t as data};

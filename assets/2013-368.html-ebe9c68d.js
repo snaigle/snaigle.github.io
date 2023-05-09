@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-2b8795db","path":"/2013/2013-368.html","title":"spring insight 使用介绍","lang":"zh-CN","frontmatter":{"date":"2013-03-21T12:29:26.000Z","title":"spring insight 使用介绍"},"headers":[],"git":{},"filePathRelative":"2013/2013-368.md"}');export{t as data};

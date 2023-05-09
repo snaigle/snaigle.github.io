@@ -1,0 +1,1 @@
+import{_ as t,p as _,q as o,R as e}from"./framework-5866ffd3.js";const s={},l=e("p",null," 需要准备的应该有常用设计模式的概念和类图 ",-1),n=e("p",null," 还有多线程并发的关键字， ",-1),c=e("p",null," 熟悉一下oracle和 linux shell ",-1),r=e("p",null,[e("br")],-1),a=[l,n,c,r];function i(d,u){return _(),o("div",null,a)}const p=t(s,[["render",i],["__file","2012-253.html.vue"]]);export{p as default};

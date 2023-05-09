@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-52746dfa","path":"/2012/2012-283.html","title":"Nutz 文档- scoffold功能","lang":"zh-CN","frontmatter":{"date":"2012-07-31T10:18:53.000Z","title":"Nutz 文档- scoffold功能"},"headers":[],"git":{},"filePathRelative":"2012/2012-283.md"}');export{t as data};

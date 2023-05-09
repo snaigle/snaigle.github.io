@@ -1,0 +1,1 @@
+import{_ as t,p as n,q as o,R as e}from"./framework-5866ffd3.js";const c={},l=e("p",null,[e("span",null,[e("s",null,"处理action的@At时，若controller存在@At则应 则为action设置为 /actionName 不用加controller前缀，否则url匹配就出错了")])],-1),r=[l];function s(_,a){return n(),o("div",null,r)}const u=t(c,[["render",s],["__file","2012-237.html.vue"]]);export{u as default};

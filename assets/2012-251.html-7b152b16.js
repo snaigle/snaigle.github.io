@@ -1,0 +1,1 @@
+import{_ as t,p as s,q as o,R as e,t as _}from"./framework-5866ffd3.js";const c={},n=e("p",null,[e("s",null,"每个session的验证码用完后，要立马注销掉  "),_("  fixed")],-1),a=[n];function l(r,d){return s(),o("div",null,a)}const f=t(c,[["render",l],["__file","2012-251.html.vue"]]);export{f as default};

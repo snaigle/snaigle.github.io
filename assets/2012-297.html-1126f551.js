@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-127f66c0","path":"/2012/2012-297.html","title":"mongo db学习笔记-1","lang":"zh-CN","frontmatter":{"date":"2012-09-20T09:59:27.000Z","title":"mongo db学习笔记-1"},"headers":[],"git":{},"filePathRelative":"2012/2012-297.md"}');export{t as data};

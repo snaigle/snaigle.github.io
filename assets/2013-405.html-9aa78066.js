@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-50e4d557","path":"/2013/2013-405.html","title":"maven 笔记-版本管理","lang":"zh-CN","frontmatter":{"date":"2013-09-16T12:07:50.000Z","title":"maven 笔记-版本管理"},"headers":[],"git":{},"filePathRelative":"2013/2013-405.md"}');export{t as data};

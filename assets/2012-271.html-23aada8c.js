@@ -1,0 +1,1 @@
+import{_ as t,p as _,q as o,R as e}from"./framework-5866ffd3.js";const s={},c=e("p",null," 昨晚做了一个梦，梦到初恋了。 她来找我，我特别的高兴，陪着她玩了好半天。 ",-1),n=e("p",null," 看来心里还放不下她，没有勇气去面对她在别人怀抱里。 我能做的就是把这份回忆深深的埋在心里，偶尔梦起也是非常快乐的。 ",-1),l=[c,n];function r(a,d){return _(),o("div",null,l)}const f=t(s,[["render",r],["__file","2012-271.html.vue"]]);export{f as default};

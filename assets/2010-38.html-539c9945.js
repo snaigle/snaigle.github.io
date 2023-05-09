@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-261926bd","path":"/2010/2010-38.html","title":"上周末用 grub 安装了ubuntu 10.10","lang":"zh-CN","frontmatter":{"date":"2010-11-01T00:00:00.000Z","title":"上周末用 grub 安装了ubuntu 10.10"},"headers":[],"git":{},"filePathRelative":"2010/2010-38.md"}');export{t as data};

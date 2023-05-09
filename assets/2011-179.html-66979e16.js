@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"喜欢上了独自一人的自由，有回到了以前的日子，静下来，开开心心的享受这宁静的时光。",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-179.html.vue"]]);export{f as default};

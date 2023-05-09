@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-bc2ebed0","path":"/2012/2012-228.html","title":"云云面试-续","lang":"zh-CN","frontmatter":{"date":"2012-05-14T09:35:39.000Z","title":"云云面试-续"},"headers":[],"git":{},"filePathRelative":"2012/2012-228.md"}');export{t as data};

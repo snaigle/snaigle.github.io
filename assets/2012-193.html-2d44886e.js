@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-b86a5136","path":"/2012/2012-193.html","title":"修复win7,linux 双系统启动","lang":"zh-CN","frontmatter":{"date":"2012-03-17T11:26:42.000Z","title":"修复win7,linux 双系统启动"},"headers":[],"git":{},"filePathRelative":"2012/2012-193.md"}');export{t as data};

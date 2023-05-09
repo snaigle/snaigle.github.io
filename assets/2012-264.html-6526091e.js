@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-6eae2b20","path":"/2012/2012-264.html","title":"NOR介绍","lang":"zh-CN","frontmatter":{"date":"2012-06-17T11:39:07.000Z","title":"NOR介绍"},"headers":[],"git":{},"filePathRelative":"2012/2012-264.md"}');export{t as data};

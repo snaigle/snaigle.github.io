@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-71ef0f8c","path":"/2018/2018-04-24-study-english-day-02.html","title":"study-english-day-02","lang":"zh-CN","frontmatter":{"title":"study-english-day-02","date":"2018-04-24","description":"english"},"headers":[],"git":{},"filePathRelative":"2018/2018-04-24-study-english-day-02.md"}');export{t as data};

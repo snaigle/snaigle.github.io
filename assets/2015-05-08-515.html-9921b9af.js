@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-0f31b554","path":"/2015/2015-05-08-515.html","title":"ubuntu 下安装 ipython notebook","lang":"zh-CN","frontmatter":{"date":"2015-05-08T21:27:34.000Z","title":"ubuntu 下安装 ipython notebook"},"headers":[],"git":{},"filePathRelative":"2015/2015-05-08-515.md"}');export{t as data};

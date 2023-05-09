@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-bb2b61c2","path":"/2014/2014-452.html","title":"财富论","lang":"zh-CN","frontmatter":{"date":"2014-08-11T21:04:55.000Z","title":"财富论"},"headers":[],"git":{},"filePathRelative":"2014/2014-452.md"}');export{t as data};

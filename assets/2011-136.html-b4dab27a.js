@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"我开论坛了，以后可以在里面就会放着我的生活信息，和各种技术资料",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-136.html.vue"]]);export{f as default};

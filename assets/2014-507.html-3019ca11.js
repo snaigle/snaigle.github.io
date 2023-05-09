@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-0a548ed4","path":"/2014/2014-507.html","title":"论社交关系","lang":"zh-CN","frontmatter":{"date":"2014-09-17T17:42:47.000Z","title":"论社交关系"},"headers":[],"git":{},"filePathRelative":"2014/2014-507.md"}');export{t as data};

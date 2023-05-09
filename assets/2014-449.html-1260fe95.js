@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-79760037","path":"/2014/2014-449.html","title":"第一次通关的解密游戏，大概花了一个工作日","lang":"zh-CN","frontmatter":{"date":"2014-08-04T18:49:53.000Z","title":"第一次通关的解密游戏，大概花了一个工作日"},"headers":[],"git":{},"filePathRelative":"2014/2014-449.md"}');export{t as data};

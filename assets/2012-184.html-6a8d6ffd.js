@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-709974c3","path":"/2012/2012-184.html","title":"随笔","lang":"zh-CN","frontmatter":{"date":"2012-02-21T14:55:22.000Z","title":"随笔"},"headers":[],"git":{},"filePathRelative":"2012/2012-184.md"}');export{t as data};

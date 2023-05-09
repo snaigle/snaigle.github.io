@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-480849e3","path":"/2011/2011-140.html","title":"Node.js简单介绍并实现一个简单的Web MVC框架","lang":"zh-CN","frontmatter":{"date":"2011-05-31T15:03:24.000Z","title":"Node.js简单介绍并实现一个简单的Web MVC框架"},"headers":[],"git":{},"filePathRelative":"2011/2011-140.md"}');export{e as data};

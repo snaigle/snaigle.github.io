@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-50c24e44","path":"/2010/2010-42.html","title":"正则表达式基础","lang":"zh-CN","frontmatter":{"date":"2010-11-19T00:00:00.000Z","title":"正则表达式基础"},"headers":[],"git":{},"filePathRelative":"2010/2010-42.md"}');export{t as data};

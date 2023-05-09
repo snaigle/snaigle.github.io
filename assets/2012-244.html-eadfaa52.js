@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-04e1b49e","path":"/2012/2012-244.html","title":"拓词的用户和拓展方式","lang":"zh-CN","frontmatter":{"date":"2012-05-24T13:20:19.000Z","title":"拓词的用户和拓展方式"},"headers":[],"git":{},"filePathRelative":"2012/2012-244.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-542bff82","path":"/2010/2010-44.html","title":"spring事物和db连接池的一些想法","lang":"zh-CN","frontmatter":{"date":"2010-11-19T00:00:00.000Z","title":"spring事物和db连接池的一些想法"},"headers":[],"git":{},"filePathRelative":"2010/2010-44.md"}');export{t as data};

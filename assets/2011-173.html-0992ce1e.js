@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as s,R as _}from"./framework-5866ffd3.js";const o={},c=_("p",null,"知识点： dateFormat yyyyMMdd hhmmss 中 hh 是12小时制， HH 是24小时制，以后要注意",-1),n=[c];function a(r,l){return t(),s("div",null,n)}const h=e(o,[["render",a],["__file","2011-173.html.vue"]]);export{h as default};

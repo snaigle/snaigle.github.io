@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-cb051830","path":"/2011/2011-82.html","title":"spring的事件 处理机制","lang":"zh-CN","frontmatter":{"date":"2011-01-20T00:00:00.000Z","title":"spring的事件 处理机制"},"headers":[],"git":{},"filePathRelative":"2011/2011-82.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-2bb6a638","path":"/2011/2011-172.html","title":"甘肃校车惨案已死亡21人","lang":"zh-CN","frontmatter":{"date":"2011-11-18T10:54:41.000Z","title":"甘肃校车惨案已死亡21人"},"headers":[],"git":{},"filePathRelative":"2011/2011-172.md"}');export{t as data};

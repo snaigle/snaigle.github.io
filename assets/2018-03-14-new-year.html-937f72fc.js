@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-828c7850","path":"/2018/2018-03-14-new-year.html","title":"2018年如何前行","lang":"zh-CN","frontmatter":{"title":"2018年如何前行","date":"2018-03-14 11:47:00","description":"2018年如何前行"},"headers":[{"level":3,"title":"2018已来","slug":"_2018已来","link":"#_2018已来","children":[]}],"git":{},"filePathRelative":"2018/2018-03-14-new-year.md"}');export{e as data};

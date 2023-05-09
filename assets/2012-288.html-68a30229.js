@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-4163f7c4","path":"/2012/2012-288.html","title":"今天看到了三星26寸平板","lang":"zh-CN","frontmatter":{"date":"2012-09-07T05:51:57.000Z","title":"今天看到了三星26寸平板"},"headers":[],"git":{},"filePathRelative":"2012/2012-288.md"}');export{t as data};

@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as o,R as s}from"./framework-5866ffd3.js";const _={},c=s("p",null,"使用nodejs和html5来做吧，方便跨平台。 后期再通过webkit来生成 pc和andriod、ios的客户端",-1),n=[c];function r(a,l){return t(),o("div",null,n)}const i=e(_,[["render",r],["__file","2013-372.html.vue"]]);export{i as default};

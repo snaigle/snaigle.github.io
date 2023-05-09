@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const n={},o=c("p",null,"安装了ubuntu ,不知怎么回事， 我的本本开始不断的假死， 稍微有点什么操作就假死了，配置也没那么低啊，莫非是该清扫灰尘了",-1),s=[o];function r(a,l){return t(),_("div",null,s)}const d=e(n,[["render",r],["__file","2010-37.html.vue"]]);export{d as default};

@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"md，手机太烂了，不用不知道，一用吓一跳。我正在疯狂的用这个手机，争取找出点问题来给我退货。华为太烂了，可能是扩张前期有些不择手段。",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-159.html.vue"]]);export{f as default};

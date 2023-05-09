@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-3d31a11d","path":"/2012/2012-256.html","title":"面试有感，选择一个目标进行下去吧，神挡杀神，佛挡杀佛","lang":"zh-CN","frontmatter":{"date":"2012-06-06T12:59:23.000Z","title":"面试有感，选择一个目标进行下去吧，神挡杀神，佛挡杀佛"},"headers":[],"git":{},"filePathRelative":"2012/2012-256.md"}');export{t as data};

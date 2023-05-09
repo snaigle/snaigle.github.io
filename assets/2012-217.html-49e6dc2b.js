@@ -1,0 +1,1 @@
+import{_ as o,p as t,q as n,R as e}from"./framework-5866ffd3.js";const _={},c=e("p",null," 首先需要学习markdown的语法,然后为kindeditor添加在线代码编辑器 codemirror ",-1),r=e("p",null,"  添加pagedown编辑器，必要时应对该编辑器进行一些改动-- add by wangc  ",-1),s=[c,r];function a(d,l){return t(),n("div",null,s)}const m=o(_,[["render",a],["__file","2012-217.html.vue"]]);export{m as default};

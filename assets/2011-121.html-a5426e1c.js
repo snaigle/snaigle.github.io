@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-401ea800","path":"/2011/2011-121.html","title":"正在转向linux， 这是linux记事本vi的命令：","lang":"zh-CN","frontmatter":{"date":"2011-03-22T00:00:00.000Z","title":"正在转向linux， 这是linux记事本vi的命令："},"headers":[],"git":{},"filePathRelative":"2011/2011-121.md"}');export{t as data};

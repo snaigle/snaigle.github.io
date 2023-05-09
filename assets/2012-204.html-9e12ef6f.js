@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-3148c79a","path":"/2012/2012-204.html","title":"ttcms 已经完成 文章,标签,类别的添加和管理","lang":"zh-CN","frontmatter":{"date":"2012-04-15T14:23:30.000Z","title":"ttcms 已经完成 文章,标签,类别的添加和管理"},"headers":[],"git":{},"filePathRelative":"2012/2012-204.md"}');export{t as data};

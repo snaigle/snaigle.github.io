@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-8b460900","path":"/2011/2011-165.html","title":"晚上经常做噩梦，梦到鬼什么的，因为打不过他们所以经常被吓醒","lang":"zh-CN","frontmatter":{"date":"2011-10-17T10:02:17.000Z","title":"晚上经常做噩梦，梦到鬼什么的，因为打不过他们所以经常被吓醒"},"headers":[],"git":{},"filePathRelative":"2011/2011-165.md"}');export{t as data};

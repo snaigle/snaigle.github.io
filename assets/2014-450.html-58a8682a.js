@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-c1fec43e","path":"/2014/2014-450.html","title":"圣人不死，大盗不止","lang":"zh-CN","frontmatter":{"date":"2014-08-07T17:40:14.000Z","title":"圣人不死，大盗不止"},"headers":[],"git":{},"filePathRelative":"2014/2014-450.md"}');export{t as data};

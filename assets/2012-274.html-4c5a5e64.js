@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-b8d7333e","path":"/2012/2012-274.html","title":"asm学习入门","lang":"zh-CN","frontmatter":{"date":"2012-07-16T07:09:12.000Z","title":"asm学习入门"},"headers":[],"git":{},"filePathRelative":"2012/2012-274.md"}');export{t as data};

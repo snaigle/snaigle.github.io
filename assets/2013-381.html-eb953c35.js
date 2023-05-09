@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-ed3bbff8","path":"/2013/2013-381.html","title":"centos 下安装 redis","lang":"zh-CN","frontmatter":{"date":"2013-08-21T10:23:43.000Z","title":"centos 下安装 redis"},"headers":[],"git":{},"filePathRelative":"2013/2013-381.md"}');export{t as data};

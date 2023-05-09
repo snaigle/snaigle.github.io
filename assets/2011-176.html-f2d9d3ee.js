@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-1e0fe140","path":"/2011/2011-176.html","title":"阿甘正传","lang":"zh-CN","frontmatter":{"date":"2011-11-22T09:44:07.000Z","title":"阿甘正传"},"headers":[],"git":{},"filePathRelative":"2011/2011-176.md"}');export{t as data};

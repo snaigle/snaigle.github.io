@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-1f45c441","path":"/2010/2010-34.html","title":"ie6下 js 操作 window.location.href 不跳转 的解决方法","lang":"zh-CN","frontmatter":{"date":"2010-10-27T00:00:00.000Z","title":"ie6下 js 操作 window.location.href 不跳转 的解决方法"},"headers":[],"git":{},"filePathRelative":"2010/2010-34.md"}');export{t as data};

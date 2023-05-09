@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-f0a57136","path":"/2013/2013-380.html","title":"python安装 django ， setuptools ， pip 、easy_install 等插件","lang":"zh-CN","frontmatter":{"date":"2013-08-15T11:07:11.000Z","title":"python安装 django ， setuptools ， pip 、easy_install 等插件"},"headers":[],"git":{},"filePathRelative":"2013/2013-380.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-ea71d93c","path":"/2010/2010-55.html","title":"log4j 详解","lang":"zh-CN","frontmatter":{"date":"2010-12-23T00:00:00.000Z","title":"log4j 详解"},"headers":[],"git":{},"filePathRelative":"2010/2010-55.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-1a273a64","path":"/2010/2010-31.html","title":"一个类似uml画图 东西","lang":"zh-CN","frontmatter":{"date":"2010-10-19T00:00:00.000Z","title":"一个类似uml画图 东西"},"headers":[],"git":{},"filePathRelative":"2010/2010-31.md"}');export{t as data};

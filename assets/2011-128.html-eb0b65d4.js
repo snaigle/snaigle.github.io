@@ -1,0 +1,1 @@
+import{_,p as n,q as o,t,R as e}from"./framework-5866ffd3.js";const s={},c=e("p",null,"例子： 将某文件夹下的 所有.JPG后缀 改为 .jpg ，",-1),l=e("p",null,"一条命令搞定： ren *.JPG *.jpg",-1),r=e("p",null,"比写程序快多了",-1);function a(p,d){return n(),o("div",null,[c,t(),l,t(),r])}const u=_(s,[["render",a],["__file","2011-128.html.vue"]]);export{u as default};

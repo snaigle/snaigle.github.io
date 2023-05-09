@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-32fda039","path":"/2012/2012-205.html","title":"明天将ttcms 部署到vps上","lang":"zh-CN","frontmatter":{"date":"2012-04-18T21:50:30.000Z","title":"明天将ttcms 部署到vps上"},"headers":[],"git":{},"filePathRelative":"2012/2012-205.md"}');export{t as data};

@@ -1,0 +1,1 @@
+import{_ as t,p as _,q as o,R as e}from"./framework-5866ffd3.js";const s={},n=e("p",null," 1，awk ",-1),c=e("p",null," 2，if 和for 语法 ",-1),l=e("p",null," 3,  service 语法 ",-1),r=e("p",null," 4，系统自启动的语法 ",-1),a=[n,c,l,r];function i(d,f){return _(),o("div",null,a)}const u=t(s,[["render",i],["__file","2013-375.html.vue"]]);export{u as default};

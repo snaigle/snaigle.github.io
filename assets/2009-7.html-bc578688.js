@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-71b4e279","path":"/2009/2009-7.html","title":"基于flex 和red5的视频聊天","lang":"zh-CN","frontmatter":{"date":"2009-11-04T00:00:00.000Z","title":"基于flex 和red5的视频聊天"},"headers":[],"git":{},"filePathRelative":"2009/2009-7.md"}');export{e as data};

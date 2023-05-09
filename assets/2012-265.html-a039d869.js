@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-706303bf","path":"/2012/2012-265.html","title":"NOR的特性","lang":"zh-CN","frontmatter":{"date":"2012-06-17T12:19:57.000Z","title":"NOR的特性"},"headers":[],"git":{},"filePathRelative":"2012/2012-265.md"}');export{t as data};

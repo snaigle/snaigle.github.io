@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-3aee1120","path":"/2011/2011-68.html","title":"spring 详细配置","lang":"zh-CN","frontmatter":{"date":"2011-01-13T00:00:00.000Z","title":"spring 详细配置"},"headers":[],"git":{},"filePathRelative":"2011/2011-68.md"}');export{t as data};

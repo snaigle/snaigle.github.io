@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-6c6a9b23","path":"/2011/2011-76.html","title":"gae 数据存储区说明 2","lang":"zh-CN","frontmatter":{"date":"2011-01-19T00:00:00.000Z","title":"gae 数据存储区说明 2"},"headers":[],"git":{},"filePathRelative":"2011/2011-76.md"}');export{t as data};

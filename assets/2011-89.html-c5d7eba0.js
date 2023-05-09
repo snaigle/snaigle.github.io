@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-b3213f7e","path":"/2011/2011-89.html","title":"pe下安装win7","lang":"zh-CN","frontmatter":{"date":"2011-01-26T00:00:00.000Z","title":"pe下安装win7"},"headers":[],"git":{},"filePathRelative":"2011/2011-89.md"}');export{t as data};

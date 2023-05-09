@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as o,R as c}from"./framework-5866ffd3.js";const _={},a=c("p",null,"确定以后的语言学习方向： java,python,lua,javascript,c，groovy 有这些应该就足够了",-1),s=[a];function n(r,l){return t(),o("div",null,s)}const p=e(_,[["render",n],["__file","2012-189.html.vue"]]);export{p as default};

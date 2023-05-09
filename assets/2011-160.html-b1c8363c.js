@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-9c567f36","path":"/2011/2011-160.html","title":"决定了，用python写一个baidu音乐播放器","lang":"zh-CN","frontmatter":{"date":"2011-08-19T14:04:22.000Z","title":"决定了，用python写一个baidu音乐播放器"},"headers":[],"git":{},"filePathRelative":"2011/2011-160.md"}');export{t as data};

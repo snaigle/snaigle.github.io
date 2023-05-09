@@ -1,0 +1,1 @@
+import{_ as e,p as s,q as o,R as t}from"./framework-5866ffd3.js";const _={},c=t("p",null,"两个周末啥都没干，总是心神不宁，心里乱糟糟的，看什么都烦。还是定下心来看asm吧，先把asm掌握熟练，完成scoffold功能，再把背单词的实现，先用html5+js支持新版浏览器，然后再开发flash通用版，完成这些之后就着手做记忆算法方面的研究，采用mongodb或者h2, 不用mysql了，太大",-1),l=[c];function n(a,r){return s(),o("div",null,l)}const f=e(_,[["render",n],["__file","2012-273.html.vue"]]);export{f as default};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-357e01ba","path":"/2010/2010-21.html","title":"js或css文件后面为什么有参数","lang":"zh-CN","frontmatter":{"date":"2010-09-14T00:00:00.000Z","title":"js或css文件后面为什么有参数"},"headers":[],"git":{},"filePathRelative":"2010/2010-21.md"}');export{t as data};

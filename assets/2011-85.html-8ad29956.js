@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-c0c80476","path":"/2011/2011-85.html","title":"ioc 容器中进行 事务管理","lang":"zh-CN","frontmatter":{"date":"2011-01-21T00:00:00.000Z","title":"ioc 容器中进行 事务管理"},"headers":[],"git":{},"filePathRelative":"2011/2011-85.md"}');export{t as data};

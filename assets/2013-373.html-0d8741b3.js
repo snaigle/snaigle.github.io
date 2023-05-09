@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-57e59601","path":"/2013/2013-373.html","title":"awk 教程 转载的","lang":"zh-CN","frontmatter":{"date":"2013-05-31T02:16:45.000Z","title":"awk 教程 转载的"},"headers":[],"git":{},"filePathRelative":"2013/2013-373.md"}');export{t as data};

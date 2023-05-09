@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-20fa9ce0","path":"/2010/2010-35.html","title":"timer 计时器的使用","lang":"zh-CN","frontmatter":{"date":"2010-10-27T00:00:00.000Z","title":"timer 计时器的使用"},"headers":[],"git":{},"filePathRelative":"2010/2010-35.md"}');export{t as data};

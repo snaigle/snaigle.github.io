@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-98daa84c","path":"/2011/2011-116.html","title":"话说 fat32 和ntfs下 单文件夹下 可生成文件的数量限制","lang":"zh-CN","frontmatter":{"date":"2011-03-11T00:00:00.000Z","title":"话说 fat32 和ntfs下 单文件夹下 可生成文件的数量限制"},"headers":[],"git":{},"filePathRelative":"2011/2011-116.md"}');export{t as data};

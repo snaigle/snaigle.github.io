@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-2f93eefb","path":"/2012/2012-203.html","title":"xp下清除dns缓存","lang":"zh-CN","frontmatter":{"date":"2012-04-12T12:34:27.000Z","title":"xp下清除dns缓存"},"headers":[],"git":{},"filePathRelative":"2012/2012-203.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-57b837d3","path":"/2013/2013-409.html","title":"如何添加一个新硬盘，并分区","lang":"zh-CN","frontmatter":{"date":"2013-10-21T09:19:59.000Z","title":"如何添加一个新硬盘，并分区"},"headers":[],"git":{},"filePathRelative":"2013/2013-409.md"}');export{t as data};

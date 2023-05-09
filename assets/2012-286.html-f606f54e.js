@@ -1,0 +1,1 @@
+const a=JSON.parse('{"key":"v-48375a40","path":"/2012/2012-286.html","title":"java class hotswap","lang":"zh-CN","frontmatter":{"date":"2012-08-24T10:06:57.000Z","title":"java class hotswap"},"headers":[],"git":{},"filePathRelative":"2012/2012-286.md"}');export{a as data};

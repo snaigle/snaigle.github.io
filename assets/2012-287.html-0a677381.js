@@ -1,0 +1,1 @@
+import{_ as t,p as _,q as o,R as e}from"./framework-5866ffd3.js";const s={},c=e("p",null," 向交行中打入点钱，然后通过paypal付款 ",-1),n=e("p",null," 然后也该进行ibayle的开发完成 ",-1),l=[c,n];function a(r,i){return _(),o("div",null,l)}const d=t(s,[["render",a],["__file","2012-287.html.vue"]]);export{d as default};

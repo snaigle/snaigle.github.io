@@ -1,0 +1,1 @@
+import{_,p as c,q as o,R as e,t}from"./framework-5866ffd3.js";const s={},r=e("p",null,[t("玩了两个星期了都，该好好干点事了。从今晚开始，朝自己的目标努力。"),e("br"),t("2011-06-08 10:27:08:"),e("br"),t("唉，执行力太差了，不完成工作不许玩魔兽，每天只允许玩一次魔兽，50分钟")],-1),n=[r];function a(l,d){return c(),o("div",null,n)}const i=_(s,[["render",a],["__file","2011-141.html.vue"]]);export{i as default};

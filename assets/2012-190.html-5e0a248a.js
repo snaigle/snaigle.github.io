@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-c2a764f0","path":"/2012/2012-190.html","title":"linux 服务器管理常用命令","lang":"zh-CN","frontmatter":{"date":"2012-03-15T13:14:25.000Z","title":"linux 服务器管理常用命令"},"headers":[],"git":{},"filePathRelative":"2012/2012-190.md"}');export{t as data};

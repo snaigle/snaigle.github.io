@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-8eafba3e","path":"/2011/2011-164.html","title":"关于通过无线连接共享上网方法的总结（尚未验证）","lang":"zh-CN","frontmatter":{"date":"2011-10-14T10:53:37.000Z","title":"关于通过无线连接共享上网方法的总结（尚未验证）"},"headers":[],"git":{},"filePathRelative":"2011/2011-164.md"}');export{t as data};

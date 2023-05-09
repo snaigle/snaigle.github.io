@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"很简单的一个视频会议,我也是学flex的新手,把代码放出来献丑了",-1),n=[s];function l(r,a){return t(),_("div",null,n)}const d=e(o,[["render",l],["__file","2010-10.html.vue"]]);export{d as default};

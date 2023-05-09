@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-a759db00","path":"/2012/2012-198.html","title":"linux下无线驱动不能正常使用的解决办法","lang":"zh-CN","frontmatter":{"date":"2012-03-24T22:15:59.000Z","title":"linux下无线驱动不能正常使用的解决办法"},"headers":[],"git":{},"filePathRelative":"2012/2012-198.md"}');export{t as data};

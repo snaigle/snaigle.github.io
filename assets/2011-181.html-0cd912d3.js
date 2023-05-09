@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as n}from"./framework-5866ffd3.js";const o={},c=n("p",null,"开发环境和部署环境不同，自己修改别人的代码还要自己测试，自己还要保证不出bug，开发测试集于一身，还要能承担java在window和linux工作效果一样， 我觉得开那么点工资太少了，这至少是资深程序员做的事。",-1),s=[c];function a(l,r){return t(),_("div",null,s)}const d=e(o,[["render",a],["__file","2011-181.html.vue"]]);export{d as default};

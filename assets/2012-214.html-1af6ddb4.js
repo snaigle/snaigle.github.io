@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-662f02db","path":"/2012/2012-214.html","title":"action无法得到参数","lang":"zh-CN","frontmatter":{"date":"2012-04-25T08:06:35.000Z","title":"action无法得到参数"},"headers":[],"git":{},"filePathRelative":"2012/2012-214.md"}');export{t as data};

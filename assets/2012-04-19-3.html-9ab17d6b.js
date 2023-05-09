@@ -1,0 +1,1 @@
+import{_ as t,p as _,q as o,R as e}from"./framework-5866ffd3.js";const s={},c=e("p",null," 文章日期归档，搜索，分类统计，标签统计 的标题都是 “新闻列表”， fix it ",-1),n=e("p",null," ----已经修改，并部署了 ",-1),l=[c,n];function r(a,i){return _(),o("div",null,l)}const f=t(s,[["render",r],["__file","2012-04-19-3.html.vue"]]);export{f as default};

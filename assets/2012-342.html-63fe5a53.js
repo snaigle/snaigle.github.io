@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-6959303f","path":"/2012/2012-342.html","title":"常用算法介绍","lang":"zh-CN","frontmatter":{"date":"2012-11-14T11:33:28.000Z","title":"常用算法介绍"},"headers":[],"git":{},"filePathRelative":"2012/2012-342.md"}');export{t as data};

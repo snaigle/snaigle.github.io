@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-032cdbff","path":"/2012/2012-243.html","title":"已经打算好去拓词了,我也想干点为国为民的事,不能只是用自己的青春为那些不良商家去剥削","lang":"zh-CN","frontmatter":{"date":"2012-05-24T10:04:02.000Z","title":"已经打算好去拓词了,我也想干点为国为民的事,不能只是用自己的青春为那些不良商家去剥削"},"headers":[],"git":{},"filePathRelative":"2012/2012-243.md"}');export{t as data};

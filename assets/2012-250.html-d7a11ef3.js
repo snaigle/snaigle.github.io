@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-32f48d63","path":"/2012/2012-250.html","title":"一个背单词系统，爱贝勒","lang":"zh-CN","frontmatter":{"date":"2012-06-04T05:14:44.000Z","title":"一个背单词系统，爱贝勒"},"headers":[],"git":{},"filePathRelative":"2012/2012-250.md"}');export{t as data};

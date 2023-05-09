@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as o}from"./framework-5866ffd3.js";const c={},s=o("p",null,"又写了一个51youba的注册器，感觉很好。再理解一下 代理的原理",-1),n=[s];function a(r,l){return t(),_("div",null,n)}const f=e(c,[["render",a],["__file","2011-169.html.vue"]]);export{f as default};

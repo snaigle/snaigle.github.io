@@ -1,0 +1,1 @@
+import{_ as t,p as _,q as o,R as e}from"./framework-5866ffd3.js";const s={},c=e("p",null," 昨天又梦到初恋了，陪我玩了一会就走了，她消失的时候我没有伤心，还苦笑了一下，好像能理解她的所做所为了 ",-1),n=e("p",null," 今天开始要做 背单词的设计了 ",-1),l=[c,n];function r(a,d){return _(),o("div",null,l)}const f=t(s,[["render",r],["__file","2012-284.html.vue"]]);export{f as default};

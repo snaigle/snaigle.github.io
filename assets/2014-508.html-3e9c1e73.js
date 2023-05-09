@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-0c096773","path":"/2014/2014-508.html","title":"人的定义","lang":"zh-CN","frontmatter":{"date":"2014-09-19T09:11:09.000Z","title":"人的定义"},"headers":[],"git":{},"filePathRelative":"2014/2014-508.md"}');export{t as data};

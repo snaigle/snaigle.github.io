@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-7d9f4408","path":"/2011/2011-169.html","title":"又写了一个51youba的注册器，感觉很好。","lang":"zh-CN","frontmatter":{"date":"2011-11-01T12:45:12.000Z","title":"又写了一个51youba的注册器，感觉很好。"},"headers":[],"git":{},"filePathRelative":"2011/2011-169.md"}');export{t as data};

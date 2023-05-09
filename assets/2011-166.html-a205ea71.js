@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-87dc57c2","path":"/2011/2011-166.html","title":"关于验证码的破解和防破解","lang":"zh-CN","frontmatter":{"date":"2011-10-18T11:42:33.000Z","title":"关于验证码的破解和防破解"},"headers":[],"git":{},"filePathRelative":"2011/2011-166.md"}');export{t as data};

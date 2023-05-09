@@ -1,0 +1,1 @@
+import{_ as t,p as o,q as _,R as e}from"./framework-5866ffd3.js";const s={},c=e("p",null," chown -Rv user[:group] file ",-1),n=e("p",null," 可以改变文件或文件夹的所属用户和所属用户组 ",-1),l=[c,n];function r(a,i){return o(),_("div",null,l)}const d=t(s,[["render",r],["__file","2012-213.html.vue"]]);export{d as default};

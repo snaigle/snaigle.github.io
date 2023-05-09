@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-38e7b2f8","path":"/2010/2010-20.html","title":"ssi server side include","lang":"zh-CN","frontmatter":{"date":"2010-09-14T00:00:00.000Z","title":"ssi server side include"},"headers":[],"git":{},"filePathRelative":"2010/2010-20.md"}');export{e as data};

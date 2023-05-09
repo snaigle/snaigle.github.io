@@ -1,0 +1,1 @@
+import{_ as t,p as _,q as o,R as e}from"./framework-5866ffd3.js";const s={},n=e("p",null," 题目： 设计一个采集系统能采集网站的全部网页, 如果需要采集几十万个中文网站，那么需要哪些方法能加快采集速度 ",-1),c=e("p",null," 大家先想想，有思路可以直接评论回复. ",-1),l=e("p",null,[e("br")],-1),r=[n,c,l];function a(d,i){return _(),o("div",null,r)}const u=t(s,[["render",a],["__file","2012-254.html.vue"]]);export{u as default};

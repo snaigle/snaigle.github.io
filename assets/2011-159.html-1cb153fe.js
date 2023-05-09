@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-e76bba8a","path":"/2011/2011-159.html","title":"买了个手机真郁闷，非说手机类要有质量问题才给退货","lang":"zh-CN","frontmatter":{"date":"2011-07-11T14:43:13.000Z","title":"买了个手机真郁闷，非说手机类要有质量问题才给退货"},"headers":[],"git":{},"filePathRelative":"2011/2011-159.md"}');export{t as data};

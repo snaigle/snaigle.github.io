@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-ee3f1d06","path":"/2011/2011-157.html","title":"php实现 网络工具的几种方式","lang":"zh-CN","frontmatter":{"date":"2011-06-27T12:01:07.000Z","title":"php实现 网络工具的几种方式"},"headers":[],"git":{},"filePathRelative":"2011/2011-157.md"}');export{t as data};

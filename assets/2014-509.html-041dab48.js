@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-0dbe4012","path":"/2014/2014-509.html","title":"采集系统分析和设计","lang":"zh-CN","frontmatter":{"date":"2014-12-25T11:13:13.000Z","title":"采集系统分析和设计"},"headers":[],"git":{},"filePathRelative":"2014/2014-509.md"}');export{t as data};

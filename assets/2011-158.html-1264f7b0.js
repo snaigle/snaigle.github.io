@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-ead56bc8","path":"/2011/2011-158.html","title":"丰富自己的业余生活","lang":"zh-CN","frontmatter":{"date":"2011-07-04T13:13:51.000Z","title":"丰富自己的业余生活"},"headers":[],"git":{},"filePathRelative":"2011/2011-158.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-98eccdf8","path":"/2011/2011-161.html","title":"该给自己充电了，去国图借书，不能浪费了这么好的资源","lang":"zh-CN","frontmatter":{"date":"2011-08-31T14:20:46.000Z","title":"该给自己充电了，去国图借书，不能浪费了这么好的资源"},"headers":[],"git":{},"filePathRelative":"2011/2011-161.md"}');export{t as data};

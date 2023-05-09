@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-680c042a","path":"/2011/2011-90.html","title":"win xp和 win7 的集成版 和 安装方法","lang":"zh-CN","frontmatter":{"date":"2011-01-26T00:00:00.000Z","title":"win xp和 win7 的集成版 和 安装方法"},"headers":[],"git":{},"filePathRelative":"2011/2011-90.md"}');export{t as data};

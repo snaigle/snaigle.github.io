@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-5299adf6","path":"/2013/2013-406.html","title":"如何减少群中的广告数量","lang":"zh-CN","frontmatter":{"date":"2013-09-23T07:04:08.000Z","title":"如何减少群中的广告数量"},"headers":[],"git":{},"filePathRelative":"2013/2013-406.md"}');export{t as data};

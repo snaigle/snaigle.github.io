@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-27d73cc2","path":"/2010/2010-25.html","title":"freemarker 语法","lang":"zh-CN","frontmatter":{"date":"2010-09-19T00:00:00.000Z","title":"freemarker 语法"},"headers":[],"git":{},"filePathRelative":"2010/2010-25.md"}');export{e as data};

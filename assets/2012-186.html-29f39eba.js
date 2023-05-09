@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"目标： 65公斤 原理：少吃、多运动 实行：饿了就多吃些粗粮比如红薯干、水果，多喝些水， 早起可以去锻炼身体，跑步、打球、仰卧起坐等 食物一定要限量，吃饭要多菜少肉，水果每天4个不能多吃，一定要把肚子减下去。",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2012-186.html.vue"]]);export{f as default};

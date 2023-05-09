@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-6f38ec7d","path":"/2014/2014-443.html","title":"论一个单身狗的自我修养","lang":"zh-CN","frontmatter":{"date":"2014-07-24T18:06:04.000Z","title":"论一个单身狗的自我修养"},"headers":[],"git":{},"filePathRelative":"2014/2014-443.md"}');export{t as data};

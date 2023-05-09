@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-409b525b","path":"/2012/2012-258.html","title":"每次找工作都会纠结","lang":"zh-CN","frontmatter":{"date":"2012-06-08T10:04:10.000Z","title":"每次找工作都会纠结"},"headers":[],"git":{},"filePathRelative":"2012/2012-258.md"}');export{t as data};

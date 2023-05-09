@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as s,R as o}from"./framework-5866ffd3.js";const c={},_=o("p",null,"dos下默认的是gbk简体中文编码（936），所以你的程序中是utf-8的，那么就会无法显示编码，也无法通过dos输入中文，倒是有个命令可以将dos下改为utf-8 编码 ，chcp 65001; 这样就可以了，不过仍然会带来其他问题，你自己摸索吧，我的解决方法是能不用就不用，宁可自己写sql文件",-1),n=[_];function l(r,a){return t(),s("div",null,n)}const f=e(c,[["render",l],["__file","2011-168.html.vue"]]);export{f as default};

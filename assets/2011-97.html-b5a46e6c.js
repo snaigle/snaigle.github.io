@@ -1,0 +1,1 @@
+import{_ as s,p as _,q as c,R as e,t}from"./framework-5866ffd3.js";const o={},n=e("p",null,[t("这几个技术是目前急需的，html5，还有sql可以排后一些 "),e("br"),t(),e("br"),t("nutz和tiles学的够用了，可以应用于实践了。")],-1),r=[n];function l(a,d){return _(),c("div",null,r)}const f=s(o,[["render",l],["__file","2011-97.html.vue"]]);export{f as default};

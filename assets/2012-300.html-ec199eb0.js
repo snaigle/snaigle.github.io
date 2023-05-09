@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-db52dc06","path":"/2012/2012-300.html","title":"沿着google的脚步前行","lang":"zh-CN","frontmatter":{"date":"2012-10-17T05:31:54.000Z","title":"沿着google的脚步前行"},"headers":[],"git":{},"filePathRelative":"2012/2012-300.md"}');export{t as data};

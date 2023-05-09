@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-5947d076","path":"/2012/2012-281.html","title":"先说项目管理","lang":"zh-CN","frontmatter":{"date":"2012-07-31T02:23:10.000Z","title":"先说项目管理"},"headers":[],"git":{},"filePathRelative":"2012/2012-281.md"}');export{t as data};

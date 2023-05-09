@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"可以选择一个乐器来，主要是编程，每天看书玩游戏不能超过两个小时，要有两个小时的时间出去活动（乐器和锻炼）。编程的时间每天要3-4个小时即可，剩下的时候可以看书。看书不练是混蛋，哈哈",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-158.html.vue"]]);export{f as default};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-509084fe","path":"/2011/2011-145.html","title":"关于社会人文的一些感想","lang":"zh-CN","frontmatter":{"date":"2011-06-10T10:59:36.000Z","title":"关于社会人文的一些感想"},"headers":[],"git":{},"filePathRelative":"2011/2011-145.md"}');export{t as data};

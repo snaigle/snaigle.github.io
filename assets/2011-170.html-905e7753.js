@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-328a08b4","path":"/2011/2011-170.html","title":"有时间看看 stringtoken 这个类是什么原理，貌似在提取有分隔符的字符串的值时非常方便","lang":"zh-CN","frontmatter":{"date":"2011-11-05T10:36:05.000Z","title":"有时间看看 stringtoken 这个类是什么原理，貌似在提取有分隔符的字符串的值时非常方便"},"headers":[],"git":{},"filePathRelative":"2011/2011-170.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-2a75651e","path":"/2012/2012-200.html","title":"ttcms 的目前设计细节","lang":"zh-CN","frontmatter":{"date":"2012-03-30T14:44:25.000Z","title":"ttcms 的目前设计细节"},"headers":[],"git":{},"filePathRelative":"2012/2012-200.md"}');export{t as data};

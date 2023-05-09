@@ -1,0 +1,1 @@
+import{_ as t,p as _,q as n,R as e}from"./framework-5866ffd3.js";const s={},c=e("p",null,[e("span",null,"已经打算好去拓词了,我也想干点为国为民的事,不能只是用自己的青春为那些不良商家去剥削")],-1),o=[c];function l(a,r){return _(),n("div",null,o)}const f=t(s,[["render",l],["__file","2012-243.html.vue"]]);export{f as default};

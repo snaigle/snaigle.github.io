@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-b7c1b084","path":"/2014/2014-453.html","title":"如何提升自己的效率","lang":"zh-CN","frontmatter":{"date":"2014-08-11T21:20:59.000Z","title":"如何提升自己的效率"},"headers":[],"git":{},"filePathRelative":"2014/2014-453.md"}');export{t as data};

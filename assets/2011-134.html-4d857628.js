@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-19f5711e","path":"/2011/2011-134.html","title":"ubuntu 离线升级办法","lang":"zh-CN","frontmatter":{"date":"2011-05-18T00:00:00.000Z","title":"ubuntu 离线升级办法"},"headers":[],"git":{},"filePathRelative":"2011/2011-134.md"}');export{t as data};

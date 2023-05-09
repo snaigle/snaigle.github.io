@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-1baa49bd","path":"/2011/2011-135.html","title":"ubuntu 入门----开发环境搭建","lang":"zh-CN","frontmatter":{"date":"2011-05-18T00:00:00.000Z","title":"ubuntu 入门----开发环境搭建"},"headers":[],"git":{},"filePathRelative":"2011/2011-135.md"}');export{t as data};

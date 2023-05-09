@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-5f5ba05f","path":"/2012/2012-210.html","title":"cat , split , od ,wc , head ,tail,dmesg","lang":"zh-CN","frontmatter":{"date":"2012-04-22T01:51:09.000Z","title":"cat , split , od ,wc , head ,tail,dmesg"},"headers":[],"git":{},"filePathRelative":"2012/2012-210.md"}');export{t as data};

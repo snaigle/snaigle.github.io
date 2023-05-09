@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-394b4584","path":"/2011/2011-123.html","title":"开始学grails ，练手应用 ： bug跟踪， 博客，和个人信息管理","lang":"zh-CN","frontmatter":{"date":"2011-03-29T00:00:00.000Z","title":"开始学grails ，练手应用 ： bug跟踪， 博客，和个人信息管理"},"headers":[],"git":{},"filePathRelative":"2011/2011-123.md"}');export{t as data};

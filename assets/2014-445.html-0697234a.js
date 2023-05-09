@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-72a29dbb","path":"/2014/2014-445.html","title":"开发模式的一点想法","lang":"zh-CN","frontmatter":{"date":"2014-07-25T13:39:03.000Z","title":"开发模式的一点想法"},"headers":[],"git":{},"filePathRelative":"2014/2014-445.md"}');export{t as data};

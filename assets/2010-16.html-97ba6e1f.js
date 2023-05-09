@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-8e3a0206","path":"/2010/2010-16.html","title":"jquery 和velocity $冲突的解决办法","lang":"zh-CN","frontmatter":{"date":"2010-09-14T00:00:00.000Z","title":"jquery 和velocity $冲突的解决办法"},"headers":[],"git":{},"filePathRelative":"2010/2010-16.md"}');export{t as data};

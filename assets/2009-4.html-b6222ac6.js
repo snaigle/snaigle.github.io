@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"今天好不容易把代码敲完了，回头写文档的时候，发现我的需求分析有变。哎  重写一次吧",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2009-4.html.vue"]]);export{f as default};

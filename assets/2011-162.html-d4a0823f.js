@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"所谓道，就是能不断前行的路，也就是所谓的道在脚下，只要你一直向前走，不停下，那么这就是你的道，就是条条大道通罗马，成就你的梦想，只要坚持就会胜利，方向真的不是大问题，只是时间长短的问题",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-162.html.vue"]]);export{f as default};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-1bdc1303","path":"/2010/2010-32.html","title":"html 后# 号的作用，及html 如何传参","lang":"zh-CN","frontmatter":{"date":"2010-10-20T00:00:00.000Z","title":"html 后# 号的作用，及html 如何传参"},"headers":[],"git":{},"filePathRelative":"2010/2010-32.md"}');export{t as data};

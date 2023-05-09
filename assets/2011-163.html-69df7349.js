@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"4年来她没有给我惹过什么麻烦，4年如一日的对我那样好，从没有什么过分的要求，如今我却弃她而去，喜新厌旧，太可恶了",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-163.html.vue"]]);export{f as default};

@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"公司产品部连个提需求的都没有，都是我们项目经理自己再想需求，他自己做的需求都不确定，要美工去确定，直接把模块扔给我们，需求十分粗糙，有些需求都很模糊的， 他也不确定是不是该有这个东西。我和美工同时做，谁和谁想的都不一样，做完之后在整合，几乎都要在重写一遍。过一阵子跳槽啊，呆不下去了",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-96.html.vue"]]);export{f as default};

@@ -1,0 +1,1 @@
+import{_ as t,p as s,q as n,t as _,R as e}from"./framework-5866ffd3.js";const c={},o=e("p",null,"发现springside，原来springside 是常用框架的集合，只是对这些框架进行了整合，使企业开发更方便。",-1),r=e("p",null,"这个项目可以让我对框架的整合 进行熟悉，让我了解一些目前还不知道的框架。",-1);function a(l,i){return s(),n("div",null,[o,_(),r])}const p=t(c,[["render",a],["__file","2010-47.html.vue"]]);export{p as default};

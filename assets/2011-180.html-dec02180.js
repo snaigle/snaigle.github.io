@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as c}from"./framework-5866ffd3.js";const o={},s=c("p",null,"感觉很不适应外界，总感觉外面发生了什么变化，而自己却一点也不知道。 今天发现以前写的代码中发现了一个很严重的bug，幸亏没有引发灾难。 以后要继续细心，敲代码的感觉还是不错的，以后多用程序的思维去解决问题，我还是要继续专注技术层面。管理这东西，需要各种经历和天赋的。",-1),n=[s];function r(a,l){return t(),_("div",null,n)}const f=e(o,[["render",r],["__file","2011-180.html.vue"]]);export{f as default};

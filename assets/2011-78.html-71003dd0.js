@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-6fd44c61","path":"/2011/2011-78.html","title":"电脑报警音","lang":"zh-CN","frontmatter":{"date":"2011-01-19T00:00:00.000Z","title":"电脑报警音"},"headers":[],"git":{},"filePathRelative":"2011/2011-78.md"}');export{t as data};

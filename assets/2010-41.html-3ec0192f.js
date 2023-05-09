@@ -1,0 +1,1 @@
+const e=JSON.parse('{"key":"v-4f0d75a5","path":"/2010/2010-41.html","title":"lucene 入门的小例子","lang":"zh-CN","frontmatter":{"date":"2010-11-16T00:00:00.000Z","title":"lucene 入门的小例子"},"headers":[],"git":{},"filePathRelative":"2010/2010-41.md"}');export{e as data};

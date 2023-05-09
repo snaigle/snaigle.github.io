@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-f1a8ce44","path":"/2011/2011-156.html","title":"想要个天文望远镜，这个月实施。","lang":"zh-CN","frontmatter":{"date":"2011-06-22T16:14:33.000Z","title":"想要个天文望远镜，这个月实施。"},"headers":[],"git":{},"filePathRelative":"2011/2011-156.md"}');export{t as data};

@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-6a462100","path":"/2012/2012-231.html","title":"Z形遍历二维数组","lang":"zh-CN","frontmatter":{"date":"2012-05-14T12:52:02.000Z","title":"Z形遍历二维数组"},"headers":[],"git":{},"filePathRelative":"2012/2012-231.md"}');export{t as data};

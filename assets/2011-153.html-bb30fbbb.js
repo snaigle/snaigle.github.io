@@ -1,0 +1,1 @@
+const t=JSON.parse('{"key":"v-fbe5e1fe","path":"/2011/2011-153.html","title":"什么是爱情","lang":"zh-CN","frontmatter":{"date":"2011-06-20T11:50:25.000Z","title":"什么是爱情"},"headers":[],"git":{},"filePathRelative":"2011/2011-153.md"}');export{t as data};

@@ -1,0 +1,1 @@
+import{_ as e,p as t,q as _,R as o}from"./framework-5866ffd3.js";const c={},n=o("p",null,"1,java和python的语法提示 2,类的自动导入 3,运行和构建快捷键 4,类的跳转，可以跳转到源码上 5,类的 层次",-1),s=[n];function a(r,l){return t(),_("div",null,s)}const f=e(c,[["render",a],["__file","2013-363.html.vue"]]);export{f as default};
